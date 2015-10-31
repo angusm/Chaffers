@@ -3,6 +3,7 @@ from resources.models import Ability
 
 
 # Setup Admin models
+@admin.register(Ability)
 class AbilityAdmin(admin.ModelAdmin):
 
     fields = ('name',
@@ -12,5 +13,3 @@ class AbilityAdmin(admin.ModelAdmin):
 
     list_display = ('display_name', 'description',)
     search_fields = ('name',)
-
-admin.site.register(Ability, AbilityAdmin)

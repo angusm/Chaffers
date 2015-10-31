@@ -11,11 +11,6 @@ from ..models import Location
 from ..models import Page
 from ..models import Section
 
-from .ability_admin import AbilityAdmin
-from .character_admin import CharacterAdmin
-from .specialty_admin import SpecialtyAdmin
-from .flaw_admin import FlawAdmin
-
 # Register your models here.
 admin.site.register(AbilityModifier)
 admin.site.register(Attribute)
@@ -27,3 +22,9 @@ admin.site.register(GlossaryTerm)
 admin.site.register(Location)
 admin.site.register(Page)
 admin.site.register(Section)
+
+from .ability_admin import AbilityAdmin
+from .character_admin import CharacterAdmin
+from .specialty_admin import SpecialtyAdmin
+from .flaw_admin import FlawAdmin
+
