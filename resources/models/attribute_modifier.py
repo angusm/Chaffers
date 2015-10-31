@@ -9,7 +9,7 @@ class AttributeModifier(Model):
     attribute = ForeignKey('Attribute')
     modifier = IntegerField()
     specialties = ManyToManyField('Specialty', blank=True)
-    specialties = ManyToManyField('Flaw', blank=True)
+    flaws = ManyToManyField('Flaw', blank=True)
     display_name = CharField(max_length=255, null=True, blank=True)
 
     def get_display_name(self):
