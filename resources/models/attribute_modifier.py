@@ -5,20 +5,17 @@ from django.db.models import Model
 from django.db.models import CharField
 
 
-class AbilityModifier(Model):
-    ability = ForeignKey('Ability')
+class AttributeModifier(Model):
+    attribute = ForeignKey('Attribute')
     modifier = IntegerField()
     specialties = ManyToManyField('Specialty', blank=True)
     specialties = ManyToManyField('Flaw', blank=True)
     display_name = CharField(max_length=255, null=True, blank=True)
 
-    class Meta(object):
-        ordering = ['display_name']
-
     def get_display_name(self):
-        return '{ability} {modifier}'.format(
+        return '{modifier} {attribute}'.format(
             modifier=self.modifier,
-            ability=self.ability.display_name
+            attribute=self.attribute.name
         )
 
     def save(self):
@@ -27,7 +24,7 @@ class AbilityModifier(Model):
         """
         # Handle updating display names
         self.display_name = self.get_display_name()
-        super(AbilityModifier, self).save()
+        super(AttributeModifier, self).save()
 
     def __unicode__(self):
         return self.get_display_name()

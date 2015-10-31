@@ -44,3 +44,8 @@ Temporary Items
 
 # Intellij
 .idea
+
+# Compiled python
+*.pyc
+*.pyc
+resources/models/specialty.pyc
