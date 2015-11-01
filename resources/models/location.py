@@ -1,12 +1,10 @@
-from django.db.models import CharField
-from django.db.models import TextField
+from django.db.models import ForeignKey
 from django.db.models import ManyToManyField
-from django.db.models import Model
+from .text_substitution import TextSubstitution
 
 
-class Location(Model):
-    name = CharField(max_length=255)
-    description = TextField()
+class Location(TextSubstitution):
+    description = ForeignKey('TextBlock')
     campaign_settings = ManyToManyField('CampaignSetting',)
     adventures = ManyToManyField('Adventure',)
     characters = ManyToManyField('Character',)

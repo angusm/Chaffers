@@ -1,11 +1,9 @@
-from django.db.models import CharField
-from django.db.models import TextField
-from django.db.models import Model
+from django.db.models import ForeignKey
+from .text_substitution import TextSubstitution
 
 
-class Page(Model):
-    name = CharField(max_length=255)
-    description = TextField()
+class Page(TextSubstitution):
+    description = ForeignKey('TextBlock')
 
     def __unicode__(self):
-        return '{name}'.format(name=self.name)
+        return '{display_name}'.format(name=self.display_name)

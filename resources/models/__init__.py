@@ -12,3 +12,5 @@ from location import Location
 from page import Page
 from section import Section
 from specialty import Specialty
+from text_block import TextBlock
+from text_substitution import TextSubstitution

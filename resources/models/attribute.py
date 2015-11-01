@@ -1,9 +1,9 @@
-from django.db.models import Model
 from django.db.models import CharField
 from django.db.models import IntegerField
+from .text_substitution import TextSubstitution
 
 
-class Attribute(Model):
+class Attribute(TextSubstitution):
 
     name = CharField(max_length=255)
     base_value = IntegerField()

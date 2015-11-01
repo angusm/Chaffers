@@ -10,6 +10,8 @@ from ..models import GlossaryTerm
 from ..models import Location
 from ..models import Page
 from ..models import Section
+from ..models import TextBlock
+from ..models import TextSubstitution
 
 # Register your models here.
 admin.site.register(AbilityModifier)
@@ -22,6 +24,8 @@ admin.site.register(GlossaryTerm)
 admin.site.register(Location)
 admin.site.register(Page)
 admin.site.register(Section)
+admin.site.register(TextBlock)
+admin.site.register(TextSubstitution)
 
 from .ability_admin import AbilityAdmin
 from .character_admin import CharacterAdmin

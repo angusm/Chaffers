@@ -1,16 +1,14 @@
 from django.db.models import CharField
-from django.db.models import TextField
-from django.db.models import Model
 from django.db.models import ForeignKey
 from django.db.models import ManyToManyField
+from .text_substitution import TextSubstitution
 
 
-class Ability(Model):
+class Ability(TextSubstitution):
     name = CharField(max_length=255)
-    description = TextField()
+    description = ForeignKey('TextBlock')
     parent_ability = ForeignKey('self', null=True, blank=True, )
     categories = ManyToManyField('Category',)
-    display_name = CharField(max_length=255, null=True, blank=True)
 
     class Meta(object):
         ordering = ['display_name']
