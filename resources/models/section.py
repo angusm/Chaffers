@@ -1,12 +1,10 @@
-from django.db.models import CharField
-from django.db.models import TextField
 from django.db.models import ForeignKey
-from django.db.models import Model
+from ..libraries import Dictable
+from .text_substitution import TextSubstitution
 
 
-class Section(Model):
-    name = CharField(max_length=255)
-    text = TextField()
+class Section(TextSubstitution, Dictable):
+    text = ForeignKey('TextBlock')
     parent_section = ForeignKey('self')
 
     def __unicode__(self):

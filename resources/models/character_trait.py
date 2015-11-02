@@ -2,10 +2,10 @@ from django.db.models import CharField
 from django.db.models import ForeignKey
 from django.db.models import ManyToManyField
 from .text_substitution import TextSubstitution
+from ..libraries import Dictable
 
 
-class CharacterTrait(TextSubstitution):
-    name = CharField(max_length=255)
+class CharacterTrait(TextSubstitution, Dictable):
     description = ForeignKey('TextBlock',)
     ability_modifiers = ManyToManyField(
         'AbilityModifier',
@@ -17,7 +17,5 @@ class CharacterTrait(TextSubstitution):
     )
 
     class Meta(object):
-        ordering = ['name']
+        ordering = ['display_name']
 
-    def __unicode__(self):
-        return '{name}'.format(name=self.name)

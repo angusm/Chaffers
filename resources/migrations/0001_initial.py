@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import resources.libraries.dictable.dictable
 
 
 class Migration(migrations.Migration):
@@ -20,6 +21,7 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['display_name'],
             },
+            bases=(models.Model, resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='AttributeModifier',
@@ -28,31 +30,15 @@ class Migration(migrations.Migration):
                 ('modifier', models.IntegerField()),
                 ('display_name', models.CharField(max_length=255, null=True, blank=True)),
             ],
-        ),
-        migrations.CreateModel(
-            name='Category',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255)),
-                ('internal_code', models.CharField(max_length=255)),
-                ('parent_category', models.ForeignKey(blank=True, to='resources.Category', null=True)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Section',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255)),
-                ('text', models.TextField()),
-                ('parent_section', models.ForeignKey(to='resources.Section')),
-            ],
+            bases=(models.Model, resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='TextBlock',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('description', models.TextField()),
+                ('raw_description', models.TextField()),
             ],
+            bases=(models.Model, resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='TextSubstitution',
@@ -61,70 +47,75 @@ class Migration(migrations.Migration):
                 ('text_substitution_label', models.CharField(unique=True, max_length=255)),
                 ('display_name', models.CharField(max_length=255, null=True, blank=True)),
             ],
+            bases=(models.Model, resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='Ability',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
                 ('name', models.CharField(max_length=255)),
-                ('categories', models.ManyToManyField(to='resources.Category')),
             ],
             options={
                 'ordering': ['display_name'],
             },
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='Adventure',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
-                ('name', models.CharField(max_length=255)),
             ],
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='Attribute',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
-                ('name', models.CharField(max_length=255)),
                 ('base_value', models.IntegerField()),
             ],
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='CampaignSetting',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
-                ('name', models.CharField(max_length=255)),
                 ('adventures', models.ManyToManyField(to='resources.Adventure', blank=True)),
             ],
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
+        ),
+        migrations.CreateModel(
+            name='Category',
+            fields=[
+                ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
+                ('parent_category', models.ForeignKey(blank=True, to='resources.Category', null=True)),
+            ],
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='Character',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
-                ('name', models.CharField(max_length=255)),
                 ('adventures', models.ManyToManyField(to='resources.Adventure', blank=True)),
                 ('campaign_settings', models.ManyToManyField(to='resources.CampaignSetting', blank=True)),
+                ('description', models.ForeignKey(to='resources.TextBlock')),
             ],
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='CharacterTrait',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
-                ('name', models.CharField(max_length=255)),
             ],
             options={
-                'ordering': ['name'],
+                'ordering': ['display_name'],
             },
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='GlossaryTerm',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
+                ('definition', models.ForeignKey(to='resources.TextBlock')),
             ],
             bases=('resources.textsubstitution',),
         ),
@@ -135,15 +126,26 @@ class Migration(migrations.Migration):
                 ('adventures', models.ManyToManyField(to='resources.Adventure')),
                 ('campaign_settings', models.ManyToManyField(to='resources.CampaignSetting')),
                 ('characters', models.ManyToManyField(to='resources.Character')),
+                ('description', models.ForeignKey(to='resources.TextBlock')),
             ],
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='Page',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
+                ('description', models.ForeignKey(to='resources.TextBlock')),
             ],
-            bases=('resources.textsubstitution',),
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
+        ),
+        migrations.CreateModel(
+            name='Section',
+            fields=[
+                ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
+                ('parent_section', models.ForeignKey(to='resources.Section')),
+                ('text', models.ForeignKey(to='resources.TextBlock')),
+            ],
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
         migrations.CreateModel(
             name='Flaw',
@@ -160,56 +162,6 @@ class Migration(migrations.Migration):
             bases=('resources.charactertrait',),
         ),
         migrations.AddField(
-            model_name='textblock',
-            name='abilities',
-            field=models.ManyToManyField(to='resources.Ability'),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='adventures',
-            field=models.ManyToManyField(to='resources.Adventure'),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='attributes',
-            field=models.ManyToManyField(to='resources.Attribute'),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='campaign_settings',
-            field=models.ManyToManyField(to='resources.CampaignSetting'),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='characters',
-            field=models.ManyToManyField(to='resources.Character'),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='glossary_terms',
-            field=models.ManyToManyField(to='resources.GlossaryTerm'),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='locations',
-            field=models.ManyToManyField(to='resources.Location'),
-        ),
-        migrations.AddField(
-            model_name='page',
-            name='description',
-            field=models.ForeignKey(to='resources.TextBlock'),
-        ),
-        migrations.AddField(
-            model_name='location',
-            name='description',
-            field=models.ForeignKey(to='resources.TextBlock'),
-        ),
-        migrations.AddField(
-            model_name='glossaryterm',
-            name='definition',
-            field=models.ForeignKey(to='resources.TextBlock'),
-        ),
-        migrations.AddField(
             model_name='charactertrait',
             name='ability_modifiers',
             field=models.ManyToManyField(to='resources.AbilityModifier', blank=True),
@@ -221,11 +173,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='charactertrait',
-            name='description',
-            field=models.ForeignKey(to='resources.TextBlock'),
-        ),
-        migrations.AddField(
-            model_name='character',
             name='description',
             field=models.ForeignKey(to='resources.TextBlock'),
         ),
@@ -281,6 +228,11 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='ability',
+            name='categories',
+            field=models.ManyToManyField(to='resources.Category'),
+        ),
+        migrations.AddField(
+            model_name='ability',
             name='description',
             field=models.ForeignKey(to='resources.TextBlock'),
         ),
@@ -288,16 +240,6 @@ class Migration(migrations.Migration):
             model_name='ability',
             name='parent_ability',
             field=models.ForeignKey(blank=True, to='resources.Ability', null=True),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='flaws',
-            field=models.ManyToManyField(to='resources.Flaw'),
-        ),
-        migrations.AddField(
-            model_name='textblock',
-            name='specialties',
-            field=models.ManyToManyField(to='resources.Specialty'),
         ),
         migrations.AddField(
             model_name='character',

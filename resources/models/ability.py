@@ -2,9 +2,10 @@ from django.db.models import CharField
 from django.db.models import ForeignKey
 from django.db.models import ManyToManyField
 from .text_substitution import TextSubstitution
+from ..libraries.dictable import Dictable
 
 
-class Ability(TextSubstitution):
+class Ability(TextSubstitution, Dictable):
     name = CharField(max_length=255)
     description = ForeignKey('TextBlock')
     parent_ability = ForeignKey('self', null=True, blank=True, )
@@ -49,6 +50,3 @@ class Ability(TextSubstitution):
             )
         else:
             return base_name
-
-    def __unicode__(self):
-        return self.display_name

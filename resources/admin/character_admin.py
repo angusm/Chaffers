@@ -6,13 +6,13 @@ from resources.models import Character
 @admin.register(Character)
 class CharacterAdmin(admin.ModelAdmin):
 
-    fields = ('name',
+    fields = ('display_name',
               'description',
               'specialties',
               'flaws',)
     filter_horizontal = ('specialties',
                          'flaws',)
 
-    list_display = ('name', 'description',)
-    search_fields = ('name',)
+    list_display = ('display_name', 'description',)
+    search_fields = ('display_name',)
 

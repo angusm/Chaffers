@@ -3,9 +3,10 @@ from django.db.models import IntegerField
 from django.db.models import ManyToManyField
 from django.db.models import Model
 from django.db.models import CharField
+from ..libraries.dictable import Dictable
 
 
-class AbilityModifier(Model):
+class AbilityModifier(Model, Dictable):
     ability = ForeignKey('Ability')
     modifier = IntegerField()
     specialties = ManyToManyField('Specialty', blank=True)
