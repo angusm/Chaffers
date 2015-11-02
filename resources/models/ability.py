@@ -18,12 +18,20 @@ class Ability(TextSubstitution, Dictable):
         """
         Update the display name of the instance, returning True if the name changed
         """
-        clean_copy = type(self).objects.get(pk=self.pk)
-        if clean_copy.display_name == self.get_calculated_display_name():
-            return False
+
+        # Look for a reason not to save
+        must_save = True
+
+        # New objects don't need to update children
+        if self.pk is not None:
+            clean_copy = type(self).objects.get(pk=self.pk)
+            if clean_copy.display_name == self.get_calculated_display_name():
+                must_save = False
+        else:
+            must_save = False
 
         self.display_name = self.get_calculated_display_name()
-        return True
+        return must_save
 
     def save(self):
         """

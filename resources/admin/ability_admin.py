@@ -7,6 +7,7 @@ from resources.models import Ability
 class AbilityAdmin(admin.ModelAdmin):
 
     fields = ('name',
+              'text_substitution_label',
               'description',
               'parent_ability',
               'categories',)
