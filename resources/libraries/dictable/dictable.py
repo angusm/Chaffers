@@ -4,6 +4,13 @@ from .to_dict_field_set import ToDictFieldSet
 
 class Dictable(object):
 
+    @classmethod
+    def to_dict_queryset(cls, queryset, fields):
+        """
+        Returns the dictionary version of the instances in the given queryset
+        """
+        return [instance.to_dict(*fields) for instance in queryset]
+
     def to_dict(self, *args):
         """
         Return a dictionary representation of the given instance using a field set
