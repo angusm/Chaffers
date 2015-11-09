@@ -2,29 +2,37 @@
     angular.module('chaffers').factory('CharacterTrait', [
         'BaseModel',
         'extend',
+        'relationManager',
+        'TextBlock',
         characterTraitFactory
     ]);
 
-    function characterTraitFactory(BaseModel, extend) {
+    function characterTraitFactory(
+        BaseModel,
+        extend,
+        relationManager,
+        TextBlock
+    ) {
 
         /**
          * Class to contain Character Trait data and functionality
          * @constructor
          */
         function CharacterTrait() {
+
+            this.displayName = undefined;
+            this.description = undefined;
+            this.attributeModifiers = undefined;
+            this.abilityModifiers = undefined;
+
             BaseModel.apply(this, arguments);
         }
 
         // Inherit from the Base Model since this is a backend model
         extend(CharacterTrait, BaseModel);
 
-        // Class Functions
-
-        // Instance Properties
-        CharacterTrait.prototype.displayName = undefined;
-        CharacterTrait.prototype.description = undefined;
-        CharacterTrait.prototype.attributeModifiers = undefined;
-        CharacterTrait.prototype.abilityModifiers = undefined;
+        // Attach relations
+        relationManager.registerHasOneRelation(CharacterTrait, 'description', TextBlock);
 
         // Instance Functions
         CharacterTrait.prototype.getNameForDisplay = getNameForDisplay;
@@ -45,9 +53,16 @@
 
         /**
          * Returns the description for the character trait
+         * @returns {*}
          */
         function getDescription() {
-            return this.description;
+
+            // If the description is not an instance of text block return nothing
+            if (typeof this.description === 'undefined') {
+                return '';
+            }
+
+            return this.description.getText();
         }
 
         /**

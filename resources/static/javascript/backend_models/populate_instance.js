@@ -20,8 +20,6 @@
          */
         function populateInstance(instanceToPopulate, dataForPopulation) {
 
-            console.log(instanceToPopulate, dataForPopulation);
-
             // If the data for population is not valid jump out
             if (typeof dataForPopulation !== 'object') {
                 throw new Error('Data for population must be an object');
@@ -33,8 +31,6 @@
                 // Convert the key to a camel cased key
                 var camelCasedKey = caseTransform.snakeCaseToCamelCase(dataKey);
                 var data = dataForPopulation[dataKey];
-
-                console.log(camelCasedKey);
 
                 // If the instance doesn't have the given property then
                 // on to the next one
@@ -109,6 +105,7 @@
         function getRelationInstance(instanceToPopulate, propertyString, data) {
             var RelationClass = relationManager.getRelationClass(instanceToPopulate, propertyString);
             var relationInstance = new RelationClass();
+            console.log(relationInstance, data, RelationClass);
             populateInstance(relationInstance, data);
             return relationInstance;
         }

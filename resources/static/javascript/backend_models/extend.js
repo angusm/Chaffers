@@ -7,7 +7,7 @@
         return extend;
 
         function extend(ChildClass, ParentClass) {
-            ChildClass.prototype = Object.create(ParentClass);
+            ChildClass.prototype = Object.create(ParentClass.prototype);
             ChildClass.prototype.constructor = ChildClass;
         }
 

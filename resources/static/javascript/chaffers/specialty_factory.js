@@ -11,7 +11,6 @@
         function Specialty() {
             CharacterTrait.apply(this, arguments);
         }
-
         extend(Specialty, CharacterTrait);
 
         return Specialty;
