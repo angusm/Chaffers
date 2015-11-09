@@ -16,7 +16,7 @@ class AttributeModifier(Model, Dictable):
     def get_display_name(self):
         return '{modifier} {attribute}'.format(
             modifier=self.modifier,
-            attribute=self.attribute.name
+            attribute=self.attribute.display_name
         )
 
     def save(self):

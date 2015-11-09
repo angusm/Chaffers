@@ -7,6 +7,7 @@ from resources.models import Character
 class CharacterAdmin(admin.ModelAdmin):
 
     fields = ('display_name',
+              'text_substitution_label',
               'description',
               'specialties',
               'flaws',)

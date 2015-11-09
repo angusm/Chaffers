@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="chaffers" ng-strict-di>
 <head>
     <meta charset="UTF-8">
     <title>
@@ -10,6 +10,6 @@
 </head>
 <body>
     {% block content %}{% endblock %}
-    <script type="text/javascript" src="{% static 'javascript/libraries/angular/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'javascript/main.min.js' %}"></script>
 </body>
 </html>

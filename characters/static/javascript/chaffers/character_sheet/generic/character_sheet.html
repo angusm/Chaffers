@@ -1,0 +1,28 @@
+<div class="character-sheet">
+
+    <!-- NAME AND BIO -->
+    <h1 ng-bind="character.getNameForDisplay()"></h1>
+    <div class="biography" ng-bind="character.getBiographyForDisplay()"></div>
+
+    <!-- CHARACTER TRAITS -->
+    <div class="specialties">
+        <specialty ng-repeat="specialty in character.getSpecialties()"
+                specialty="specialty"></specialty>
+    </div>
+    <div class="flaws">
+        <flaw ng-repeat="flaw in character.getFlaws()"
+                flaw="flaw"></flaw>
+    </div>
+
+    <!-- DEFENSE POINTS -->
+    <div class="hit-points" ng-bind="character.getHitPoints()"></div>
+    <div class="resolve-points" ng-bind="character.getResolvePoints()"></div>
+
+    <!-- ABILITIES -->
+    <div class="abilities">
+        <ability ng-repeat="ability in abilities"
+                ability="ability">
+        </ability>
+    </div>
+
+</div>

@@ -1,0 +1,20 @@
+<div class="character-trait">
+
+    <div class="display-name">
+        <span ng-bind="characterTrait.getNameForDisplay()"></span>
+    </div>
+    <div class="description">
+        <span ng-bind="characterTrait.getDescription()"></span>
+    </div>
+    <div class="ability-modifiers">
+        <ability-modifier ng-repeat="abilityModifier in characterTrait.getAbilityModifiers()"
+                          ability-modifier="abilityModifier">
+        </ability-modifier>
+    </div>
+    <div class="attribute-modifiers">
+        <attribute-modifier ng-repeat="attributeModifier in characterTrait.getAttributeModifiers()"
+                            attribute-modifier="attributeModifier">
+        </attribute-modifier>
+    </div>
+
+</div>
