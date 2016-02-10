@@ -17,7 +17,7 @@ module.exports = function(grunt) {
                         'resources/static/javascript/handies.js',
                         'resources/static/javascript/backend_models.js',
                         'resources/static/javascript/chaffers.js',
-                        '*/static/javascript/*/**/*.js',
+                        'resources/static/javascript/*/**/*.js',
                         '!resources/static/javascript/main.min.js'
                     ]
                 }
