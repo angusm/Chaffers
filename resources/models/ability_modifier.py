@@ -39,9 +39,16 @@ class AbilityModifier(Model, Dictable):
         """
         Save override to keep display names up to date
         """
-        # Handle updating display names
-        self.display_name = self.get_display_name()
+
+        # Since the name is dependent on the rest of the data
+        # being saved we need to save everything else first
         super(AbilityModifier, self).save()
+
+        # Update the display name and save
+        display_name = self.get_display_name()
+        if self.display_name != display_name:
+            self.display_name = display_name
+            super(AbilityModifier, self).save(update_fields=['display_name'])
 
     def __unicode__(self):
         return self.display_name

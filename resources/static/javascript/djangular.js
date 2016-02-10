@@ -1,3 +1,3 @@
 (function() {
-    angular.module('djangular', []);
+    angular.module('djangular', ['ngCookies']);
 })();

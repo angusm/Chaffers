@@ -15,27 +15,31 @@
             scope: {
                 characterId: '='
             },
-            controller: characterSheetFromIdController,
+            controller: CharacterSheetFromIdController,
             controllerAs: 'characterSheetFromIdVM',
             bindToController: true,
             templateUrl: '/static/javascript/chaffers/character_sheet/from_id/character_sheet_from_id.html'
         };
 
-        characterSheetFromIdController.$inject(
-            'CharacterSheetDataService'
-        );
+        CharacterSheetFromIdController.$inject = [
+            'CharacterDataService'
+        ];
 
-        function characterSheetFromIdController(
-            CharacterSheetDataService
+        function CharacterSheetFromIdController(
+            CharacterDataService
         ) {
             var vm = this;
-            CharacterSheetDataService.getCharacterByID(this.characterId).then(setCharacter);
-            function setCharacter(character) {
-                vm.character = character;
-            }
-        };
+            CharacterDataService.getCharacterById(vm.characterId).then(setCharacter.bind(vm));
+        }
+
+        CharacterSheetFromIdController.prototype.setCharacter = setCharacter;
 
         return directive;
+
+        // Functions past here...
+        function setCharacter(character) {
+            this.character = character;
+        }
 
     }
 })();

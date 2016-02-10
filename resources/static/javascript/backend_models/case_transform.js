@@ -23,14 +23,7 @@
                 // We don't care about the underscore part of the match so,
                 // we just want the word part of the match
                 var matchedString = snakeCaseMatch[1];
-
-                // Handle ID's specially
-                switch (matchedString) {
-                    case 'id':
-                        return 'ID';
-                    default:
-                        return matchedString.toUpperCase();
-                }
+                return matchedString.toUpperCase();
 
             }
         }

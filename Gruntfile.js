@@ -8,7 +8,11 @@ module.exports = function(grunt) {
             modules: {
                 files: {
                     'resources/static/javascript/main.min.js': [
-                        'resources/static/javascript/angular.js',
+
+                        //TODO: Embedded to speed up minification, put back in for production
+                        //'resources/static/javascript/angular.js',
+                        //'resources/static/javascript/angular-cookies.js',
+
                         'resources/static/javascript/djangular.js',
                         'resources/static/javascript/handies.js',
                         'resources/static/javascript/backend_models.js',
@@ -23,7 +27,7 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: [
-                    '*/static/javascript/*/**/*.js',
+                    '*/static/javascript/**/*.js',
                     '!resources/static/javascript/main.min.js'
                 ],
                 tasks: ['uglify'],

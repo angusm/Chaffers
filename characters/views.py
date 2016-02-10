@@ -18,10 +18,26 @@ def view_character_list(request):
     )
 
 
-def view_character(request, character_id):
+def view_character_sheet(request, character_id):
+    """
+    Show the character sheet for the given character
+    """
+    return render(
+        request,
+        'character_sheet.html',
+        {'character_id': character_id}
+    )
 
+
+@require_POST
+def get_character_data_by_id(request):
+    """
+    Get the character data for the given character
+    """
+
+    request_data = json.loads(request.body)
     character = Character.objects.get(
-        pk=character_id
+        pk=request_data['character_id']
     )
     character_data = character.to_dict(
         'display_name',
@@ -50,11 +66,9 @@ def view_character(request, character_id):
         'flaws__attribute_modifiers__modifier',
     )
 
-    return render(
-        request,
-        'character_sheet.html',
-        {'character_data': json.dumps(character_data)}
-    )
+    return JsonResponse({
+        'character_data': character_data
+    })
 
 @require_POST
 def get_ability_data(request):

@@ -1,16 +1,14 @@
 (function() {
-    angular.module('djangular').factory('csrfService', [
-        '$cookies',
-        csrfService
-    ]);
+    angular.module('djangular').factory('csrfService', csrfService);
 
+    csrfService.$inject = ['$cookies'];
     function csrfService($cookies) {
         return {
             getCSRFToken: getCSRFToken
         };
 
         function getCSRFToken() {
-            return $cookies['csrftoken'];
+            return $cookies.get('csrftoken');
         }
     }
 
