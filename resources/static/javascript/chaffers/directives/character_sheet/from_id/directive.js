@@ -18,7 +18,7 @@
             controller: CharacterSheetFromIdController,
             controllerAs: 'characterSheetFromIdVM',
             bindToController: true,
-            templateUrl: '/static/javascript/chaffers/character_sheet/from_id/character_sheet_from_id.html'
+            templateUrl: '/static/javascript/chaffers/directives/character_sheet/from_id/character_sheet_from_id.html'
         };
 
         CharacterSheetFromIdController.$inject = [

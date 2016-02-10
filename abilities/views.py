@@ -11,6 +11,7 @@ def get_all_abilities_data(request):
 
     abilities = Ability.objects.all()
     properties_to_dict = [
+        'id',
         'display_name',
         'description__formatted_text',
 

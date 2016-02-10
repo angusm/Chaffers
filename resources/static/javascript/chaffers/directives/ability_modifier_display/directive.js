@@ -19,7 +19,7 @@
             },
             controllerAs: 'abilityModifierVM',
             bindToController: true,
-            templateUrl: '/static/javascript/chaffers/ability_modifier_display/ability_modifier.html'
+            templateUrl: '/static/javascript/chaffers/directives/ability_modifier_display/ability_modifier.html'
         };
 
         return directive;

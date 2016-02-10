@@ -12,7 +12,7 @@
             scope: {
                 characterTrait: '='
             },
-            templateUrl: '/static/javascript/chaffers/character_trait_display/generic/character_trait.html',
+            templateUrl: '/static/javascript/chaffers/directives/character_trait_display/generic/character_trait.html',
             controller: function() {},
             controllerAs: 'characterTraitVM',
             bindToController: true

@@ -11,7 +11,7 @@
             scope: {
                 specialty: '='
             },
-            templateUrl: '/static/javascript/chaffers/character_trait_display/specialty/specialty.html',
+            templateUrl: '/static/javascript/chaffers/directives/character_trait_display/specialty/specialty.html',
             controller: function() {},
             controllerAs: 'specialtyVM',
             bindToController: true

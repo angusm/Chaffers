@@ -15,7 +15,7 @@
             controller: function() {},
             controllerAs: 'flawVM',
             bindToController: true,
-            templateUrl: '/static/javascript/chaffers/character_trait_display/flaw/flaw.html'
+            templateUrl: '/static/javascript/chaffers/directives/character_trait_display/flaw/flaw.html'
         };
 
         return directive;

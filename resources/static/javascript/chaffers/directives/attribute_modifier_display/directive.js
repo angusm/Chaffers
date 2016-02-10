@@ -19,7 +19,7 @@
             },
             controllerAs: 'attributeModifierVM',
             bindToController: true,
-            templateUrl: '/static/javascript/chaffers/attribute_modifier_display/attribute_modifier.html'
+            templateUrl: '/static/javascript/chaffers/directives/attribute_modifier_display/attribute_modifier.html'
         };
 
         return directive;

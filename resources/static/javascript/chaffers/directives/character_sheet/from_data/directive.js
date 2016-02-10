@@ -1,7 +1,7 @@
 (function (){
 
-    angular.module('chaffers').directive('characterLinkFromData', [
-        characterLinkFromData
+    angular.module('chaffers').directive('characterSheetFromData', [
+        characterSheetFromData
     ]);
 
     // STOP! Nothing but functions past this point ya hear?
@@ -11,7 +11,7 @@
      * Directive handler for the Character Sheet
      * @returns {object} the directive objects for a character sheet
      */
-    function characterLinkFromData() {
+    function characterSheetFromData() {
 
         var directive = {
             restrict: 'E',
@@ -19,9 +19,9 @@
                 characterData: '='
             },
             controller: ['createPopulatedInstance', 'Character', controller],
-            controllerAs: 'characterLinkFromDataVM',
+            controllerAs: 'characterSheetFromDataVM',
             bindToController: true,
-            templateUrl: '/static/javascript/chaffers/character_link/from_data/character_link.html'
+            templateUrl: '/static/javascript/chaffers/directives/character_sheet/from_data/character_sheet_from_data.html'
         };
 
         return directive;

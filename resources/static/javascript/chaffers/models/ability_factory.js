@@ -18,6 +18,7 @@
 
         function Ability() {
 
+            this.id = undefined;
             this.displayName = undefined;
             this.description = undefined;
 
@@ -30,13 +31,22 @@
 
         // Functions
         Ability.prototype.getDisplayName = getDisplayName;
+        Ability.prototype.getDescription = getDescription;
 
         return Ability;
         // STOP! Functions only past this point alright.
 
         /**
+         * Return the description of the ability
+         * @returns {string}
+         */
+        function getDescription() {
+            return this.description.formattedText;
+        }
+
+        /**
          * Return the display name for the ability modifier
-         * @returns {undefined|*}
+         * @returns {string}
          */
         function getDisplayName() {
             return this.displayName;

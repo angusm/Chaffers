@@ -18,7 +18,7 @@
             controller: CharacterSheetController,
             controllerAs: 'characterSheetVM',
             bindToController: true,
-            templateUrl: '/static/javascript/chaffers/character_sheet/generic/character_sheet.html'
+            templateUrl: '/static/javascript/chaffers/directives/character_sheet/generic/character_sheet.html'
         };
 
         /**

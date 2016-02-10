@@ -18,7 +18,7 @@
             controller: function(){},
             controllerAs: 'characterLinkVM',
             bindToController: true,
-            templateUrl: '/static/javascript/chaffers/character_link/generic/character_link.html'
+            templateUrl: '/static/javascript/chaffers/directives/character_link/generic/character_link.html'
         };
 
         return directive;
