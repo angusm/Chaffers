@@ -39,7 +39,7 @@ def get_character_data_by_id(request):
     character = Character.objects.get(
         pk=request_data['character_id']
     )
-    character_data = character.to_dict(
+    properties_to_dict = [
         'display_name',
         'description__formatted_text',
 
@@ -64,7 +64,8 @@ def get_character_data_by_id(request):
         'flaws__attribute_modifiers__attribute_id',
         'flaws__attribute_modifiers__display_name',
         'flaws__attribute_modifiers__modifier',
-    )
+    ]
+    character_data = character.to_dict(*properties_to_dict)
 
     return JsonResponse({
         'character_data': character_data

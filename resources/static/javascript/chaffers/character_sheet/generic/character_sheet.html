@@ -20,9 +20,10 @@
 
     <!-- ABILITIES -->
     <div class="abilities">
-        <ability ng-repeat="ability in characterSheetVM.abilities"
-                ability="ability">
-        </ability>
+        <character-ability ng-repeat="ability in characterSheetVM.abilities"
+                ability="ability"
+                character="characterSheetVM.character">
+        </character-ability>
     </div>
 
 </div>

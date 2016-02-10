@@ -1,11 +1,12 @@
 (function() {
 
-    angular.module('backendModels').factory('createPopulatedInstances', [
-        'createPopulatedInstance',
-        createPopulatedInstancesFactory
-    ]);
+    angular.module('backendModels').factory('createPopulatedInstances', createPopulatedInstancesFactory);
 
-    function createPopulatedInstancesFactory(populateInstance) {
+    createPopulatedInstancesFactory.$inject = [
+        'createPopulatedInstance'
+    ];
+
+    function createPopulatedInstancesFactory(createPopulatedInstance) {
 
         return createPopulatedInstances;
         // STOP! It's a function only party past this point.

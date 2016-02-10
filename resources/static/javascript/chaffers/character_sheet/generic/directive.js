@@ -13,16 +13,40 @@
         var directive = {
             restrict: 'E',
             scope: {
-                character: '=',
-                abilities: '='
+                character: '='
             },
-            controller: function(){},
+            controller: CharacterSheetController,
             controllerAs: 'characterSheetVM',
             bindToController: true,
             templateUrl: '/static/javascript/chaffers/character_sheet/generic/character_sheet.html'
         };
 
+        /**
+         * Give the Character sheet controller what it needs
+         * @type {string[]}
+         */
+        CharacterSheetController.$inject = [
+            'AbilityDataService'
+        ];
+        CharacterSheetController.prototype.setAbilities = setAbilities;
+
         return directive;
+
+        function CharacterSheetController(
+            AbilityDataService
+        ) {
+            AbilityDataService.getAllAbilities().then(
+                this.setAbilities.bind(this)
+            );
+        }
+
+        /**
+         * Set the abilities on the controller to the given set
+         */
+        function setAbilities(newAbilities) {
+            console.log(newAbilities);
+            this.abilities = newAbilities;
+        }
 
     }
 })();
