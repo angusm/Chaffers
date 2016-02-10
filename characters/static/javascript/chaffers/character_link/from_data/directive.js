@@ -1,7 +1,6 @@
 (function (){
 
     angular.module('chaffers').directive('characterLinkFromData', [
-        '$injector',
         characterLinkFromData
     ]);
 
@@ -12,7 +11,7 @@
      * Directive handler for the Character Sheet
      * @returns {object} the directive objects for a character sheet
      */
-    function characterLinkFromData($injector) {
+    function characterLinkFromData() {
 
         var directive = {
             restrict: 'E',
