@@ -5,6 +5,7 @@ from django.contrib import admin
 class CharacterTraitAdmin(admin.ModelAdmin):
 
     fields = ('display_name',
+              'text_substitution_label',
               'description',
               'ability_modifiers',
               'attribute_modifiers',)

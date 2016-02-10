@@ -4,6 +4,7 @@
         'extend',
         'relationManager',
         'TextBlock',
+        'AttributeModifier',
         characterTraitFactory
     ]);
 
@@ -11,7 +12,8 @@
         BaseModel,
         extend,
         relationManager,
-        TextBlock
+        TextBlock,
+        AttributeModifier
     ) {
 
         /**
@@ -33,6 +35,7 @@
 
         // Attach relations
         relationManager.registerHasOneRelation(CharacterTrait, 'description', TextBlock);
+        relationManager.registerHasManyRelation(CharacterTrait, 'attributeModifiers', AttributeModifier);
 
         // Instance Functions
         CharacterTrait.prototype.getNameForDisplay = getNameForDisplay;

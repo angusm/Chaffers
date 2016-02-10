@@ -105,7 +105,6 @@
         function getRelationInstance(instanceToPopulate, propertyString, data) {
             var RelationClass = relationManager.getRelationClass(instanceToPopulate, propertyString);
             var relationInstance = new RelationClass();
-            console.log(relationInstance, data, RelationClass);
             populateInstance(relationInstance, data);
             return relationInstance;
         }

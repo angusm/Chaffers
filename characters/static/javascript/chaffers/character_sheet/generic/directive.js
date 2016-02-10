@@ -11,10 +11,14 @@
     function characterSheet() {
 
         var directive = {
+            restrict: 'E',
             scope: {
                 character: '=',
                 abilities: '='
             },
+            controller: function(){},
+            controllerAs: 'characterSheetVM',
+            bindToController: true,
             templateUrl: '/static/javascript/chaffers/character_sheet/generic/character_sheet.html'
         };
 

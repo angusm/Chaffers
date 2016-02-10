@@ -21,6 +21,7 @@
 
         function Character() {
 
+            this.id = undefined;
             this.specialties = undefined;
             this.flaws = undefined;
             this.description = undefined;
@@ -35,8 +36,9 @@
         Character.prototype.getFlaws = getFlaws;
         Character.prototype.getSpecialties = getSpecialties;
         Character.prototype.getDescription = getDescription;
+        Character.prototype.getCharacterSheetURL = getCharacterSheetURL;
 
-        // Register relations
+        // Register Relations
         relationManager.registerHasManyRelation(Character, 'flaws', Flaw);
         relationManager.registerHasManyRelation(Character, 'specialties', Specialty);
         relationManager.registerHasOneRelation(Character, 'description', TextBlock);
@@ -44,6 +46,14 @@
         return Character;
 
         // STOP! Only functions past here.
+
+        /**
+         * Return a link to the character's sheet
+         * @returns {string}
+         */
+        function getCharacterSheetURL() {
+            return '/characters/view/' + this.id;
+        }
 
         /**
          * Return the description for the character

@@ -1,0 +1,7 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% for character in character_data %}
+        <character-link-from-data character-data="{{ character }}"></character-link-from-data>
+    {% endfor %}
+{% endblock %}

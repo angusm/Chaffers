@@ -5,6 +5,19 @@ from django.views.decorators.http import require_POST
 import json
 
 # Create your views here.
+def view_character_list(request):
+    """ Show a list of characters
+    """
+
+    characters_data = Character.objects.values('id', 'display_name')
+
+    return render(
+        request,
+        'character_list.html',
+        {'character_data': [json.dumps(character_data) for character_data in characters_data]}
+    )
+
+
 def view_character(request, character_id):
 
     character = Character.objects.get(
@@ -19,6 +32,7 @@ def view_character(request, character_id):
         'specialties__ability_modifiers__ability_id',
         'specialties__ability_modifiers__modifier',
         'specialties__attribute_modifiers__attribute_id',
+        'specialties__attribute_modifiers__display_name',
         'specialties__attribute_modifiers__modifier',
 
         'flaws__display_name',
@@ -26,6 +40,7 @@ def view_character(request, character_id):
         'flaws__ability_modifiers__ability_id',
         'flaws__ability_modifiers__modifier',
         'flaws__attribute_modifiers__attribute_id',
+        'flaws__attribute_modifiers__display_name',
         'flaws__attribute_modifiers__modifier',
     )
 
@@ -57,6 +72,7 @@ def get_character_data(request):
         'flaws__ability_modifiers__ability_id',
         'flaws__ability_modifiers__modifier',
         'flaws__attribute_modifiers__attribute_id',
+        'flaws__attribute_modifiers__display_name',
         'flaws__attribute_modifiers__modifier',
     )
 

@@ -15,8 +15,20 @@ class AttributeModifier(Model, Dictable):
 
     def get_display_name(self):
         return '{modifier} {attribute}'.format(
-            modifier=self.modifier,
+            modifier=self.get_plus_minus_modifier_string(),
             attribute=self.attribute.display_name
+        )
+
+    def get_plus_minus_modifier_string(self):
+
+        if self.modifier > 0:
+            sign = '+'
+        else:
+            sign = '-'
+
+        return '{sign}{modifier}'.format(
+            sign=sign,
+            modifier=self.modifier
         )
 
     def save(self):

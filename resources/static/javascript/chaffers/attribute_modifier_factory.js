@@ -11,19 +11,17 @@
         extend
     ) {
 
-        return AttributeModifier;
-
-        // STOP! Functions only past this point.
-
         function AttributeModifier() {
 
+            this.displayName = undefined;
             this.modifier = undefined;
 
-            BaseModel.apply(this, attributes);
+            BaseModel.apply(this, arguments);
         }
         extend(AttributeModifier, BaseModel);
 
         AttributeModifier.prototype.getModifier = getModifier;
+        AttributeModifier.prototype.getDisplayName = getDisplayName;
 
         return AttributeModifier;
         // STOP! Functions only past this point alright.
@@ -34,6 +32,14 @@
          */
         function getModifier() {
             return this.modifier;
+        }
+
+        /**
+         * Return the display name for the attribute modifier
+         * @returns {undefined|*}
+         */
+        function getDisplayName() {
+            return this.displayName;
         }
 
     }

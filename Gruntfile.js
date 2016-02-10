@@ -18,11 +18,27 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+
+        watch: {
+            scripts: {
+                files: [
+                    '*/static/javascript/*/**/*.js',
+                    '!resources/static/javascript/main.min.js'
+                ],
+                tasks: ['uglify'],
+                options: {
+                    spawn: false
+                }
+            }
         }
     });
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    // Load a watcher
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
     grunt.registerTask('default', ['uglify']);

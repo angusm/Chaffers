@@ -12,6 +12,9 @@
             scope: {
                 flaw: '='
             },
+            controller: function() {},
+            controllerAs: 'flawVM',
+            bindToController: true,
             template: '/static/character_trait_display/flaw/flaw.html'
         };
 
