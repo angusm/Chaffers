@@ -44,7 +44,6 @@
          * Set the abilities on the controller to the given set
          */
         function setAbilities(newAbilities) {
-            console.log(newAbilities);
             this.abilities = newAbilities;
         }
 

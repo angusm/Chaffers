@@ -15,6 +15,12 @@
     </div>
 
     <!-- DEFENSE POINTS -->
+    <div class="attributes">
+        <character-attribute ng-repeat="attribute in characterSheetVM.attributes"
+                             attribute="attribute"
+                             character="characterSheetVM.character">
+        </character-attribute>
+    </div>
     <div class="hit-points" ng-bind="characterSheetVM.character.getHitPoints()"></div>
     <div class="resolve-points" ng-bind="characterSheetVM.character.getResolvePoints()"></div>
 

@@ -36,9 +36,7 @@
          * Controller for the character ability directive
          * @constructor
          */
-        function CharacterAbilityDirectiveController() {
-            this.getFinalModifier = getFinalModifier;
-        }
+        function CharacterAbilityDirectiveController() {}
         CharacterAbilityDirectiveController.prototype.getFinalModifier = getFinalModifier;
 
         return directive;
@@ -51,11 +49,11 @@
         function getFinalModifier() {
 
             // Return blank if the character or ability are not properly set up yet
-            if (!this.character.getFinalModifier || !this.ability.id) {
+            if (!this.character.getFinalAbilityModifier || !this.ability.id) {
                 return '';
             }
 
-            var finalModifier = this.character.getFinalModifier(this.ability);
+            var finalModifier = this.character.getFinalAbilityModifier(this.ability);
             return formatModifierForDisplay(finalModifier);
         }
 

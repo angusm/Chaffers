@@ -38,11 +38,18 @@
         Character.prototype.getSpecialties = getSpecialties;
         Character.prototype.getDescription = getDescription;
         Character.prototype.getCharacterSheetURL = getCharacterSheetURL;
+
         Character.prototype.getAllSpecialtyAbilityModifiers = getAllSpecialtyAbilityModifiers;
         Character.prototype.getAllFlawAbilityModifiers = getAllFlawAbilityModifiers;
         Character.prototype.getAllAbilityModifiers = getAllAbilityModifiers;
         Character.prototype.getAllAbilityModifiersForAbility = getAllAbilityModifiersForAbility;
-        Character.prototype.getFinalModifier = getFinalModifier;
+        Character.prototype.getFinalAbilityModifier = getFinalAbilityModifier;
+
+        Character.prototype.getAllSpecialtyAttributeModifiers = getAllSpecialtyAttributeModifiers;
+        Character.prototype.getAllFlawAttributeModifiers = getAllFlawAttributeModifiers;
+        Character.prototype.getAllAttributeModifiers = getAllAttributeModifiers;
+        Character.prototype.getAllAttributeModifiersForAttribute = getAllAttributeModifiersForAttribute;
+        Character.prototype.getFinalAttributeValue = getFinalAttributeValue;
 
         // Register Relations
         relationManager.registerHasManyRelation(Character, 'flaws', Flaw);
@@ -145,13 +152,54 @@
         }
 
         /**
-         * Return the modifier for the given ability as
-         * determined by tallying relevant specialties and
-         * flaws
+         * Return all of the attribute modifiers that apply to this character
+         * from their specialties
+         * @returns {AttributeModifier[]}
+         */
+        function getAllSpecialtyAttributeModifiers() {
+            var modifiers = [];
+            this.getSpecialties().forEach(function(specialty) {
+                modifiers = modifiers.concat(specialty.getAttributeModifiers());
+            });
+            return modifiers;
+        }
+
+        /**
+         * Return all of the attribute modifiers that apply to this character
+         * from their flaws
+         * @returns {AttributeModifier[]}
+         */
+        function getAllFlawAttributeModifiers() {
+            var modifiers = [];
+            this.getFlaws().forEach(function(flaw) {
+                modifiers = modifiers.concat(flaw.getAttributeModifiers());
+            });
+            return modifiers;
+        }
+
+        /**
+         * Return all of the attribute modifiers that apply to this character
+         * @returns {AttributeModifier[]}
+         */
+        function getAllAttributeModifiers() {
+            return this.getAllSpecialtyAttributeModifiers().concat(
+                this.getAllFlawAttributeModifiers()
+            );
+        }
+
+        function getAllAttributeModifiersForAttribute(attribute) {
+            return this.getAllAttributeModifiers().filter(function(candidateAttributeModifier) {
+                return candidateAttributeModifier.appliesToAttribute(attribute);
+            });
+        }
+
+        /**
+         * Return the modifier for the given ability as determined
+         * by tallying relevant specialties and flaws
          * @param ability
          * @returns {number}
          */
-        function getFinalModifier(ability) {
+        function getFinalAbilityModifier(ability) {
             var finalModifier = 0;
             this.getAllAbilityModifiersForAbility(ability).forEach(function(abilityModifier) {
                finalModifier += abilityModifier.modifier;
@@ -159,6 +207,18 @@
             return finalModifier;
         }
 
+        /**
+         * Return the final value for the given attribute
+         * @param attribute {Attribute}
+         * @returns {number}
+         */
+        function getFinalAttributeValue(attribute) {
+            var finalValue = attribute.getBaseValue();
+            this.getAllAttributeModifiersForAttribute(attribute).forEach(function(attributeModifier) {
+                finalValue += attributeModifier.modifier;
+            });
+            return finalValue
+        }
 
 
     }
