@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
             name='TextBlock',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('raw_description', models.TextField()),
+                ('raw_text', models.TextField()),
             ],
             bases=(models.Model, resources.libraries.dictable.dictable.Dictable),
         ),
@@ -57,6 +57,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ['display_name'],
+                'abstract': False,
             },
             bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
         ),
@@ -105,6 +106,20 @@ class Migration(migrations.Migration):
             name='CharacterTrait',
             fields=[
                 ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
+            ],
+            options={
+                'ordering': ['display_name'],
+            },
+            bases=('resources.textsubstitution', resources.libraries.dictable.dictable.Dictable),
+        ),
+        migrations.CreateModel(
+            name='CheckContext',
+            fields=[
+                ('textsubstitution_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='resources.TextSubstitution')),
+                ('name', models.CharField(max_length=255)),
+                ('ability_modifiers', models.ManyToManyField(to='resources.AbilityModifier', blank=True)),
+                ('description', models.ForeignKey(to='resources.TextBlock')),
+                ('parent', models.ForeignKey(blank=True, to='resources.CheckContext', null=True)),
             ],
             options={
                 'ordering': ['display_name'],
@@ -227,6 +242,11 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='resources.Ability'),
         ),
         migrations.AddField(
+            model_name='abilitymodifier',
+            name='check_contexts',
+            field=models.ManyToManyField(to='resources.CheckContext', blank=True),
+        ),
+        migrations.AddField(
             model_name='ability',
             name='categories',
             field=models.ManyToManyField(to='resources.Category'),
@@ -238,7 +258,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='ability',
-            name='parent_ability',
+            name='parent',
             field=models.ForeignKey(blank=True, to='resources.Ability', null=True),
         ),
         migrations.AddField(

@@ -4,6 +4,7 @@ from django.db.models import ManyToManyField
 from django.db.models import Model
 from django.db.models import CharField
 from ..libraries import Dictable
+from ..libraries.chaffers_utilities import modifier_value_to_string
 
 
 class AttributeModifier(Model, Dictable):
@@ -15,20 +16,8 @@ class AttributeModifier(Model, Dictable):
 
     def get_display_name(self):
         return '{modifier} {attribute}'.format(
-            modifier=self.get_plus_minus_modifier_string(),
+            modifier=modifier_value_to_string(self.modifier),
             attribute=self.attribute.display_name
-        )
-
-    def get_plus_minus_modifier_string(self):
-
-        if self.modifier > 0:
-            sign = '+'
-        else:
-            sign = '-'
-
-        return '{sign}{modifier}'.format(
-            sign=sign,
-            modifier=self.modifier
         )
 
     def save(self):

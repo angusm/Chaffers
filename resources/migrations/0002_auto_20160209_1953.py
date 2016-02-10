@@ -11,9 +11,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='textblock',
-            old_name='raw_description',
-            new_name='raw_text',
+        migrations.AlterField(
+            model_name='checkcontext',
+            name='description',
+            field=models.ForeignKey(blank=True, to='resources.TextBlock', null=True),
         ),
     ]

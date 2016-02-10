@@ -33,6 +33,7 @@
         extend(Character, BaseModel);
 
         // Functions
+        Character.prototype.getDisplayName = getDisplayName;
         Character.prototype.getFlaws = getFlaws;
         Character.prototype.getSpecialties = getSpecialties;
         Character.prototype.getDescription = getDescription;
@@ -46,6 +47,14 @@
         return Character;
 
         // STOP! Only functions past here.
+
+        /**
+         * Return the display name for this character
+         * @returns {undefined|*}
+         */
+        function getDisplayName() {
+            return this.displayName;
+        }
 
         /**
          * Return a link to the character's sheet

@@ -20,6 +20,5 @@ import views
 urlpatterns = [
     url(r'^list', views.view_character_list),
     url(r'^view/(?P<character_id>[0-9]*)', views.view_character),
-    url(r'^get_data', views.get_character_data),
     url(r'^get_ability_data', views.get_ability_data),
 ]

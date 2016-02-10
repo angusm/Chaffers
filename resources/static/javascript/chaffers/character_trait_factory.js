@@ -5,6 +5,7 @@
         'relationManager',
         'TextBlock',
         'AttributeModifier',
+        'AbilityModifier',
         characterTraitFactory
     ]);
 
@@ -13,7 +14,8 @@
         extend,
         relationManager,
         TextBlock,
-        AttributeModifier
+        AttributeModifier,
+        AbilityModifier
     ) {
 
         /**
@@ -36,9 +38,10 @@
         // Attach relations
         relationManager.registerHasOneRelation(CharacterTrait, 'description', TextBlock);
         relationManager.registerHasManyRelation(CharacterTrait, 'attributeModifiers', AttributeModifier);
+        relationManager.registerHasManyRelation(CharacterTrait, 'abilityModifiers', AbilityModifier);
 
         // Instance Functions
-        CharacterTrait.prototype.getNameForDisplay = getNameForDisplay;
+        CharacterTrait.prototype.getDisplayName = getDisplayName;
         CharacterTrait.prototype.getDescription = getDescription;
         CharacterTrait.prototype.getAbilityModifiers = getAbilityModifiers;
         CharacterTrait.prototype.getAttributeModifiers = getAttributeModifiers;
@@ -50,7 +53,7 @@
         /**
          * Returns the display name for the character trait
          */
-        function getNameForDisplay() {
+        function getDisplayName() {
             return this.displayName;
         }
 
