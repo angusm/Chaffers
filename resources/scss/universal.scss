@@ -1,5 +1,8 @@
 @import "__chaffers";
+body {
+  font-size: 30px;
 
-.description {
-  @include flavour-text();
+  .description {
+    @include flavour-text();
+  }
 }

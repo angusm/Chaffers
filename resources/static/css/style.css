@@ -86,8 +86,10 @@ hr {
 input, select {
   vertical-align: middle; }
 
-.description {
-  font-style: italic; }
+body {
+  font-size: 30px; }
+  body .description {
+    font-style: italic; }
 
 character-sheet {
   width: 100%; }
