@@ -1,0 +1,4 @@
+@mixin flex-fill-width {
+  display: flex;
+  width: 100%;
+}

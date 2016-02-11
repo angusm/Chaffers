@@ -50,7 +50,7 @@
         function getModifiedAttributeValue() {
 
             // Return blank if the character or attribute are not properly set up yet
-            if (!this.character.getModifiedAttributeValue || !this.attribute.id) {
+            if (!this.character || !this.attribute.id) {
                 return '';
             }
 

@@ -1,10 +1,10 @@
 <div class="character-trait">
 
     <div class="display-name">
-        <span ng-bind="characterTraitVM.characterTrait.getDisplayName()"></span>
+        <h3 ng-bind="characterTraitVM.characterTrait.getDisplayName()"></h3>
     </div>
-    <div class="description">
-        <span ng-bind="characterTraitVM.characterTrait.getDescription()"></span>
+    <div class="description"
+         ng-bind="characterTraitVM.characterTrait.getDescription()">
     </div>
     <div class="ability-modifiers">
         <ability-modifier ng-repeat="abilityModifier in characterTraitVM.characterTrait.getAbilityModifiers()"

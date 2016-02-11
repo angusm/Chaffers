@@ -1,0 +1,60 @@
+@import "_character_trait";
+@import "__flexies";
+
+character-sheet {
+  width: 100%;
+
+  .character-sheet {
+    width: 100%;
+
+    .character-bio {
+      .character-name {
+        margin: 0;
+      }
+      .description {
+        font-style: italic;
+      }
+    }
+
+    .attributes {
+      width: 100%;
+      attribute {
+        width: 100%;
+        .attribute {
+          display: inline-block;
+        }
+      }
+      .modified-attribute-value {
+        display: inline-block;
+      }
+    }
+
+    .abilities {
+      width: 100%;
+      character-ability {
+        @include character-trait-block();
+        .character-ability {
+          position: relative;
+          ability {
+            .ability {
+
+            }
+          }
+          .modifier {
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+        }
+      }
+    }
+
+    .character-traits-container {
+      width: 100%;
+      flaw, specialty {
+        @include character-trait-block();
+      }
+    }
+
+  }
+}

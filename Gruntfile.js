@@ -23,8 +23,24 @@ module.exports = function(grunt) {
                 }
             }
         },
+        sass: {
+            options: {
+                sourceMap: true
+            },
+            dist: {
+                files: {
+                    'resources/static/css/style.css': 'resources/scss/style.scss'
+                }
+            }
+        },
 
         watch: {
+            css: {
+                files: [
+                    'resources/scss/*.scss'
+                ],
+                tasks: ['sass']
+            },
             scripts: {
                 files: [
                     '*/static/javascript/**/*.js',
@@ -44,6 +60,10 @@ module.exports = function(grunt) {
     // Load a watcher
     grunt.loadNpmTasks('grunt-contrib-watch');
 
+    // Load the SASS plugin
+    grunt.loadNpmTasks('grunt-sass');
+
     // Default task(s).
     grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', ['sass']);
 }
