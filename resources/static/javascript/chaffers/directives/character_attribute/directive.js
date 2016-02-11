@@ -50,12 +50,11 @@
         function getModifiedAttributeValue() {
 
             // Return blank if the character or attribute are not properly set up yet
-            if (!this.character.getFinalModifier || !this.attribute.id) {
+            if (!this.character.getModifiedAttributeValue || !this.attribute.id) {
                 return '';
             }
 
-            var finalModifier = this.character.getFinalModifier(this.attribute);
-            return formatModifierForDisplay(finalModifier);
+            return this.character.getModifiedAttributeValue(this.attribute);
         }
 
     }

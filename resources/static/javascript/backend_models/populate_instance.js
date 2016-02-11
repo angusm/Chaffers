@@ -25,6 +25,11 @@
                 throw new Error('Data for population must be an object');
             }
 
+            // If the data is null, then we just return the instance as is
+            if (dataForPopulation === null) {
+                return instanceToPopulate;
+            }
+
             var dataKeys = Object.keys(dataForPopulation);
             dataKeys.forEach(function (dataKey) {
 

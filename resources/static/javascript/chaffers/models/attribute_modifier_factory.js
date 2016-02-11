@@ -3,12 +3,16 @@
     angular.module('chaffers').factory('AttributeModifier', [
         'BaseModel',
         'extend',
+        'Attribute',
+        'relationManager',
         AttributeModifierFactory
     ]);
 
     function AttributeModifierFactory(
         BaseModel,
-        extend
+        extend,
+        Attribute,
+        relationManager
     ) {
 
         function AttributeModifier() {
@@ -16,10 +20,17 @@
             this.displayName = undefined;
             this.modifier = undefined;
 
+            this.attributeId = undefined;
+            this.attribute = undefined;
+
             BaseModel.apply(this, arguments);
         }
         extend(AttributeModifier, BaseModel);
 
+        // Relationships
+        relationManager.registerHasOneRelation(AttributeModifier, 'attribute', Attribute);
+
+        // Functions
         AttributeModifier.prototype.getModifier = getModifier;
         AttributeModifier.prototype.getDisplayName = getDisplayName;
         AttributeModifier.prototype.appliesToAttribute = appliesToAttribute;

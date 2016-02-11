@@ -49,7 +49,7 @@
         Character.prototype.getAllFlawAttributeModifiers = getAllFlawAttributeModifiers;
         Character.prototype.getAllAttributeModifiers = getAllAttributeModifiers;
         Character.prototype.getAllAttributeModifiersForAttribute = getAllAttributeModifiersForAttribute;
-        Character.prototype.getFinalAttributeValue = getFinalAttributeValue;
+        Character.prototype.getModifiedAttributeValue = getModifiedAttributeValue;
 
         // Register Relations
         relationManager.registerHasManyRelation(Character, 'flaws', Flaw);
@@ -212,7 +212,7 @@
          * @param attribute {Attribute}
          * @returns {number}
          */
-        function getFinalAttributeValue(attribute) {
+        function getModifiedAttributeValue(attribute) {
             var finalValue = attribute.getBaseValue();
             this.getAllAttributeModifiersForAttribute(attribute).forEach(function(attributeModifier) {
                 finalValue += attributeModifier.modifier;

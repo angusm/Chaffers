@@ -26,25 +26,41 @@
          * @type {string[]}
          */
         CharacterSheetController.$inject = [
-            'AbilityDataService'
+            'AbilityDataService',
+            'AttributeDataService'
         ];
         CharacterSheetController.prototype.setAbilities = setAbilities;
+        CharacterSheetController.prototype.setAttributes = setAttributes;
 
         return directive;
 
         function CharacterSheetController(
-            AbilityDataService
+            AbilityDataService,
+            AttributeDataService
         ) {
             AbilityDataService.getAllAbilities().then(
                 this.setAbilities.bind(this)
+            );
+
+            AttributeDataService.getAllAttributes().then(
+                this.setAttributes.bind(this)
             );
         }
 
         /**
          * Set the abilities on the controller to the given set
+         * @param newAbilities
          */
         function setAbilities(newAbilities) {
             this.abilities = newAbilities;
+        }
+
+        /**
+         * Set the attributes on the controller to the given set
+         * @param newAttributes
+         */
+        function setAttributes(newAttributes) {
+            this.attributes = newAttributes;
         }
 
     }
