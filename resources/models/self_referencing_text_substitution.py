@@ -48,7 +48,7 @@ class SelfReferencingTextSubstitution(TextSubstitution):
         must_update_children = self.__update_display_names()
         super(SelfReferencingTextSubstitution, self).save()
         if must_update_children:
-            for child in self.parent_text_substitution_set.all():
+            for child in type(self).objects.filter(parent=self):
                 child.save()
 
     def get_calculated_display_name(self):

@@ -50,7 +50,7 @@
         function getFinalModifier() {
 
             // Return blank if the character or ability are not properly set up yet
-            if (!this.character.getFinalAbilityModifier || !this.ability.id) {
+            if (!this.character || !this.character.getFinalAbilityModifier || !this.ability.id) {
                 return '';
             }
 

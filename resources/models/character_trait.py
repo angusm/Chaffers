@@ -6,7 +6,7 @@ from ..libraries import Dictable
 
 
 class CharacterTrait(TextSubstitution, Dictable):
-    description = ForeignKey('TextBlock',)
+    description = ForeignKey('TextBlock', null=True, blank=True)
     ability_modifiers = ManyToManyField(
         'AbilityModifier',
         blank=True
