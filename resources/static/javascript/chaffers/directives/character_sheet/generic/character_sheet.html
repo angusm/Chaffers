@@ -7,6 +7,14 @@
         <div class="description" ng-bind="characterSheetVM.character.getDescription()"></div>
     </div>
 
+    <!-- CHECK CONTEXTS -->
+    <div class="check-contexts">
+        <h2 class="check-contexts-header">Current Context</h2>
+        <check-context-selector
+                selected-check-contexts="characterSheetVM.selectedCheckContexts">
+        </check-context-selector>
+    </div>
+
     <!-- ATTRIBUTES (Resolve and Health) -->
     <div class="attributes">
         <h2 class="attributes-header">Attributes</h2>
@@ -21,7 +29,8 @@
         <h2 class="abilities-header">Abilities</h2>
         <character-ability ng-repeat="ability in characterSheetVM.abilities"
                            ability="ability"
-                           character="characterSheetVM.character">
+                           character="characterSheetVM.character"
+                           check-contexts="characterSheetVM.selectedCheckContexts">
         </character-ability>
     </div>
 

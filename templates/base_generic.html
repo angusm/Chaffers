@@ -13,10 +13,6 @@
 
     {% block content %}{% endblock %}
 
-    <!-- TODO: Added so minification can be sped up, either add to gruntfile or stick in a CDN link or something -->
-    <script type="text/javascript" src="{% static 'javascript/angular.js' %}"></script>
-    <script type="text/javascript" src="{% static 'javascript/angular-cookies.js' %}"></script>
-
     <script type="text/javascript" src="{% static 'javascript/main.min.js' %}"></script>
 </body>
 </html>

@@ -9,15 +9,27 @@ module.exports = function(grunt) {
                 files: {
                     'resources/static/javascript/main.min.js': [
 
-                        //TODO: Embedded to speed up minification, put back in for production
-                        //'resources/static/javascript/angular.js',
-                        //'resources/static/javascript/angular-cookies.js',
+                        // JQuery Things
+                        'resources/static/javascript/jquery-2.2.1.js',
+                        'resources/static/javascript/chosen.jquery.js',
 
+                        // Angular things
+                        'resources/static/javascript/angular.js',
+
+                        // 3rd Party Angular modules
+                        'resources/static/javascript/angular-cookies.js',
+                        'resources/static/javascript/chosen.js',
+
+                        // Custom Angular modules
                         'resources/static/javascript/djangular.js',
                         'resources/static/javascript/handies.js',
                         'resources/static/javascript/backend_models.js',
+
+                        // Main site module
                         'resources/static/javascript/chaffers.js',
                         'resources/static/javascript/*/**/*.js',
+
+                        // Things to ignore
                         '!resources/static/javascript/main.min.js'
                     ]
                 }

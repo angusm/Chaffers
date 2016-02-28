@@ -23,7 +23,8 @@
             restrict: 'E',
             scope: {
                 character: '=',
-                ability: '='
+                ability: '=',
+                checkContexts: '='
             },
             controller: CharacterAbilityDirectiveController,
             controllerAs: 'characterAbilityVM',
@@ -53,7 +54,7 @@
                 return '';
             }
 
-            var finalModifier = this.character.getFinalAbilityModifier(this.ability);
+            var finalModifier = this.character.getFinalAbilityModifier(this.ability, this.checkContexts);
             return formatModifierForDisplay(finalModifier);
         }
 

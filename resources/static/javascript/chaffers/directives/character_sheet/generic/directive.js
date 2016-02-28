@@ -38,6 +38,7 @@
             AbilityDataService,
             AttributeDataService
         ) {
+            this.selectedCheckContexts = [];
             AbilityDataService.getAllAbilities().then(
                 this.setAbilities.bind(this)
             );
@@ -62,6 +63,5 @@
         function setAttributes(newAttributes) {
             this.attributes = newAttributes;
         }
-
     }
 })();
