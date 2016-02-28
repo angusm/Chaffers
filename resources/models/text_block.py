@@ -1,6 +1,8 @@
 from django.db.models import TextField
 from django.db.models import Model
+from .text_substitution import TextSubstitution
 from ..libraries import Dictable
+import re
 
 
 class TextBlock(Model, Dictable):
@@ -8,7 +10,17 @@ class TextBlock(Model, Dictable):
 
     @property
     def formatted_text(self):
-        return self.raw_text
+        """
+        Function to return the formatted text block
+        :return:
+        """
+
+        text_sub_dict = TextSubstitution.get_label_to_display_dict()
+        formatted_text = self.raw_text
+        for substitution_label, display_name in text_sub_dict.items():
+            formatted_text = re.sub(substitution_label, display_name, formatted_text)
+
+        return formatted_text
 
     def __str__(self):
         max_length = 30
