@@ -197,12 +197,15 @@
          * Return the modifier for the given ability as determined
          * by tallying relevant specialties and flaws
          * @param ability
+         * @param checkContexts {Array<CheckContext>} An array of applicable contexts
          * @returns {number}
          */
-        function getFinalAbilityModifier(ability) {
+        function getFinalAbilityModifier(ability, checkContexts) {
             var finalModifier = 0;
-            this.getAllAbilityModifiersForAbility(ability).forEach(function(abilityModifier) {
-               finalModifier += abilityModifier.modifier;
+            this.getAllAbilityModifiersForAbility(ability).filter(function(abilityModifier) {
+                return abilityModifier.isContainedInCheckContexts(checkContexts);
+            }).forEach(function(abilityModifier) {
+                finalModifier += abilityModifier.modifier;
             });
             return finalModifier;
         }

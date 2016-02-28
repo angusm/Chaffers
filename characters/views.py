@@ -49,6 +49,7 @@ def get_character_data_by_id(request):
         'specialties__ability_modifiers__ability_id',
         'specialties__ability_modifiers__display_name',
         'specialties__ability_modifiers__modifier',
+        'specialties__ability_modifiers__check_contexts__id',
 
         'specialties__attribute_modifiers__attribute_id',
         'specialties__attribute_modifiers__display_name',
@@ -60,6 +61,7 @@ def get_character_data_by_id(request):
         'flaws__ability_modifiers__ability_id',
         'flaws__ability_modifiers__display_name',
         'flaws__ability_modifiers__modifier',
+        'flaws__ability_modifiers__check_contexts__id',
 
         'flaws__attribute_modifiers__attribute_id',
         'flaws__attribute_modifiers__display_name',

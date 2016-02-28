@@ -5,20 +5,17 @@
     CheckContextFactory.$inject = [
         'BaseModel',
         'extend',
-        'relationManager',
-        'AbilityModifier'
+        'relationManager'
     ];
 
     function CheckContextFactory(BaseModel,
                                  extend,
-                                 relationManager,
-                                 AbilityModifier) {
+                                 relationManager) {
 
         function CheckContext() {
 
             this.id = undefined;
             this.description = undefined;
-            this.abilityModifiers = undefined;
             this.displayName = undefined;
             this.parent = undefined;
 
@@ -28,12 +25,20 @@
         extend(CheckContext, BaseModel);
 
         // Relations
-        relationManager.registerHasManyRelation(CheckContext, 'abilityModifiers', AbilityModifier);
 
         // Functions
+        CheckContext.prototype.getID = getID;
 
         return CheckContext;
         // STOP! Functions only past this point alright.
+
+        /**
+         * Returns the ID of this check context
+         * @returns {*}
+         */
+        function getID() {
+            return this.id;
+        }
 
     }
 
