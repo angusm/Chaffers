@@ -1,6 +1,7 @@
-<select multiple
-        chosen
-        ng-model="checkContextSelectorVM.selectedCheckContexts"
-        ng-options="checkContext.displayName for checkContext in checkContextSelectorVM.checkContexts">
-    <option value=""></option>
-</select>
+<div isteven-multi-select
+     input-model="checkContextSelectorVM.checkContexts"
+     output-model="checkContextSelectorVM.selectedCheckContexts"
+     button-label="displayName"
+     item-label="displayName"
+     helper-elements="filter"
+     tick-property="ticked"></div>

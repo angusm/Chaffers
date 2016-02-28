@@ -11,19 +11,18 @@ module.exports = function(grunt) {
 
                         // JQuery Things
                         'resources/static/javascript/jquery-2.2.1.js',
-                        'resources/static/javascript/chosen.jquery.js',
 
                         // Angular things
                         'resources/static/javascript/angular.js',
 
                         // 3rd Party Angular modules
                         'resources/static/javascript/angular-cookies.js',
-                        'resources/static/javascript/chosen.js',
 
                         // Custom Angular modules
                         'resources/static/javascript/djangular.js',
                         'resources/static/javascript/handies.js',
                         'resources/static/javascript/backend_models.js',
+                        'resources/static/javascript/isteven_multi_select/isteven-multi-select.js',
 
                         // Main site module
                         'resources/static/javascript/chaffers.js',
