@@ -1,14 +1,14 @@
 <div class="character-sheet">
 
     <!-- NAME AND BIO -->
-    <div class="character-bio">
-        <h1 class="character-name"
-            ng-bind="characterSheetVM.character.getDisplayName()"></h1>
+    <div class="character-bio character-sheet-section">
+        <div class="character-name"
+            ng-bind="characterSheetVM.character.getDisplayName()"></div>
         <div class="description" ng-bind="characterSheetVM.character.getDescription()"></div>
     </div>
 
     <!-- ATTRIBUTES (Resolve and Health) -->
-    <div class="attributes">
+    <div class="attributes character-sheet-section">
         <h2 class="attributes-header">Attributes</h2>
         <character-attribute ng-repeat="attribute in characterSheetVM.attributes"
                              attribute="attribute"
@@ -17,7 +17,7 @@
     </div>
 
     <!-- CHECK CONTEXTS -->
-    <div class="check-contexts">
+    <div class="check-contexts character-sheet-section">
         <h2 class="check-contexts-header">Current Context</h2>
         <check-context-selector
                 selected-check-contexts="characterSheetVM.selectedCheckContexts">
@@ -25,8 +25,8 @@
     </div>
 
     <!-- SELECTED ABILITY -->
-    <div class="abilities">
-        <h2 class="abilities-header">Selected Ability</h2>
+    <div class="abilities character-sheet-section">
+        <h2 class="abilities-header">Abilities</h2>
         <ability-selector
             selected-abilities="characterSheetVM.selectedAbilities">
         </ability-selector>
@@ -50,15 +50,17 @@
     -->
 
     <!-- DICE ROLLER -->
-    <dice-roller></dice-roller>
+    <div class="dice-roller character-sheet-section">
+        <dice-roller></dice-roller>
+    </div>
 
     <!-- CHARACTER TRAITS -->
-    <div class="character-traits-container specialties">
+    <div class="character-traits-container specialties character-sheet-section">
         <h2 class="specialties-header">Specialties</h2>
         <specialty ng-repeat="specialty in characterSheetVM.character.getSpecialties()"
                 specialty="specialty"></specialty>
     </div>
-    <div class="character-traits-container flaws">
+    <div class="character-traits-container flaws character-sheet-section">
         <h2 class="flaws-header">Flaws</h2>
         <flaw ng-repeat="flaw in characterSheetVM.character.getFlaws()"
                 flaw="flaw"></flaw>

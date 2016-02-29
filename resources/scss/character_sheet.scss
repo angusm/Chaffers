@@ -1,24 +1,26 @@
+@import "__chaffers";
 @import "__chaffers_colours";
 @import "__character_trait";
 @import "__flexies";
 
 character-sheet {
   .character-sheet {
-    outline: 1px solid $darkest;
-    padding: 1%;
-    width: 98%;
+    outline: 1px solid $important-text-colour;
+    padding: $base-padding;
+    width: 100% - ($base-padding * 2);
+
+    .character-sheet-section {
+      padding: $base-padding;
+    }
 
     .character-bio {
       .character-name {
+        @include unique-title-font();
         margin: 0;
       }
       .description {
-        font-style: italic;
+        @include flavour-text-font();
       }
-    }
-
-    .check-contexts {
-      width: 100%;
     }
 
     .attributes {
@@ -32,6 +34,10 @@ character-sheet {
       .modified-attribute-value {
         display: inline-block;
       }
+    }
+
+    .check-contexts {
+      width: 100%;
     }
 
     .abilities {

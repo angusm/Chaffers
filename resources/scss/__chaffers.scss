@@ -1,3 +1,26 @@
-@mixin flavour-text() {
+@import "__chaffers_colours";
+
+$base-font-size: 30px;
+$base-padding: 1%;
+
+@mixin base-font() {
+  font-size: $base-font-size;
+  font-family: 'Roboto Slab', serif;
+}
+
+@mixin unique-title-font() {
+  font-family: 'Stalemate', cursive;
+  font-size: $base-font-size * 2;
   font-style: italic;
+  font-weight: bold;
+  border-bottom: 3px solid $important-text-colour;
+  padding-top: $base-padding * 1.5;
+}
+
+@mixin flavour-text-font() {
+  color: $flavour-text-colour;
+  font-family: 'Open Sans', sans-serif;
+  font-size: $base-font-size * 0.75;
+  font-style: italic;
+  font-weight: 300;
 }
