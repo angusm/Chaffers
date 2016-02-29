@@ -24,3 +24,9 @@ $base-padding: 1%;
   font-style: italic;
   font-weight: 300;
 }
+
+@mixin header-at-level($header-level) {
+  font-size: $base-font-size * (5 - $header-level)/3;
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+}

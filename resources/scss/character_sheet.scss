@@ -11,6 +11,18 @@ character-sheet {
 
     .character-sheet-section {
       padding: $base-padding;
+      .character-sheet-header {
+        @include header-at-level(2);
+      }
+
+      &.character-traits-container {
+        width: 50% - ($base-padding * 2);
+        display: inline-block;
+        .specialty, .flaw {
+          width: 100%;
+        }
+      }
+
     }
 
     .character-name-section {
@@ -27,14 +39,19 @@ character-sheet {
 
     .attributes {
       width: 100%;
-      attribute {
-        width: 100%;
-        .attribute {
+      .character-attribute {
+        width: 50%;
+        display: inline-block;
+
+        attribute {
+          .attribute {
+            width: 50%;
+            display: inline-block;
+          }
+        }
+        .modified-attribute-value {
           display: inline-block;
         }
-      }
-      .modified-attribute-value {
-        display: inline-block;
       }
     }
 
@@ -59,13 +76,6 @@ character-sheet {
             right: 0;
           }
         }
-      }
-    }
-
-    .character-traits-container {
-      width: 100%;
-      flaw, specialty {
-        @include character-trait-block();
       }
     }
 

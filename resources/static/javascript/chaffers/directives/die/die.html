@@ -1,1 +1,5 @@
 <div ng-bind="dieVM.die.getValue()"></div>
+<div ng-class="dieVM.getClass()">
+    <span ng-repeat="dot in dieVM.getDots() track by $index"
+            ng-bind="dot"></span>
+</div>

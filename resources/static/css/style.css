@@ -6184,6 +6184,15 @@ character-sheet .character-sheet {
   width: 98%; }
   character-sheet .character-sheet .character-sheet-section {
     padding: 1%; }
+    character-sheet .character-sheet .character-sheet-section .character-sheet-header {
+      font-size: 30px;
+      font-family: 'Roboto Slab', serif;
+      font-weight: bold; }
+    character-sheet .character-sheet .character-sheet-section.character-traits-container {
+      width: 48%;
+      display: inline-block; }
+      character-sheet .character-sheet .character-sheet-section.character-traits-container .specialty, character-sheet .character-sheet .character-sheet-section.character-traits-container .flaw {
+        width: 100%; }
   character-sheet .character-sheet .character-name-section .character-name {
     font-family: 'Stalemate', cursive;
     font-size: 60px;
@@ -6193,19 +6202,21 @@ character-sheet .character-sheet {
     padding-top: 1.5%;
     margin: 0; }
   character-sheet .character-sheet .character-biography .description {
-    color: #999;
+    color: #777;
     font-family: 'Open Sans', sans-serif;
     font-size: 22.5px;
     font-style: italic;
     font-weight: 300; }
   character-sheet .character-sheet .attributes {
     width: 100%; }
-    character-sheet .character-sheet .attributes attribute {
-      width: 100%; }
-      character-sheet .character-sheet .attributes attribute .attribute {
-        display: inline-block; }
-    character-sheet .character-sheet .attributes .modified-attribute-value {
+    character-sheet .character-sheet .attributes .character-attribute {
+      width: 50%;
       display: inline-block; }
+      character-sheet .character-sheet .attributes .character-attribute attribute .attribute {
+        width: 50%;
+        display: inline-block; }
+      character-sheet .character-sheet .attributes .character-attribute .modified-attribute-value {
+        display: inline-block; }
   character-sheet .character-sheet .check-contexts {
     width: 100%; }
   character-sheet .character-sheet .abilities {
@@ -6221,12 +6232,5 @@ character-sheet .character-sheet {
           position: absolute;
           top: 0;
           right: 0; }
-  character-sheet .character-sheet .character-traits-container {
-    width: 100%; }
-    character-sheet .character-sheet .character-traits-container flaw, character-sheet .character-sheet .character-traits-container specialty {
-      display: inline-block;
-      padding: 2%;
-      vertical-align: top;
-      width: 46%; }
 
 /*# sourceMappingURL=style.css.map */
