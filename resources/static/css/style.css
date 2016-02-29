@@ -87,7 +87,8 @@ input, select {
   vertical-align: middle; }
 
 body {
-  font-size: 30px; }
+  font-size: 30px;
+  padding: 1%; }
   body .description {
     font-style: italic; }
 
@@ -357,43 +358,43 @@ body {
   max-height: 22px;
   max-width: 22px; }
 
-character-sheet {
-  width: 100%; }
-  character-sheet .character-sheet {
+character-sheet .character-sheet {
+  outline: 1px solid #000;
+  padding: 1%;
+  width: 98%; }
+  character-sheet .character-sheet .character-bio .character-name {
+    margin: 0; }
+  character-sheet .character-sheet .character-bio .description {
+    font-style: italic; }
+  character-sheet .character-sheet .check-contexts {
     width: 100%; }
-    character-sheet .character-sheet .character-bio .character-name {
-      margin: 0; }
-    character-sheet .character-sheet .character-bio .description {
-      font-style: italic; }
-    character-sheet .character-sheet .check-contexts {
+  character-sheet .character-sheet .attributes {
+    width: 100%; }
+    character-sheet .character-sheet .attributes attribute {
       width: 100%; }
-    character-sheet .character-sheet .attributes {
-      width: 100%; }
-      character-sheet .character-sheet .attributes attribute {
-        width: 100%; }
-        character-sheet .character-sheet .attributes attribute .attribute {
-          display: inline-block; }
-      character-sheet .character-sheet .attributes .modified-attribute-value {
+      character-sheet .character-sheet .attributes attribute .attribute {
         display: inline-block; }
-    character-sheet .character-sheet .abilities {
-      width: 100%; }
-      character-sheet .character-sheet .abilities character-ability {
-        display: inline-block;
-        padding: 2%;
-        vertical-align: top;
-        width: 46%; }
-        character-sheet .character-sheet .abilities character-ability .character-ability {
-          position: relative; }
-          character-sheet .character-sheet .abilities character-ability .character-ability .modifier {
-            position: absolute;
-            top: 0;
-            right: 0; }
-    character-sheet .character-sheet .character-traits-container {
-      width: 100%; }
-      character-sheet .character-sheet .character-traits-container flaw, character-sheet .character-sheet .character-traits-container specialty {
-        display: inline-block;
-        padding: 2%;
-        vertical-align: top;
-        width: 46%; }
+    character-sheet .character-sheet .attributes .modified-attribute-value {
+      display: inline-block; }
+  character-sheet .character-sheet .abilities {
+    width: 100%; }
+    character-sheet .character-sheet .abilities character-ability {
+      display: inline-block;
+      padding: 2%;
+      vertical-align: top;
+      width: 46%; }
+      character-sheet .character-sheet .abilities character-ability .character-ability {
+        position: relative; }
+        character-sheet .character-sheet .abilities character-ability .character-ability .modifier {
+          position: absolute;
+          top: 0;
+          right: 0; }
+  character-sheet .character-sheet .character-traits-container {
+    width: 100%; }
+    character-sheet .character-sheet .character-traits-container flaw, character-sheet .character-sheet .character-traits-container specialty {
+      display: inline-block;
+      padding: 2%;
+      vertical-align: top;
+      width: 46%; }
 
 /*# sourceMappingURL=style.css.map */

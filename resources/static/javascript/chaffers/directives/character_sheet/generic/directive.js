@@ -29,6 +29,8 @@
             'AbilityDataService',
             'AttributeDataService'
         ];
+        CharacterSheetController.prototype.getSelectedAbilities = getSelectedAbilities;
+        CharacterSheetController.prototype.getSelectedCheckContexts = getSelectedCheckContexts;
         CharacterSheetController.prototype.setAbilities = setAbilities;
         CharacterSheetController.prototype.setAttributes = setAttributes;
 
@@ -39,6 +41,7 @@
             AttributeDataService
         ) {
             this.selectedCheckContexts = [];
+            this.selectedAbilities = [];
             AbilityDataService.getAllAbilities().then(
                 this.setAbilities.bind(this)
             );
@@ -46,6 +49,20 @@
             AttributeDataService.getAllAttributes().then(
                 this.setAttributes.bind(this)
             );
+        }
+
+        /**
+         * Get the selected check contexts
+         */
+        function getSelectedAbilities() {
+            return this.selectedAbilities;
+        }
+
+        /**
+         * Get the selected check contexts
+         */
+        function getSelectedCheckContexts() {
+            return this.selectedCheckContexts;
         }
 
         /**

@@ -7,16 +7,6 @@
         <div class="description" ng-bind="characterSheetVM.character.getDescription()"></div>
     </div>
 
-    <dice-roller></dice-roller>
-
-    <!-- CHECK CONTEXTS -->
-    <div class="check-contexts">
-        <h2 class="check-contexts-header">Current Context</h2>
-        <check-context-selector
-                selected-check-contexts="characterSheetVM.selectedCheckContexts">
-        </check-context-selector>
-    </div>
-
     <!-- ATTRIBUTES (Resolve and Health) -->
     <div class="attributes">
         <h2 class="attributes-header">Attributes</h2>
@@ -26,7 +16,29 @@
         </character-attribute>
     </div>
 
+    <!-- CHECK CONTEXTS -->
+    <div class="check-contexts">
+        <h2 class="check-contexts-header">Current Context</h2>
+        <check-context-selector
+                selected-check-contexts="characterSheetVM.selectedCheckContexts">
+        </check-context-selector>
+    </div>
+
+    <!-- SELECTED ABILITY -->
+    <div class="abilities">
+        <h2 class="abilities-header">Selected Ability</h2>
+        <ability-selector
+            selected-abilities="characterSheetVM.selectedAbilities">
+        </ability-selector>
+        <character-ability ng-if="characterSheetVM.selectedAbilities.length > 0"
+                           ability="characterSheetVM.selectedAbilities[0]"
+                           character="characterSheetVM.character"
+                           check-contexts="characterSheetVM.selectedCheckContexts">
+        </character-ability>
+    </div>
+
     <!-- ABILITIES -->
+    <!--
     <div class="abilities">
         <h2 class="abilities-header">Abilities</h2>
         <character-ability ng-repeat="ability in characterSheetVM.abilities"
@@ -35,6 +47,10 @@
                            check-contexts="characterSheetVM.selectedCheckContexts">
         </character-ability>
     </div>
+    -->
+
+    <!-- DICE ROLLER -->
+    <dice-roller></dice-roller>
 
     <!-- CHARACTER TRAITS -->
     <div class="character-traits-container specialties">

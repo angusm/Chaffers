@@ -55,7 +55,6 @@
      */
     function setCheckContexts(newCheckContexts) {
         this.checkContexts = newCheckContexts;
-        console.log(this.checkContexts);
     }
 
 })();

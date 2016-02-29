@@ -2,17 +2,17 @@
 
 <!DOCTYPE html>
 <html lang="en" ng-app="chaffers" ng-strict-di>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <title>
-        {% block title %}Chaffers{% endblock %}
-    </title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <title>
+            {% block title %}Chaffers{% endblock %}
+        </title>
+    </head>
+    <body>
 
-    {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
-    <script type="text/javascript" src="{% static 'javascript/main.min.js' %}"></script>
-</body>
+        <script type="text/javascript" src="{% static 'javascript/main.min.js' %}"></script>
+    </body>
 </html>

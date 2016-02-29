@@ -1,11 +1,12 @@
-@import "_character_trait";
+@import "__chaffers_colours";
+@import "__character_trait";
 @import "__flexies";
 
 character-sheet {
-  width: 100%;
-
   .character-sheet {
-    width: 100%;
+    outline: 1px solid $darkest;
+    padding: 1%;
+    width: 98%;
 
     .character-bio {
       .character-name {
