@@ -13,7 +13,9 @@
                 characterTrait: '='
             },
             templateUrl: '/static/javascript/chaffers/directives/character_trait_display/generic/character_trait.html',
-            controller: function() {},
+            controller: function() {
+                this.popoverTemplateUrl = '/static/javascript/chaffers/directives/character_trait_display/generic/character_trait_popover.html';
+            },
             controllerAs: 'characterTraitVM',
             bindToController: true
         };

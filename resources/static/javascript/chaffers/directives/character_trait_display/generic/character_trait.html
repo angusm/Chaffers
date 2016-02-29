@@ -1,20 +1,6 @@
-<div class="character-trait">
-
-    <div class="display-name">
-        <h3 ng-bind="characterTraitVM.characterTrait.getDisplayName()"></h3>
-    </div>
-    <div class="description"
-         ng-bind="characterTraitVM.characterTrait.getDescription()">
-    </div>
-    <div class="ability-modifiers">
-        <ability-modifier ng-repeat="abilityModifier in characterTraitVM.characterTrait.getAbilityModifiers()"
-                          ability-modifier="abilityModifier">
-        </ability-modifier>
-    </div>
-    <div class="attribute-modifiers">
-        <attribute-modifier ng-repeat="attributeModifier in characterTraitVM.characterTrait.getAttributeModifiers()"
-                            attribute-modifier="attributeModifier">
-        </attribute-modifier>
-    </div>
-
-</div>
+<span class="character-trait"
+      uib-popover-template="characterTraitVM.popoverTemplateUrl"
+      ng-bind="characterTraitVM.characterTrait.getDisplayName()"
+      popover-is-open="popoverIsOpen"
+      ng-mouseenter="popoverIsOpen = true"
+      ng-mouseout="popoverIsOpen = false"></span>

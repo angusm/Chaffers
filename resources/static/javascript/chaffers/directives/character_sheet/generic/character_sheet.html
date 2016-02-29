@@ -1,10 +1,9 @@
 <div class="character-sheet">
 
-    <!-- NAME AND BIO -->
-    <div class="character-bio character-sheet-section">
+    <!-- NAME -->
+    <div class="character-name-section character-sheet-section">
         <div class="character-name"
-            ng-bind="characterSheetVM.character.getDisplayName()"></div>
-        <div class="description" ng-bind="characterSheetVM.character.getDescription()"></div>
+             ng-bind="characterSheetVM.character.getDisplayName()"></div>
     </div>
 
     <!-- ATTRIBUTES (Resolve and Health) -->
@@ -64,6 +63,12 @@
         <h2 class="flaws-header">Flaws</h2>
         <flaw ng-repeat="flaw in characterSheetVM.character.getFlaws()"
                 flaw="flaw"></flaw>
+    </div>
+
+    <!-- CHARACTER BIOGRAPHY -->
+    <div class="character-biography character-sheet-section">
+        <h2 class="biography-header">Biography</h2>
+        <div class="description" ng-bind="characterSheetVM.character.getDescription()"></div>
     </div>
 
 </div>

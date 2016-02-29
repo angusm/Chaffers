@@ -13,11 +13,13 @@ character-sheet {
       padding: $base-padding;
     }
 
-    .character-bio {
+    .character-name-section {
       .character-name {
         @include unique-title-font();
         margin: 0;
       }
+    }
+    .character-biography {
       .description {
         @include flavour-text-font();
       }

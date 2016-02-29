@@ -17,12 +17,13 @@ module.exports = function(grunt) {
 
                         // 3rd Party Angular modules
                         'resources/static/javascript/angular-cookies.js',
+                        'resources/static/javascript/angular_ui/ui-bootstrap-tpls-1.2.1.min.js',
+                        'resources/static/javascript/isteven_multi_select/isteven-multi-select.js',
 
                         // Custom Angular modules
                         'resources/static/javascript/djangular.js',
                         'resources/static/javascript/handies.js',
                         'resources/static/javascript/backend_models.js',
-                        'resources/static/javascript/isteven_multi_select/isteven-multi-select.js',
 
                         // Main site module
                         'resources/static/javascript/chaffers.js',

@@ -1,4 +1,7 @@
-<div class="attribute">
-    <div class="title" ng-bind="attributeVM.attribute.getDisplayName()"></div>
-    <div class="description" ng-bind="attributeVM.attribute.getDescription()"></div>
-</div>
+<span class="attribute"
+      ng-bind="attributeVM.attribute.getDisplayName()"
+      uib-popover="{{attributeVM.attribute.getDescription()}}"
+      popover-is-open="popoverIsOpen"
+      ng-mouseenter="popoverIsOpen = true"
+      ng-mouseout="popoverIsOpen = false">
+</span>

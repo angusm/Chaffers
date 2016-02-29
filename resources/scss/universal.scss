@@ -2,4 +2,7 @@
 body {
   padding: $base-padding;
   @include base-font();
+  .glyphicon {
+    font-family: 'Glyphicons Halflings' !important;
+  }
 }
