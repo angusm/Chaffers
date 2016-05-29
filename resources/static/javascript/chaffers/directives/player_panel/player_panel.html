@@ -1,0 +1,19 @@
+<div class="player-header-panel">
+    <div class="login" ng-if="!playerPanelVM.isPlayerLoggedIn()">
+        <div class="login-row">
+            <div class="login-row-title">Player Name</div>
+            <input class="login-row-input" type="text" ng-model="playerPanelVM.username"/>
+        </div>
+        <div class="login-row">
+            <div class="login-row-title">Password</div>
+            <input class="login-row-input" type="password" ng-model="playerPanelVM.password"/>
+        </div>
+        <button ng-click="playerPanelVM.login()">Login</button>
+    </div>
+    <div class="logout" ng-if="playerPanelVM.isPlayerLoggedIn()">
+        <div class="player-info">
+            <div class="player-name" ng-bind="playerPanelVM.getPlayer().getUsername()"></div>
+        </div>
+        <button ng-click="playerPanelVM.logout()">Logout</button>
+    </div>
+</div>

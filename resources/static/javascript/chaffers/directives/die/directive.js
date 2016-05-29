@@ -41,7 +41,6 @@
      * @returns {string} The CSS class used to style the die.
      */
     function getCSSClass() {
-        console.log(this);
         return 'die-display-' + this.die.getValue();
     }
 })();

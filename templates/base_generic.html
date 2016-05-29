@@ -10,6 +10,18 @@
         </title>
     </head>
     <body>
+        {% csrf_token %}
+
+        <!-- Header Block -->
+        {% block header %}
+            <div class="header">
+                <player-panel
+                    {% if is_authenticated %}
+                        player-data="{{ player_data }}"
+                    {% endif %}
+                ></player-panel>
+            </div>
+        {% endblock %}
 
         <!-- Block Content -->
         {% block content %}{% endblock %}
@@ -23,7 +35,7 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,800,800italic,700italic' rel='stylesheet' type='text/css'>
 
         <div class="disclaimers">
-            Icons made by Lorc, Delapouite, John Colburn, Felbrigg, John Redman, Carl Olsen, sbed, PriorBlue, Willdabeast, Viscious Speed, Lord Berandas, Irongamer, HeavenlyDog, Lucas, Faithtoken, Skoll and Various artists from game-icons.net. Available on "http://game-icons.net".
+            Icons made by Lorc, Delapouite, John Colburn, Felbrigg, John Redman, Carl Olsen, sbed, PriorBlue, Willdabeast, Viscious Speed, Lord Berandas, Irongamer, HeavenlyDog, Lucas, Faithtoken, Skoll and Various artists from game-icons.net. Available on <a href="http://game-icons.net">"http://game-icons.net"</a>.
         </div>
     </body>
 </html>

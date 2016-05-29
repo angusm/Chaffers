@@ -10,6 +10,7 @@ from ..models import CheckContext
 from ..models import GlossaryTerm
 from ..models import Location
 from ..models import Page
+from ..models import Player
 from ..models import Section
 from ..models import TextBlock
 from ..models import TextSubstitution
@@ -25,6 +26,7 @@ admin.site.register(CheckContext)
 admin.site.register(GlossaryTerm)
 admin.site.register(Location)
 admin.site.register(Page)
+admin.site.register(Player)
 admin.site.register(Section)
 admin.site.register(TextBlock)
 admin.site.register(TextSubstitution)
