@@ -1,5 +1,17 @@
+// Resets
 @import "reset";
+
+// Bootstraps
 @import "bootstrap/bootstrap";
+
+// Site wide settings
 @import "universal";
+
+// iSteven Multi Select and overrides
 @import "isteven_multi_select";
+@import "chaffers_isteven_multi_select";
+
+// Components
 @import "character_sheet";
+@import "die";
+@import "dice_roller";

@@ -8,15 +8,17 @@
     DiceRollerController.$inject = ['Die'];
 
     // Controller functions
-    DiceRollerController.prototype.roll = roll;
+    DiceRollerController.prototype.getDice = getDice;
     DiceRollerController.prototype.getDiceTotal = getDiceTotal;
+    DiceRollerController.prototype.isLastDie = isLastDie;
+    DiceRollerController.prototype.roll = roll;
 
     // STOP! Nothing but functions past this point ya hear?
     return;
 
     /**
      * Directive handler for ...
-     * @returns {object} the directive object for ...
+     * @returns {Object} the directive object for ...
      */
     function DiceRoller() {
 
@@ -41,12 +43,12 @@
     }
 
     /**
-     * Roll all of the instance's dice
+     * Returns the dice the controller is responsible for.
+     * Used as a function in place of a list to ease refactoring.
+     * @returns {Array|*[]}
      */
-    function roll() {
-        this.dice.forEach(function(die) {
-            die.roll();
-        });
+    function getDice() {
+        return this.dice;
     }
 
     /**
@@ -55,10 +57,28 @@
      */
     function getDiceTotal() {
         var total = 0;
-        this.dice.forEach(function(die) {
+        this.getDice().forEach(function(die) {
             total += die.getValue();
         });
         return total;
+    }
+
+    /**
+     * Returns true if the given die is the last die in the set.
+     * @param {Die} die The die in question.
+     * @returns {boolean} True if the given die is the last die in the list.
+     */
+    function isLastDie(die) {
+        return this.getDice().indexOf(die) == this.getDice().length - 1;
+    }
+
+    /**
+     * Roll all of the instance's dice
+     */
+    function roll() {
+        this.getDice().forEach(function(die) {
+            die.roll();
+        });
     }
 
 })();

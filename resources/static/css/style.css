@@ -5911,6 +5911,10 @@ body {
   font-family: 'Roboto Slab', serif; }
   body .glyphicon {
     font-family: 'Glyphicons Halflings' !important; }
+  body .disclaimers {
+    margin: 2px;
+    opacity: 0.5;
+    font-size: 10px; }
 
 /*
  * Don't modify things marked with ! - unless you know what you're doing
@@ -6178,6 +6182,19 @@ body {
   max-height: 22px;
   max-width: 22px; }
 
+.multiSelect .checkBoxContainer {
+  display: flex;
+  flex-direction: column; }
+
+.multiSelect .clearButton {
+  width: 41px;
+  height: 41px; }
+
+.multiSelect .multiSelectItem {
+  order: 1; }
+  .multiSelect .multiSelectItem:not(.multiSelectGroup).selected {
+    order: 0; }
+
 character-sheet .character-sheet {
   outline: 1px solid #000;
   padding: 1%;
@@ -6190,7 +6207,8 @@ character-sheet .character-sheet {
       font-weight: bold; }
     character-sheet .character-sheet .character-sheet-section.character-traits-container {
       width: 48%;
-      display: inline-block; }
+      display: inline-block;
+      vertical-align: top; }
       character-sheet .character-sheet .character-sheet-section.character-traits-container .specialty, character-sheet .character-sheet .character-sheet-section.character-traits-container .flaw {
         width: 100%; }
   character-sheet .character-sheet .character-name-section .character-name {
@@ -6225,12 +6243,58 @@ character-sheet .character-sheet {
       display: inline-block;
       padding: 2%;
       vertical-align: top;
-      width: 46%; }
+      width: 100%; }
       character-sheet .character-sheet .abilities character-ability .character-ability {
         position: relative; }
         character-sheet .character-sheet .abilities character-ability .character-ability .modifier {
           position: absolute;
           top: 0;
           right: 0; }
+
+die {
+  border-radius: 6px;
+  display: block;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  width: 50px; }
+  die .die-display {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    background-position: center center;
+    background-size: contain; }
+    die .die-display.die-display-1 {
+      background-image: url(/static/img/icons/dice/dice-six-faces-one.svg); }
+    die .die-display.die-display-2 {
+      background-image: url(/static/img/icons/dice/dice-six-faces-two.svg); }
+    die .die-display.die-display-3 {
+      background-image: url(/static/img/icons/dice/dice-six-faces-three.svg); }
+    die .die-display.die-display-4 {
+      background-image: url(/static/img/icons/dice/dice-six-faces-four.svg); }
+    die .die-display.die-display-5 {
+      background-image: url(/static/img/icons/dice/dice-six-faces-five.svg); }
+    die .die-display.die-display-6 {
+      background-image: url(/static/img/icons/dice/dice-six-faces-six.svg); }
+
+dice-roller {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  dice-roller die {
+    display: inline-block; }
+  dice-roller .dice-roller-formula-piece {
+    margin: 4px; }
+  dice-roller .dice-total {
+    font-size: 60px; }
+  dice-roller .dice-roller-roll-button {
+    margin-left: 25px; }
 
 /*# sourceMappingURL=style.css.map */

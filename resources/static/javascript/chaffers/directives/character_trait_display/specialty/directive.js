@@ -3,7 +3,7 @@
 
     /**
      * Directive generator for display a Specialty
-     * @returns {object} The directive object for displaying a specialty
+     * @returns {Object} The directive object for displaying a specialty
      */
     function specialty() {
         var directive = {

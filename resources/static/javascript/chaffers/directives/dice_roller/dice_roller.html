@@ -1,10 +1,7 @@
-<div class="dice">
-    <div class="die" ng-repeat="die in diceRollerVM.dice">
-        <die die="die"></die>
-        <span ng-if="diceRollerVM.dice.indexOf(die) != diceRollerVM.dice.length - 1">+</span>
-    </div>
-    <span>=</span>
-    <div class="dice-total" ng-bind="diceRollerVM.getDiceTotal()"></div>
-</div>
+<die class="dice-roller-formula-piece"
+        die="die"
+     ng-repeat="die in diceRollerVM.getDice()"></die>
+<span class="dice-roller-formula-piece">=</span>
+<span class="dice-roller-formula-piece dice-total" ng-bind="diceRollerVM.getDiceTotal()"></span>
 
-<button ng-click="diceRollerVM.roll()">Roll</button>
+<button class="dice-roller-roll-button" ng-click="diceRollerVM.roll()">Roll</button>

@@ -6,7 +6,7 @@
 
     /**
      * Directive handler for a character sheet created from a character ID
-     * @returns {object} the directive object for a character sheet
+     * @returns {Object} the directive object for a character sheet
      */
     function characterSheetFromId() {
 

@@ -6,7 +6,7 @@
 
     /**
      * Directive handler for an ability modifier
-     * @returns {object} the directive object for an ability modifier
+     * @returns {Object} the directive object for an ability modifier
      */
     function abilityModifier() {
 

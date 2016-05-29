@@ -6,7 +6,7 @@
 
     /**
      * Directive handler for a link to a character sheet
-     * @returns {object} the directive object for a character link
+     * @returns {Object} the directive object for a character link
      */
     function characterLink() {
 

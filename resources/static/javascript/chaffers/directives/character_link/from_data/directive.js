@@ -9,7 +9,7 @@
 
     /**
      * Directive handler for the Character Sheet
-     * @returns {object} the directive objects for a character sheet
+     * @returns {Object} the directive objects for a character sheet
      */
     function characterLinkFromData() {
 

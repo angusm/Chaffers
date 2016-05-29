@@ -4,7 +4,7 @@
 
     /**
      * Generates a directive object for displaying a flaw
-     * @returns {object} Directive object for displaying a flaw
+     * @returns {Object} Directive object for displaying a flaw
      */
     function flaw() {
         var directive = {

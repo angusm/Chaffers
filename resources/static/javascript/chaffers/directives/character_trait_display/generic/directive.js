@@ -3,7 +3,7 @@
 
     /**
      * Directive generator for a Character Trait display block
-     * @returns {object} The directive object for displaying a character trait
+     * @returns {Object} The directive object for displaying a character trait
      */
     function characterTrait() {
 

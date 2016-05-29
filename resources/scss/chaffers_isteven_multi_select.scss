@@ -1,0 +1,22 @@
+
+// Float selected items to the top
+.multiSelect {
+
+  .checkBoxContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .clearButton {
+    width: 41px;
+    height: 41px;
+  }
+
+  .multiSelectItem {
+    order: 1;
+
+    &:not(.multiSelectGroup).selected {
+      order: 0;
+    }
+  }
+}

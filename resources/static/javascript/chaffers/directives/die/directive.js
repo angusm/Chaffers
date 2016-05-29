@@ -4,16 +4,18 @@
 
     angular.module('chaffers').directive('die', Die);
 
+    // Constants
+
 
     // Functions
-    DieController.prototype.getDots = getDots;
+    DieController.prototype.getCSSClass = getCSSClass;
 
     // STOP! Nothing but functions past this point ya hear?
     return;
 
     /**
      * Directive handler for ...
-     * @returns {object} the directive object for ...
+     * @returns {Object} the directive object for ...
      */
     function Die() {
 
@@ -35,14 +37,11 @@
     function DieController() {}
 
     /**
-     * Return an array with a length that matches the die value
-     * @returns {Array}
+     * Returns a CSS class used to style the die based on its value.
+     * @returns {string} The CSS class used to style the die.
      */
-    function getDots() {
-        var dots = [];
-        for (var dotCounter = 0; dotCounter < this.die.getValue(); dotCounter++) {
-            dots.push('.');
-        }
-        return dots;
+    function getCSSClass() {
+        console.log(this);
+        return 'die-display-' + this.die.getValue();
     }
 })();

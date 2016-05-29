@@ -1,0 +1,24 @@
+@import "__chaffers_colours";
+@import "__flexies";
+@import "__handies";
+
+dice-roller {
+  @include flex-center-everything();
+
+  die {
+    display: inline-block;
+  }
+
+  .dice-roller-formula-piece {
+    margin: 4px;
+  }
+
+  .dice-total {
+    font-size: 60px;
+  }
+
+  .dice-roller-roll-button {
+    margin-left: 25px;
+  }
+
+}

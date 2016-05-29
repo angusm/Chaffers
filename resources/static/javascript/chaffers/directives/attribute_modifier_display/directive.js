@@ -6,7 +6,7 @@
 
     /**
      * Directive handler for an attribute modifier
-     * @returns {object} the directive object for an attribute modifier
+     * @returns {Object} the directive object for an attribute modifier
      */
     function attributeModifier() {
 

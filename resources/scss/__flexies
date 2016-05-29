@@ -2,3 +2,9 @@
   display: flex;
   width: 100%;
 }
+
+@mixin flex-center-everything {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
