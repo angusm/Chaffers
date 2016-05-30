@@ -2,6 +2,7 @@
     angular.module(
         'chaffers',
         [
+            'animatedDom',
             'backendModels',
             'handies',
             'djangular',

@@ -56,7 +56,7 @@
         // STOP! Nothing but functions past this point
 
         /**
-         * Return the currently logged in player
+         * Return the currently logged in player.
          * @returns {Player|*}
          */
         function getPlayer() {
@@ -66,39 +66,54 @@
             return this.player;
         }
 
+        /**
+         * Indicates whether or not the user is logged in.
+         * @returns {boolean} True if the player is loggeed in, false otherwise.
+         */
         function isPlayerLoggedIn() {
             return typeof this.getPlayer() !== 'undefined';
         }
 
+        /**
+         * Clear the input fields.
+         */
         function clearInput() {
             this.username = undefined;
             this.password = undefined;
         }
 
         function login() {
-            var ctrl = this;
             this.djangoHTTP.post(
                 '/players/login',
                 {
                     username: this.username,
                     password: this.password
                 }
-            ).then(function(res) {
-                ctrl.player = undefined;
-                ctrl.playerData = res.data.player_data;
-                ctrl.clearInput();
-            });
+            ).then(
+                this.completeLogin.bind(this)
+            );
+        }
+
+        function completeLogin(loginResult) {
+            if (loginResult.data.success) {
+                this.player = undefined;
+                this.playerData = loginResult.data.player_data;
+                this.clearInput();
+            }
         }
 
         function logout() {
-            var ctrl = this;
             this.djangoHTTP.post(
                 '/players/logout'
-            ).then(function(res) {
-                ctrl.player = undefined;
-                ctrl.playerData = undefined;
-                ctrl.clearInput();
-            });
+            ).then(
+                this.completeLogout.bind(this)
+            );
+        }
+
+        function completeLogout() {
+            this.player = undefined;
+            this.playerData = undefined;
+            this.clearInput();
         }
 
     }

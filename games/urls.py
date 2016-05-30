@@ -13,15 +13,11 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
-from django.contrib import admin
+from django.conf.urls import url
+from . import views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^abilities/', include('abilities.urls')),
-    url(r'^attributes/', include('attributes.urls')),
-    url(r'^characters/', include('characters.urls')),
-    url(r'^check_contexts/', include('check_contexts.urls')),
-    url(r'^players/', include('players.urls')),
-    url(r'^games/', include('games.urls'))
+    url(r'view/(?P<game_id>[0-9]*)', views.view),
+    url(r'^view_all_games', views.view_all),
+    url(r'^get_all_games_data', views.get_all_games_data),
 ]

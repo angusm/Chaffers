@@ -6306,6 +6306,36 @@ dice-roller {
   dice-roller .dice-roller-roll-button {
     margin-left: 25px; }
 
+game {
+  display: block;
+  height: 650px;
+  width: 650px; }
+
+game-board {
+  background: #000;
+  border: #000 4px solid;
+  border-radius: 6px;
+  display: block;
+  height: 650px;
+  overflow: hidden;
+  position: relative;
+  width: 650px; }
+
+.tile-container {
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 0; }
+
+.tile {
+  border-radius: 6px;
+  background: #FFF;
+  display: block;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0; }
+
 .header {
   width: 100%; }
 

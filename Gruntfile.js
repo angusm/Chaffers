@@ -24,6 +24,7 @@ module.exports = function(grunt) {
                         'resources/static/javascript/djangular.js',
                         'resources/static/javascript/handies.js',
                         'resources/static/javascript/backend_models.js',
+                        'resources/static/javascript/animated_dom.js',
 
                         // Main site module
                         'resources/static/javascript/chaffers.js',

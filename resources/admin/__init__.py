@@ -7,6 +7,10 @@ from ..models import Adventure
 from ..models import CampaignSetting
 from ..models import Category
 from ..models import CheckContext
+from ..models import Game
+from ..models import GameAttributeModifier
+from ..models import GameCharacter
+from ..models import GameMap
 from ..models import GlossaryTerm
 from ..models import Location
 from ..models import Page
@@ -23,6 +27,10 @@ admin.site.register(Adventure)
 admin.site.register(CampaignSetting)
 admin.site.register(Category)
 admin.site.register(CheckContext)
+admin.site.register(Game)
+admin.site.register(GameAttributeModifier)
+admin.site.register(GameCharacter)
+admin.site.register(GameMap)
 admin.site.register(GlossaryTerm)
 admin.site.register(Location)
 admin.site.register(Page)
