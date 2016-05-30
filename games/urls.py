@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'view/(?P<game_id>[0-9]*)', views.view),
     url(r'^view_all_games', views.view_all),
     url(r'^get_all_games_data', views.get_all_games_data),
+    url(r'^get_data_by_id', views.get_data_by_id),
 ]

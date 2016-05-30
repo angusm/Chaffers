@@ -3,4 +3,4 @@ from .map import Map
 
 
 class GameMap(Map):
-    game = ForeignKey('Game')
+    game = ForeignKey('Game', related_name='game_maps')

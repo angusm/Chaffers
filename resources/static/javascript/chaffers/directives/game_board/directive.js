@@ -7,7 +7,8 @@
     gameBoardDirective.$inject = [
         'extend',
         'MouseUpdated',
-        'Position2D'
+        'Position2D',
+        'getParentClass'
     ];
 
     // STOP! Nothing but functions past this point ya hear?
@@ -20,7 +21,8 @@
     function gameBoardDirective(
         extend,
         MouseUpdated,
-        Position2D
+        Position2D,
+        getParentClass
     ) {
 
         var directive = {
@@ -89,7 +91,7 @@
         }
 
         function queryDOM() {
-            GameBoardController.ParentClass.prototype.queryDOM.apply(this);
+            getParentClass(GameBoardController).prototype.queryDOM.apply(this);
             this.height = jQuery(this.getElement()).height();
             this.width = jQuery(this.getElement()).width();
         }
@@ -143,7 +145,7 @@
         }
 
         function handleDrag(dragVector) {
-            GameBoardController.ParentClass.prototype.handleDrag.apply(this, [dragVector]);
+            getParentClass(GameBoardController).prototype.handleDrag.apply(this, [dragVector]);
             this.setPosition(
                 this.getPosition().translate(dragVector)
             );
@@ -226,7 +228,7 @@
          * Updates the DOM based on user interactions.
          */
         function updateDOM() {
-            GameBoardController.ParentClass.prototype.updateDOM.apply(this);
+            getParentClass(GameBoardController).prototype.updateDOM.apply(this);
             this.layoutTiles();
             this.translateTileContainer();
             this.getTileOffset();

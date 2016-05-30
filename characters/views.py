@@ -30,7 +30,7 @@ def view_character_sheet(request, character_id):
 
 
 @require_POST
-def get_character_data_by_id(request):
+def get_data_by_id(request):
     """
     Get the character data for the given character
     """

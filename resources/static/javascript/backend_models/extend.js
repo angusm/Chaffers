@@ -10,7 +10,6 @@
         function extend(ChildClass, ParentClass) {
             ChildClass.prototype = Object.create(ParentClass.prototype);
             ChildClass.prototype.constructor = ChildClass;
-            ChildClass.ParentClass = ParentClass;
         }
 
     }

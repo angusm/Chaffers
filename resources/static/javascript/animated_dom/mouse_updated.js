@@ -4,12 +4,14 @@
     MouseUpdatedFactory.$inject = [
         'FrameUpdated',
         'extend',
-        'Position2D'
+        'Position2D',
+        'getParentClass'
     ];
     function MouseUpdatedFactory(
         FrameUpdated,
         extend,
-        Position2D
+        Position2D,
+        getParentClass
     ) {
         MouseUpdated.$inject = [];
 
@@ -102,14 +104,14 @@
          * Run the query dom function on the current instance.
          */
         function queryDOM() {
-            MouseUpdated.ParentClass.prototype.queryDOM.apply(this);
+            getParentClass(MouseUpdated).prototype.queryDOM.apply(this);
         }
 
         /**
          * Run the update dom function on the current instance.
          */
         function updateDOM() {
-            MouseUpdated.ParentClass.prototype.updateDOM.apply(this);
+            getParentClass(MouseUpdated).prototype.updateDOM.apply(this);
         }
 
     }

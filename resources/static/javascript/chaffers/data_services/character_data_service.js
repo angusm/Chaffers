@@ -25,7 +25,7 @@
          */
         function getCharacterById(characterId) {
             return djangoHTTP.post(
-                '/characters/get_character_data_by_id',
+                '/characters/get_data_by_id',
                 {
                     character_id: characterId
                 }
