@@ -4,13 +4,13 @@
 
     DieFactory.$inject = [
         'BaseModel',
-        'extend',
-        'relationManager'
+        'extend'
     ];
 
-    function DieFactory(BaseModel,
-                        extend,
-                        relationManager) {
+    function DieFactory(
+        BaseModel,
+        extend
+    ) {
 
         function Die() {
             this.value = undefined;

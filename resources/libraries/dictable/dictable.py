@@ -47,6 +47,7 @@ class Dictable(object):
         # If the initial value is a related object manager we have to process each
         # sub value
         if isinstance(initial_value, Manager):
+            sub_field_set.add_fields([['id']])
             return self.__get_final_value_from_initial_value(initial_value.all(), sub_field_set)
 
         # If the initial value is a list we need to process each sub value
@@ -56,6 +57,7 @@ class Dictable(object):
         # If the initial value is a Dictable model we need its dictionary
         # representation
         elif isinstance(initial_value, Dictable):
+            sub_field_set.add_fields([['id']])
             return initial_value.to_dict_using_field_set(sub_field_set)
 
         # Otherwise we can just return the raw value

@@ -3,34 +3,33 @@
     angular.module('chaffers').factory('Character', [
         'Specialty',
         'Flaw',
-        'BaseModel',
+        'ChaffersModel',
         'relationManager',
         'extend',
         'TextBlock',
+        'createDjangoField',
         CharacterFactory
     ]);
 
     function CharacterFactory(
         Specialty,
         Flaw,
-        BaseModel,
+        ChaffersModel,
         relationManager,
         extend,
-        TextBlock
+        TextBlock,
+        createDjangoField
     ) {
 
         function Character() {
+            ChaffersModel.apply(this);
 
-            this.id = undefined;
-            this.specialties = undefined;
-            this.flaws = undefined;
-            this.description = undefined;
-            this.displayName = undefined;
-
-            BaseModel.apply(this, arguments);
-
+            createDjangoField(this, 'specialties');
+            createDjangoField(this, 'flaws');
+            createDjangoField(this, 'description');
+            createDjangoField(this, 'displayName');
         }
-        extend(Character, BaseModel);
+        extend(Character, ChaffersModel);
 
         // Functions
         Character.prototype.getDisplayName = getDisplayName;

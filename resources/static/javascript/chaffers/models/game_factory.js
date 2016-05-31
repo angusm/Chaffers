@@ -1,33 +1,34 @@
 (function() {
 
     angular.module('chaffers').factory('Game', [
-        'BaseModel',
+        'ChaffersModel',
         'Player',
         'TextBlock',
         'extend',
         'relationManager',
+        'createDjangoField',
         gameFactory
     ]);
 
     function gameFactory(
-        BaseModel,
+        ChaffersModel,
         Player,
         TextBlock,
         extend,
-        relationManager
+        relationManager,
+        createDjangoField
     ) {
 
         function Game() {
+            ChaffersModel.apply(this);
 
-            this.displayName = undefined;
-            this.description = undefined;
-            this.gameMasters = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'displayName');
+            createDjangoField(this, 'description');
+            createDjangoField(this, 'gameMasters');
         }
 
         // Inherit from the Base Model since this is a backend model
-        extend(Game, BaseModel);
+        extend(Game, ChaffersModel);
 
         // Attach relations
         relationManager.registerHasOneRelation(Game, 'description', TextBlock);

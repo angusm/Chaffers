@@ -1,37 +1,34 @@
 (function() {
 
     angular.module('chaffers').factory('AbilityModifier', [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
         'Ability',
         'CheckContext',
         'relationManager',
+        'createDjangoField',
         AbilityModifierFactory
     ]);
 
     function AbilityModifierFactory(
-        BaseModel,
+        ChaffersModel,
         extend,
         Ability,
         CheckContext,
-        relationManager
+        relationManager,
+        createDjangoField
     ) {
 
         function AbilityModifier() {
+            ChaffersModel.apply(this);
 
-            this.id = undefined;
-
-            this.ability = undefined;
-            this.abilityId = undefined;
-
-            this.checkContexts = undefined;
-
-            this.displayName = undefined;
-            this.modifier = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'ability');
+            createDjangoField(this, 'abilityId');
+            createDjangoField(this, 'checkContexts');
+            createDjangoField(this, 'displayName');
+            createDjangoField(this, 'modifier');
         }
-        extend(AbilityModifier, BaseModel);
+        extend(AbilityModifier, ChaffersModel);
 
         // Relations
         relationManager.registerHasOneRelation(AbilityModifier, 'ability', Ability);

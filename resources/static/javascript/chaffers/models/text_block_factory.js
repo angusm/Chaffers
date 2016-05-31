@@ -1,17 +1,23 @@
 (function() {
 
     angular.module('chaffers').factory('TextBlock', [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
+        'createDjangoField',
         TextBlockFactory
     ]);
 
-    function TextBlockFactory(BaseModel, extend) {
+    function TextBlockFactory(
+        ChaffersModel,
+        extend,
+        createDjangoField
+    ) {
 
         function TextBlock() {
-            this.formattedText = undefined;
+            ChaffersModel.apply(this);
+            createDjangoField(this, 'formattedText');
         }
-        extend(TextBlock, BaseModel);
+        extend(TextBlock, ChaffersModel);
 
         TextBlock.prototype.getText = getText;
 

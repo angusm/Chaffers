@@ -3,25 +3,23 @@
     angular.module('chaffers').factory('User', UserFactory);
 
     UserFactory.$inject = [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
-        'relationManager'
+        'createDjangoField'
     ];
 
     function UserFactory(
-        BaseModel,
+        ChaffersModel,
         extend,
-        relationManager
+        createDjangoField
     ) {
 
         function User() {
+            ChaffersModel.apply(this);
 
-            this.id = undefined;
-            this.username = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'username');
         }
-        extend(User, BaseModel);
+        extend(User, ChaffersModel);
 
         // Functions
         User.prototype.getUsername = getUsername;

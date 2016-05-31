@@ -34,7 +34,12 @@
          * @returns {string} The camelCase string converted to snake_case
          */
         function camelCaseToSnakeCase(camelCaseString) {
-            throw new Error('You should really implement this function bud!');
+
+            return camelCaseString.replace(/([A-Z])/g, transformCamelCaseMatchToSnakeCase);
+
+            function transformCamelCaseMatchToSnakeCase(camelCaseMatch) {
+                return '_' + camelCaseMatch.toLowerCase();
+            }
         }
 
     }

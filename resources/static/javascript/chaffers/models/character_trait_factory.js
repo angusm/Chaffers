@@ -1,21 +1,23 @@
 (function() {
     angular.module('chaffers').factory('CharacterTrait', [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
         'relationManager',
         'TextBlock',
         'AttributeModifier',
         'AbilityModifier',
+        'createDjangoField',
         characterTraitFactory
     ]);
 
     function characterTraitFactory(
-        BaseModel,
+        ChaffersModel,
         extend,
         relationManager,
         TextBlock,
         AttributeModifier,
-        AbilityModifier
+        AbilityModifier,
+        createDjangoField
     ) {
 
         /**
@@ -23,17 +25,16 @@
          * @constructor
          */
         function CharacterTrait() {
+            ChaffersModel.apply(this);
 
-            this.displayName = undefined;
-            this.description = undefined;
-            this.attributeModifiers = undefined;
-            this.abilityModifiers = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'displayName');
+            createDjangoField(this, 'description');
+            createDjangoField(this, 'attributeModifiers');
+            createDjangoField(this, 'abilityModifiers');
         }
 
         // Inherit from the Base Model since this is a backend model
-        extend(CharacterTrait, BaseModel);
+        extend(CharacterTrait, ChaffersModel);
 
         // Attach relations
         relationManager.registerHasOneRelation(CharacterTrait, 'description', TextBlock);
@@ -75,14 +76,22 @@
          * Returns the ability modifiers for the character trait
          */
         function getAbilityModifiers() {
-            return this.abilityModifiers;
+            if (typeof this.abilityModifiers === 'undefined') {
+                return [];
+            } else {
+                return this.abilityModifiers;
+            }
         }
 
         /**
          * Returns the attribute modifiers for the character trait
          */
         function getAttributeModifiers() {
-            return this.attributeModifiers;
+            if (typeof this.attributeModifiers === 'undefined') {
+                return [];
+            } else {
+                return this.attributeModifiers;
+            }
         }
 
     }

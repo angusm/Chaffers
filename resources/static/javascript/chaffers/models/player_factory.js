@@ -3,29 +3,29 @@
     angular.module('chaffers').factory('Player', PlayerFactory);
 
     PlayerFactory.$inject = [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
         'User',
-        'relationManager'
+        'relationManager',
+        'createDjangoField'
     ];
 
     function PlayerFactory(
-        BaseModel,
+        ChaffersModel,
         extend,
         User,
-        relationManager
+        relationManager,
+        createDjangoField
     ) {
 
         function Player() {
+            ChaffersModel.apply(this);
 
-            this.id = undefined;
-            this.masteredGames = undefined;
-            this.user = undefined;
-            this.username = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'masteredGames');
+            createDjangoField(this, 'user');
+            createDjangoField(this, 'username');
         }
-        extend(Player, BaseModel);
+        extend(Player, ChaffersModel);
 
         // Relations
         relationManager.registerHasOneRelation(Player, 'user', User);

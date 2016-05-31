@@ -22,14 +22,15 @@
         };
 
         CharacterSheetFromIdController.$inject = [
-            'CharacterDataService'
+            'Character',
+            'createPopulatedDjangoModel'
         ];
 
         function CharacterSheetFromIdController(
-            CharacterDataService
+            Character,
+            createPopulatedDjangoModel
         ) {
-            var vm = this;
-            CharacterDataService.getCharacterById(vm.characterId).then(setCharacter.bind(vm));
+            createPopulatedDjangoModel(Character, this.characterId).then(setCharacter.bind(this));
         }
 
         CharacterSheetFromIdController.prototype.setCharacter = setCharacter;

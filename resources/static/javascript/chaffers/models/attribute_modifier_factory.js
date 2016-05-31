@@ -1,31 +1,31 @@
 (function() {
 
     angular.module('chaffers').factory('AttributeModifier', [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
         'Attribute',
         'relationManager',
+        'createDjangoField',
         AttributeModifierFactory
     ]);
 
     function AttributeModifierFactory(
-        BaseModel,
+        ChaffersModel,
         extend,
         Attribute,
-        relationManager
+        relationManager,
+        createDjangoField
     ) {
 
         function AttributeModifier() {
+            ChaffersModel.apply(this);
 
-            this.displayName = undefined;
-            this.modifier = undefined;
-
-            this.attributeId = undefined;
-            this.attribute = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'displayName');
+            createDjangoField(this, 'modifier');
+            createDjangoField(this, 'attributeId');
+            createDjangoField(this, 'attribute');
         }
-        extend(AttributeModifier, BaseModel);
+        extend(AttributeModifier, ChaffersModel);
 
         // Relationships
         relationManager.registerHasOneRelation(AttributeModifier, 'attribute', Attribute);

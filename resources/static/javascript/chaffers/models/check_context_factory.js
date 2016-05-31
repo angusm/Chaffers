@@ -3,26 +3,26 @@
     angular.module('chaffers').factory('CheckContext', CheckContextFactory);
 
     CheckContextFactory.$inject = [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
-        'relationManager'
+        'relationManager',
+        'createDjangoField'
     ];
 
-    function CheckContextFactory(BaseModel,
+    function CheckContextFactory(ChaffersModel,
                                  extend,
-                                 relationManager) {
+                                 relationManager,
+                                 createDjangoField) {
 
         function CheckContext() {
+            ChaffersModel.apply(this);
 
-            this.id = undefined;
-            this.description = undefined;
-            this.displayName = undefined;
-            this.parent = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'description');
+            createDjangoField(this, 'displayName');
+            createDjangoField(this, 'parent');
         }
 
-        extend(CheckContext, BaseModel);
+        extend(CheckContext, ChaffersModel);
 
         // Relations
 

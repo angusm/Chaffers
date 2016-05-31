@@ -3,29 +3,29 @@
     angular.module('chaffers').factory('Attribute', AttributeFactory);
 
     AttributeFactory.$inject = [
-        'BaseModel',
+        'ChaffersModel',
         'extend',
         'TextBlock',
-        'relationManager'
+        'relationManager',
+        'createDjangoField'
     ];
 
     function AttributeFactory(
-        BaseModel,
+        ChaffersModel,
         extend,
         TextBlock,
-        relationManager
+        relationManager,
+        createDjangoField
     ) {
 
         function Attribute() {
+            ChaffersModel.apply(this);
 
-            this.id = undefined;
-            this.baseValue = undefined;
-            this.displayName = undefined;
-            this.description = undefined;
-
-            BaseModel.apply(this, arguments);
+            createDjangoField(this, 'baseValue');
+            createDjangoField(this, 'displayName');
+            createDjangoField(this, 'description');
         }
-        extend(Attribute, BaseModel);
+        extend(Attribute, ChaffersModel);
 
         // Relations
         relationManager.registerHasOneRelation(Attribute, 'description', TextBlock);

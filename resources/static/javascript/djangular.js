@@ -1,3 +1,6 @@
 (function() {
-    angular.module('djangular', ['ngCookies']);
+    angular.module('djangular', [
+        'ngCookies',
+        'backendModels'
+    ]);
 })();
