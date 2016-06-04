@@ -20,15 +20,15 @@
 
         function Player() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'masteredGames');
-            createDjangoField(this, 'user');
-            createDjangoField(this, 'username');
         }
         extend(Player, ChaffersModel);
 
         // Relations
         relationManager.registerHasOneRelation(Player, 'user', User);
+
+        // Django Fields
+        createDjangoField(Player, 'masteredGames');
+        createDjangoField(Player, 'user');
 
         // Functions
         Player.prototype.getUser = getUser;

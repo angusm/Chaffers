@@ -16,15 +16,16 @@
 
         function CheckContext() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'description');
-            createDjangoField(this, 'displayName');
-            createDjangoField(this, 'parent');
         }
 
         extend(CheckContext, ChaffersModel);
 
         // Relations
+
+        // Django Fields
+        createDjangoField(CheckContext, 'description');
+        createDjangoField(CheckContext, 'displayName');
+        createDjangoField(CheckContext, 'parent');
 
         // Functions
         CheckContext.prototype.getID = getID;

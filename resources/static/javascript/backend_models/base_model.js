@@ -26,6 +26,7 @@
         classMethod(BaseModel, 'getParentClassFunction', getClassParentClassFunction);
         classMethod(BaseModel, 'getTopLevelConstructor', getClassToplevelConstructor);
         classMethod(BaseModel, 'getClass', getClassClass);
+        classMethod(BaseModel, 'isChildOf', isChildOf);
 
         // Instance methods
         BaseModel.prototype.getParentClass = getParentClass;
@@ -40,6 +41,17 @@
         return BaseModel;
         // STOP! Functions only past this point
 
+        function isChildOf(TargetParentClass) {
+            var parentClass = this.getParentClass();
+            if (parentClass == TargetParentClass) {
+                return true;
+            } else if (parentClass == this.getTopLevelConstructor()) {
+                return false;
+            } else {
+                return parentClass.isChildOf(TargetParentClass);
+            }
+        }
+
         function getClassClass() {
             return this;
         }
@@ -49,7 +61,7 @@
         }
 
         function getClassToplevelConstructor() {
-            return Function;
+            return Object;
         }
 
         function getInstanceToplevelConstructor() {
@@ -69,15 +81,8 @@
          * @returns {function}
          */
         function getParentClass() {
-            var proto = this.getProto();
-            var constructor = undefined;
-            var topLevelConstructor = this.getTopLevelConstructor();
-            while (constructor != this.getClassContext() && constructor != topLevelConstructor) {
-                constructor = proto.constructor;
-                proto = proto.__proto__;
-            }
-
-            return proto.constructor;
+            var context = this.getClassContext();
+            return context.getProto().constructor;
         }
 
         /**

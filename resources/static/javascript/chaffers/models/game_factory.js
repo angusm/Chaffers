@@ -21,14 +21,15 @@
 
         function Game() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'displayName');
-            createDjangoField(this, 'description');
-            createDjangoField(this, 'gameMasters');
         }
 
         // Inherit from the Base Model since this is a backend model
         extend(Game, ChaffersModel);
+
+        // Django Fields
+        createDjangoField(Game, 'displayName');
+        createDjangoField(Game, 'description');
+        createDjangoField(Game, 'gameMasters');
 
         // Attach relations
         relationManager.registerHasOneRelation(Game, 'description', TextBlock);

@@ -19,16 +19,17 @@
 
         function AttributeModifier() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'displayName');
-            createDjangoField(this, 'modifier');
-            createDjangoField(this, 'attributeId');
-            createDjangoField(this, 'attribute');
         }
         extend(AttributeModifier, ChaffersModel);
 
         // Relationships
         relationManager.registerHasOneRelation(AttributeModifier, 'attribute', Attribute);
+
+        // Django Fields
+        createDjangoField(AttributeModifier, 'displayName');
+        createDjangoField(AttributeModifier, 'modifier');
+        createDjangoField(AttributeModifier, 'attributeId');
+        createDjangoField(AttributeModifier, 'attribute');
 
         // Functions
         AttributeModifier.prototype.getModifier = getModifier;

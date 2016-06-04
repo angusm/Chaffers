@@ -20,11 +20,12 @@
 
         function Ability() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'displayName');
-            createDjangoField(this, 'description');
         }
         extend(Ability, ChaffersModel);
+
+        // Django fields
+        createDjangoField(Ability, 'displayName');
+        createDjangoField(Ability, 'description');
 
         // Relations
         relationManager.registerHasOneRelation(Ability, 'description', TextBlock);

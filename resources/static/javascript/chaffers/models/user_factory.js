@@ -16,10 +16,11 @@
 
         function User() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'username');
         }
         extend(User, ChaffersModel);
+
+        // Django fields
+        createDjangoField(User, 'username');
 
         // Functions
         User.prototype.getUsername = getUsername;

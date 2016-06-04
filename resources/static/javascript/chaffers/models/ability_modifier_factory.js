@@ -21,19 +21,19 @@
 
         function AbilityModifier() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'ability');
-            createDjangoField(this, 'abilityId');
-            createDjangoField(this, 'checkContexts');
-            createDjangoField(this, 'displayName');
-            createDjangoField(this, 'modifier');
         }
         extend(AbilityModifier, ChaffersModel);
 
         // Relations
         relationManager.registerHasOneRelation(AbilityModifier, 'ability', Ability);
-
         relationManager.registerHasManyRelation(AbilityModifier, 'checkContexts', CheckContext);
+
+        // Django Fields
+        createDjangoField(AbilityModifier, 'ability');
+        createDjangoField(AbilityModifier, 'abilityId');
+        createDjangoField(AbilityModifier, 'checkContexts');
+        createDjangoField(AbilityModifier, 'displayName');
+        createDjangoField(AbilityModifier, 'modifier');
 
         // Functions
         AbilityModifier.prototype.getModifier = getModifier;

@@ -26,11 +26,6 @@
          */
         function CharacterTrait() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'displayName');
-            createDjangoField(this, 'description');
-            createDjangoField(this, 'attributeModifiers');
-            createDjangoField(this, 'abilityModifiers');
         }
 
         // Inherit from the Base Model since this is a backend model
@@ -40,6 +35,12 @@
         relationManager.registerHasOneRelation(CharacterTrait, 'description', TextBlock);
         relationManager.registerHasManyRelation(CharacterTrait, 'attributeModifiers', AttributeModifier);
         relationManager.registerHasManyRelation(CharacterTrait, 'abilityModifiers', AbilityModifier);
+
+        // Django Fields
+        createDjangoField(CharacterTrait, 'displayName');
+        createDjangoField(CharacterTrait, 'description');
+        createDjangoField(CharacterTrait, 'attributeModifiers');
+        createDjangoField(CharacterTrait, 'abilityModifiers');
 
         // Instance Functions
         CharacterTrait.prototype.getDisplayName = getDisplayName;

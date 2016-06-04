@@ -19,9 +19,10 @@
 
         function GameMap() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'game');
         }
+
+        // Django Fields
+        createDjangoField(GameMap, 'game');
 
         // Inherit from the Base Model since this is a backend model
         extend(GameMap, ChaffersModel);

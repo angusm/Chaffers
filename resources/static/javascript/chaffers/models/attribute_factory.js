@@ -20,15 +20,16 @@
 
         function Attribute() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'baseValue');
-            createDjangoField(this, 'displayName');
-            createDjangoField(this, 'description');
         }
         extend(Attribute, ChaffersModel);
 
         // Relations
         relationManager.registerHasOneRelation(Attribute, 'description', TextBlock);
+
+        // Django Fields
+        createDjangoField(Attribute, 'baseValue');
+        createDjangoField(Attribute, 'displayName');
+        createDjangoField(Attribute, 'description');
 
         // Functions
         Attribute.prototype.getBaseValue = getBaseValue;

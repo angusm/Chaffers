@@ -3,42 +3,24 @@
     angular.module('djangular').factory(
         'createDjangoField',
         [
-            'populateDjangoModel',
             'DjangoModel',
-            'isDef',
+            'isFunction',
             createDjangoFieldFactory
         ]
     );
 
     function createDjangoFieldFactory(
-        populateDjangoModel,
         DjangoModel,
-        isDef
+        isFunction
     ) {
 
-        function createDjangoField(instance, fieldName) {
-
-            if (!instance instanceof DjangoModel) {
-                throw new Error('Can only create a django field on an instance of a DjangoModel')
-            }
-
-            instance.djangoValues[fieldName] = undefined;
-            instance.loadingDjangoValue[fieldName] = false;
-            Object.defineProperty(
-                instance,
-                fieldName, {
-                    get: function() {
-                        if (!isDef(instance.djangoValues[fieldName]) && !instance.loadingDjangoValue[fieldName]) {
-                            instance.loadingDjangoValue[fieldName] = true;
-                            populateDjangoModel(instance);
-                        }
-                        return instance.djangoValues[fieldName];
-                    },
-                    set: function(value) {
-                        instance.djangoValues[fieldName] = value;
-                    }
-                }
-            );
+        /**
+         * Adds the given field to the set of django fields on the given Django Model subclass
+         * @param {DjangoModel} DjangoModelSubClass
+         * @param {string} fieldName
+         */
+        function createDjangoField(DjangoModelSubClass, fieldName) {
+            DjangoModelSubClass.createDjangoField(fieldName);
         }
         return createDjangoField;
         // STOP! Functions only past this point

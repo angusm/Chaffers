@@ -23,13 +23,14 @@
 
         function Character() {
             this.callSuper('constructor');
-
-            createDjangoField(this, 'specialties');
-            createDjangoField(this, 'flaws');
-            createDjangoField(this, 'description');
-            createDjangoField(this, 'displayName');
         }
         extend(Character, ChaffersModel);
+
+        // Django Fields
+        createDjangoField(Character, 'specialties');
+        createDjangoField(Character, 'flaws');
+        createDjangoField(Character, 'description');
+        createDjangoField(Character, 'displayName');
 
         // Functions
         Character.prototype.getDisplayName = getDisplayName;

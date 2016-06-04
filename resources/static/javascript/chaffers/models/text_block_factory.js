@@ -15,10 +15,13 @@
 
         function TextBlock() {
             this.callSuper('constructor');
-            createDjangoField(this, 'formattedText');
         }
         extend(TextBlock, ChaffersModel);
 
+        // Django fields
+        createDjangoField(TextBlock, 'formattedText');
+
+        // Instance methods
         TextBlock.prototype.getText = getText;
 
         return TextBlock;

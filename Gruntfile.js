@@ -1,11 +1,13 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         uglify: {
-            options: {
-                mangle: false,
-                //beautify: true
-            },
             modules: {
+                options: {
+                    mangle: false,
+                    beautify: true,
+                    sourceMap: true,
+                    screwIE8: true
+                },
                 files: {
                     'resources/static/javascript/main.min.js': [
 
