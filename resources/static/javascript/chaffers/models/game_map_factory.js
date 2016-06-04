@@ -5,7 +5,6 @@
         'Game',
         'extend',
         'relationManager',
-        'createDjangoField',
         gameMapFactory
     ]);
 
@@ -13,8 +12,7 @@
         ChaffersModel,
         Game,
         extend,
-        relationManager,
-        createDjangoField
+        relationManager
     ) {
 
         function GameMap() {
@@ -22,7 +20,7 @@
         }
 
         // Django Fields
-        createDjangoField(GameMap, 'game');
+        GameMap.createDjangoField('game');
 
         // Inherit from the Base Model since this is a backend model
         extend(GameMap, ChaffersModel);

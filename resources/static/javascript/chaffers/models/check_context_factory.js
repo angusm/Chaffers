@@ -4,15 +4,11 @@
 
     CheckContextFactory.$inject = [
         'ChaffersModel',
-        'extend',
-        'relationManager',
-        'createDjangoField'
+        'extend'
     ];
 
     function CheckContextFactory(ChaffersModel,
-                                 extend,
-                                 relationManager,
-                                 createDjangoField) {
+                                 extend) {
 
         function CheckContext() {
             this.callSuper('constructor');
@@ -23,9 +19,9 @@
         // Relations
 
         // Django Fields
-        createDjangoField(CheckContext, 'description');
-        createDjangoField(CheckContext, 'displayName');
-        createDjangoField(CheckContext, 'parent');
+        CheckContext.createDjangoField('description');
+        CheckContext.createDjangoField('displayName');
+        CheckContext.createDjangoField('parent');
 
         // Functions
         CheckContext.prototype.getID = getID;

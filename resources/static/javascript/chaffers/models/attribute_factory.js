@@ -6,16 +6,14 @@
         'ChaffersModel',
         'extend',
         'TextBlock',
-        'relationManager',
-        'createDjangoField'
+        'relationManager'
     ];
 
     function AttributeFactory(
         ChaffersModel,
         extend,
         TextBlock,
-        relationManager,
-        createDjangoField
+        relationManager
     ) {
 
         function Attribute() {
@@ -27,9 +25,9 @@
         relationManager.registerHasOneRelation(Attribute, 'description', TextBlock);
 
         // Django Fields
-        createDjangoField(Attribute, 'baseValue');
-        createDjangoField(Attribute, 'displayName');
-        createDjangoField(Attribute, 'description');
+        Attribute.createDjangoField('baseValue');
+        Attribute.createDjangoField('displayName');
+        Attribute.createDjangoField('description');
 
         // Functions
         Attribute.prototype.getBaseValue = getBaseValue;

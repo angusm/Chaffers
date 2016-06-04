@@ -5,7 +5,6 @@
         'extend',
         'Attribute',
         'relationManager',
-        'createDjangoField',
         AttributeModifierFactory
     ]);
 
@@ -13,8 +12,7 @@
         ChaffersModel,
         extend,
         Attribute,
-        relationManager,
-        createDjangoField
+        relationManager
     ) {
 
         function AttributeModifier() {
@@ -26,10 +24,10 @@
         relationManager.registerHasOneRelation(AttributeModifier, 'attribute', Attribute);
 
         // Django Fields
-        createDjangoField(AttributeModifier, 'displayName');
-        createDjangoField(AttributeModifier, 'modifier');
-        createDjangoField(AttributeModifier, 'attributeId');
-        createDjangoField(AttributeModifier, 'attribute');
+        AttributeModifier.createDjangoField('displayName');
+        AttributeModifier.createDjangoField('modifier');
+        AttributeModifier.createDjangoField('attributeId');
+        AttributeModifier.createDjangoField('attribute');
 
         // Functions
         AttributeModifier.prototype.getModifier = getModifier;

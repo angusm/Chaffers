@@ -3,14 +3,12 @@
     angular.module('chaffers').factory('TextBlock', [
         'ChaffersModel',
         'extend',
-        'createDjangoField',
         TextBlockFactory
     ]);
 
     function TextBlockFactory(
         ChaffersModel,
-        extend,
-        createDjangoField
+        extend
     ) {
 
         function TextBlock() {
@@ -19,7 +17,7 @@
         extend(TextBlock, ChaffersModel);
 
         // Django fields
-        createDjangoField(TextBlock, 'formattedText');
+        TextBlock.createDjangoField('formattedText');
 
         // Instance methods
         TextBlock.prototype.getText = getText;

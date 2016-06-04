@@ -7,7 +7,6 @@
         'relationManager',
         'extend',
         'TextBlock',
-        'createDjangoField',
         CharacterFactory
     ]);
 
@@ -17,8 +16,7 @@
         ChaffersModel,
         relationManager,
         extend,
-        TextBlock,
-        createDjangoField
+        TextBlock
     ) {
 
         function Character() {
@@ -27,10 +25,10 @@
         extend(Character, ChaffersModel);
 
         // Django Fields
-        createDjangoField(Character, 'specialties');
-        createDjangoField(Character, 'flaws');
-        createDjangoField(Character, 'description');
-        createDjangoField(Character, 'displayName');
+        Character.createDjangoField('specialties');
+        Character.createDjangoField('flaws');
+        Character.createDjangoField('description');
+        Character.createDjangoField('displayName');
 
         // Functions
         Character.prototype.getDisplayName = getDisplayName;

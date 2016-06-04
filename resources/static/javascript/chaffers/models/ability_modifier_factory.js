@@ -6,7 +6,6 @@
         'Ability',
         'CheckContext',
         'relationManager',
-        'createDjangoField',
         AbilityModifierFactory
     ]);
 
@@ -15,8 +14,7 @@
         extend,
         Ability,
         CheckContext,
-        relationManager,
-        createDjangoField
+        relationManager
     ) {
 
         function AbilityModifier() {
@@ -29,11 +27,11 @@
         relationManager.registerHasManyRelation(AbilityModifier, 'checkContexts', CheckContext);
 
         // Django Fields
-        createDjangoField(AbilityModifier, 'ability');
-        createDjangoField(AbilityModifier, 'abilityId');
-        createDjangoField(AbilityModifier, 'checkContexts');
-        createDjangoField(AbilityModifier, 'displayName');
-        createDjangoField(AbilityModifier, 'modifier');
+        AbilityModifier.createDjangoField('ability');
+        AbilityModifier.createDjangoField('abilityId');
+        AbilityModifier.createDjangoField('checkContexts');
+        AbilityModifier.createDjangoField('displayName');
+        AbilityModifier.createDjangoField('modifier');
 
         // Functions
         AbilityModifier.prototype.getModifier = getModifier;

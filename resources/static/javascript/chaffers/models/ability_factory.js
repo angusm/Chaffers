@@ -6,16 +6,14 @@
         'ChaffersModel',
         'extend',
         'TextBlock',
-        'relationManager',
-        'createDjangoField'
+        'relationManager'
     ];
 
     function AbilityFactory(
         ChaffersModel,
         extend,
         TextBlock,
-        relationManager,
-        createDjangoField
+        relationManager
     ) {
 
         function Ability() {
@@ -24,15 +22,15 @@
         extend(Ability, ChaffersModel);
 
         // Django fields
-        createDjangoField(Ability, 'displayName');
-        createDjangoField(Ability, 'description');
+        Ability.createDjangoField('displayName');
+        Ability.createDjangoField('description');
 
         // Relations
         relationManager.registerHasOneRelation(Ability, 'description', TextBlock);
 
         // Functions
-        Ability.prototype.getDisplayName = getDisplayName;
         Ability.prototype.getDescription = getDescription;
+        Ability.prototype.getDisplayName = getDisplayName;
 
         return Ability;
         // STOP! Functions only past this point alright.

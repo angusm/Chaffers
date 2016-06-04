@@ -6,7 +6,6 @@
         'TextBlock',
         'extend',
         'relationManager',
-        'createDjangoField',
         gameFactory
     ]);
 
@@ -15,8 +14,7 @@
         Player,
         TextBlock,
         extend,
-        relationManager,
-        createDjangoField
+        relationManager
     ) {
 
         function Game() {
@@ -27,9 +25,9 @@
         extend(Game, ChaffersModel);
 
         // Django Fields
-        createDjangoField(Game, 'displayName');
-        createDjangoField(Game, 'description');
-        createDjangoField(Game, 'gameMasters');
+        Game.createDjangoField('displayName');
+        Game.createDjangoField('description');
+        Game.createDjangoField('gameMasters');
 
         // Attach relations
         relationManager.registerHasOneRelation(Game, 'description', TextBlock);

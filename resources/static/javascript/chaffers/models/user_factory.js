@@ -4,14 +4,12 @@
 
     UserFactory.$inject = [
         'ChaffersModel',
-        'extend',
-        'createDjangoField'
+        'extend'
     ];
 
     function UserFactory(
         ChaffersModel,
-        extend,
-        createDjangoField
+        extend
     ) {
 
         function User() {
@@ -20,7 +18,7 @@
         extend(User, ChaffersModel);
 
         // Django fields
-        createDjangoField(User, 'username');
+        User.createDjangoField('username');
 
         // Functions
         User.prototype.getUsername = getUsername;

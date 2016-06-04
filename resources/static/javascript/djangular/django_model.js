@@ -6,11 +6,9 @@
             'BackendModel',
             'extend',
             'isDef',
-            'isFunction',
             'djangoHTTP',
             'classMethod',
             'populateDjangoModel',
-            'classProperty',
             DjangoModelFactory
         ]
     );
@@ -19,11 +17,9 @@
         BackendModel,
         extend,
         isDef,
-        isFunction,
         djangoHTTP,
         classMethod,
-        populateDjangoModel,
-        classProperty
+        populateDjangoModel
     ) {
 
         function DjangoModel() {

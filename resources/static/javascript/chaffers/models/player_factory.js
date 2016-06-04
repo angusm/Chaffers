@@ -6,16 +6,14 @@
         'ChaffersModel',
         'extend',
         'User',
-        'relationManager',
-        'createDjangoField'
+        'relationManager'
     ];
 
     function PlayerFactory(
         ChaffersModel,
         extend,
         User,
-        relationManager,
-        createDjangoField
+        relationManager
     ) {
 
         function Player() {
@@ -27,8 +25,8 @@
         relationManager.registerHasOneRelation(Player, 'user', User);
 
         // Django Fields
-        createDjangoField(Player, 'masteredGames');
-        createDjangoField(Player, 'user');
+        Player.createDjangoField('masteredGames');
+        Player.createDjangoField('user');
 
         // Functions
         Player.prototype.getUser = getUser;

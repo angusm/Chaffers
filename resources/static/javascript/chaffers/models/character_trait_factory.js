@@ -6,7 +6,6 @@
         'TextBlock',
         'AttributeModifier',
         'AbilityModifier',
-        'createDjangoField',
         characterTraitFactory
     ]);
 
@@ -16,8 +15,7 @@
         relationManager,
         TextBlock,
         AttributeModifier,
-        AbilityModifier,
-        createDjangoField
+        AbilityModifier
     ) {
 
         /**
@@ -37,10 +35,10 @@
         relationManager.registerHasManyRelation(CharacterTrait, 'abilityModifiers', AbilityModifier);
 
         // Django Fields
-        createDjangoField(CharacterTrait, 'displayName');
-        createDjangoField(CharacterTrait, 'description');
-        createDjangoField(CharacterTrait, 'attributeModifiers');
-        createDjangoField(CharacterTrait, 'abilityModifiers');
+        CharacterTrait.createDjangoField('displayName');
+        CharacterTrait.createDjangoField('description');
+        CharacterTrait.createDjangoField('attributeModifiers');
+        CharacterTrait.createDjangoField('abilityModifiers');
 
         // Instance Functions
         CharacterTrait.prototype.getDisplayName = getDisplayName;
