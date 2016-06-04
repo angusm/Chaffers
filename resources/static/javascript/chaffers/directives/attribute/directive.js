@@ -12,7 +12,6 @@
      * @returns {Object} the directive object for ...
      */
     function attributeDirective() {
-
         var directive = {
             restrict: 'E',
             scope: {
@@ -26,6 +25,5 @@
         };
 
         return directive;
-
     }
 })();

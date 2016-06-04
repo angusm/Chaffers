@@ -14,7 +14,7 @@
     ) {
 
         function TextBlock() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
             createDjangoField(this, 'formattedText');
         }
         extend(TextBlock, ChaffersModel);

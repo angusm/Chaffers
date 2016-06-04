@@ -9,7 +9,7 @@
     function specialtyFactory(CharacterTrait, extend) {
 
         function Specialty() {
-            CharacterTrait.apply(this, arguments);
+            this.callSuper('constructor');
         }
         extend(Specialty, CharacterTrait);
 

@@ -17,5 +17,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^get_data_by_id', views.get_data_by_id)
+    url(r'^get_data_by_id', views.get_data_by_id),
+    url(r'^get_all_ids', views.get_all_ids),
 ]

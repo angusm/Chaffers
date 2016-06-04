@@ -18,7 +18,7 @@
     ) {
 
         function GameMap() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
 
             createDjangoField(this, 'game');
         }

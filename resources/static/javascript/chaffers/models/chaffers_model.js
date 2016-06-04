@@ -4,23 +4,27 @@
 
     ChaffersModelFactory.$inject = [
         'DjangoModel',
-        'extend'
+        'extend',
+        'classMethod'
     ];
 
     function ChaffersModelFactory(
         DjangoModel,
-        extend
+        extend,
+        classMethod
     ) {
 
         function ChaffersModel() {
-            DjangoModel.apply(this);
+            this.callSuper('constructor');
         }
         extend(ChaffersModel, DjangoModel);
 
         // Relations
 
-        // Functions
-        ChaffersModel.prototype.getDataQueryURL = getDataQueryURL;
+        // Class Methods
+        classMethod(ChaffersModel, 'getDataQueryURL', getDataQueryURL);
+
+        // Instance Methods
 
         return ChaffersModel;
         // STOP! Functions only past this point alright.

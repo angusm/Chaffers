@@ -20,7 +20,7 @@
     ) {
 
         function AbilityModifier() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
 
             createDjangoField(this, 'ability');
             createDjangoField(this, 'abilityId');

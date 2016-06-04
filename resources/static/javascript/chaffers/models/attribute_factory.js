@@ -19,7 +19,7 @@
     ) {
 
         function Attribute() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
 
             createDjangoField(this, 'baseValue');
             createDjangoField(this, 'displayName');

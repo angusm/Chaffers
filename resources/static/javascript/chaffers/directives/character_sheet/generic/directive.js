@@ -26,8 +26,8 @@
          * @type {string[]}
          */
         CharacterSheetController.$inject = [
-            'AbilityDataService',
-            'AttributeDataService'
+            'Ability',
+            'Attribute'
         ];
         CharacterSheetController.prototype.getSelectedAbilities = getSelectedAbilities;
         CharacterSheetController.prototype.getSelectedCheckContexts = getSelectedCheckContexts;
@@ -37,16 +37,16 @@
         return directive;
 
         function CharacterSheetController(
-            AbilityDataService,
-            AttributeDataService
+            Ability,
+            Attribute
         ) {
             this.selectedCheckContexts = [];
             this.selectedAbilities = [];
-            AbilityDataService.getAllAbilities().then(
+            Ability.getAll().then(
                 this.setAbilities.bind(this)
             );
 
-            AttributeDataService.getAllAttributes().then(
+            Attribute.getAll().then(
                 this.setAttributes.bind(this)
             );
         }

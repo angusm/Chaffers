@@ -15,7 +15,7 @@
                                  createDjangoField) {
 
         function CheckContext() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
 
             createDjangoField(this, 'description');
             createDjangoField(this, 'displayName');

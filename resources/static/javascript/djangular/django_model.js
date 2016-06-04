@@ -6,6 +6,8 @@
             'BackendModel',
             'extend',
             'isDef',
+            'djangoHTTP',
+            'classMethod',
             DjangoModelFactory
         ]
     );
@@ -13,23 +15,67 @@
     function DjangoModelFactory(
         BackendModel,
         extend,
-        isDef
+        isDef,
+        djangoHTTP,
+        classMethod
     ) {
 
         function DjangoModel() {
-            BackendModel.apply(this);
+            this.callSuper('constructor');
             this.id = undefined;
             this.djangoValues = {};
             this.loadingDjangoValue = {};
         }
         extend(DjangoModel, BackendModel);
 
-        DjangoModel.prototype.getDataQueryURL = getDataQueryURL;
+        // Class methods
+        classMethod(DjangoModel, 'getAll', getAll);
+        classMethod(DjangoModel, 'getAllIDs', getAllIDs);
+        classMethod(DjangoModel, 'getDataQueryURL', getDataQueryURL);
+        classMethod(DjangoModel, 'createInstanceWithID', createInstanceWithID);
+        classMethod(DjangoModel, 'createInstanceWithIDs', createInstanceWithIDs);
+
+        // Instance methods
         DjangoModel.prototype.getDjangoFields = getDjangoFields;
         DjangoModel.prototype.getUnpopulatedDjangoFields = getUnpopulatedDjangoFields;
 
         return DjangoModel;
         // STOP! Functions only past this point
+
+        /**
+         * Returns an instance of the class for every record in Django
+         * @returns {Array<DjangoModel>}
+         */
+        function getAll() {
+            var CurrentClass = this;
+            return this.getAllIDs().then(this.createInstanceWithIDs.bind(this));
+        }
+
+        function createInstanceWithIDs(ids) {
+            return ids.map(this.createInstanceWithID.bind(this));
+        }
+
+        function createInstanceWithID(id) {
+            var CurrentClass = this;
+            var instance = new CurrentClass();
+            instance.id = id;
+            return instance;
+        }
+
+        /**
+         * Return all of the IDs for the current model
+         * @returns {*}
+         */
+        function getAllIDs() {
+            return djangoHTTP.post(
+                this.getDataQueryURL() + '/get_all_ids',
+                {
+                    model: this.name
+                }
+            ).then(function(postResult) {
+                return postResult.data.ids;
+            });
+        }
 
         /**
          * Returns an array of the django field values that have not been
@@ -38,7 +84,7 @@
          */
         function getUnpopulatedDjangoFields() {
             var djangoValues = this.djangoValues;
-            return Object.keys(djangoValues).filter(function(djangoFieldName) {
+            return this.getDjangoFields().filter(function(djangoFieldName) {
                 return !isDef(djangoValues[djangoFieldName]);
             });
         }
@@ -52,7 +98,7 @@
          * @returns {string}
          */
         function getDataQueryURL() {
-            return '';
+            throw new Error('getDataQueryURL must be overridden in child Class');
         }
 
     }

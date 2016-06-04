@@ -22,7 +22,7 @@
     ) {
 
         function Character() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
 
             createDjangoField(this, 'specialties');
             createDjangoField(this, 'flaws');

@@ -6,7 +6,7 @@
 
     // Inject
     AbilitySelectorController.$inject = [
-        'AbilityDataService'
+        'Ability'
     ];
 
     // Functions
@@ -38,13 +38,13 @@
 
     /**
      * Controller for the ability selector
-     * @param AbilityDataService
+     * @param Ability
      * @constructor
      */
     function AbilitySelectorController(
-        AbilityDataService
+        Ability
     ) {
-        AbilityDataService.getAllAbilities().then(
+        Ability.getAll().then(
             this.setAbilities.bind(this)
         );
     }

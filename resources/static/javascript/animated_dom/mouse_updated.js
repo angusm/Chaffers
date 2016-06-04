@@ -104,14 +104,14 @@
          * Run the query dom function on the current instance.
          */
         function queryDOM() {
-            getParentClass(MouseUpdated).prototype.queryDOM.apply(this);
+            this.callSuper('queryDom');
         }
 
         /**
          * Run the update dom function on the current instance.
          */
         function updateDOM() {
-            getParentClass(MouseUpdated).prototype.updateDOM.apply(this);
+            this.callSuper('updateDOM');
         }
 
     }

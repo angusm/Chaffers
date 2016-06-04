@@ -6,7 +6,7 @@
 
     // Inject
     CheckContextSelectorController.$inject = [
-        'CheckContextDataService'
+        'CheckContext'
     ];
 
     // Functions
@@ -38,13 +38,13 @@
 
     /**
      * Controller for the check contexts selector
-     * @param CheckContextDataService
+     * @param CheckContext
      * @constructor
      */
     function CheckContextSelectorController(
-        CheckContextDataService
+        CheckContext
     ) {
-        CheckContextDataService.getAllCheckContexts().then(
+        CheckContext.getAll().then(
             this.setCheckContexts.bind(this)
         );
     }

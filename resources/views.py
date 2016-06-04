@@ -5,6 +5,22 @@ import json
 
 
 # Create your views here.
+def get_class_by_name(class_name):
+    class_module = __import__('resources.models', fromlist=[str(class_name)])
+    return getattr(class_module, class_name)
+
+
+def get_all_ids(request):
+
+    request_data = json.loads(request.body)
+    class_name = request_data['model']
+
+    ids = get_class_by_name(class_name).objects.values_list('id', flat=True);
+    return JsonResponse({
+        'ids': list(ids)
+    })
+
+
 def get_data_by_id(request):
     """
     Return data for the model with the given class and id
@@ -17,16 +33,9 @@ def get_data_by_id(request):
     class_name = request_data['model']
     fields = request_data['fields']
 
-    class_module = __import__('resources.models', fromlist=[str(class_name)])
-    imported_class = getattr(class_module, class_name)
+    instance = get_class_by_name(class_name).objects.get(pk=instance_id)
 
-    instance = imported_class.objects.get(pk=instance_id)
-
-    from pprint import pprint
-    pprint(fields)
     data = instance.to_dict(*fields)
-    pprint(data)
-
     return JsonResponse({
         'data': data
     })

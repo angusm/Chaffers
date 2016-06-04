@@ -19,7 +19,7 @@
     ) {
 
         function Player() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
 
             createDjangoField(this, 'masteredGames');
             createDjangoField(this, 'user');

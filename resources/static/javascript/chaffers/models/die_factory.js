@@ -13,10 +13,10 @@
     ) {
 
         function Die() {
+            this.callSuper('constructor');
             this.value = undefined;
             this.sides = 6;
             this.roll();
-            BaseModel.apply(this, arguments);
         }
 
         extend(Die, BaseModel);

@@ -91,7 +91,7 @@
         }
 
         function queryDOM() {
-            getParentClass(GameBoardController).prototype.queryDOM.apply(this);
+            this.callSuper('queryDOM');
             this.height = jQuery(this.getElement()).height();
             this.width = jQuery(this.getElement()).width();
         }
@@ -145,7 +145,7 @@
         }
 
         function handleDrag(dragVector) {
-            getParentClass(GameBoardController).prototype.handleDrag.apply(this, [dragVector]);
+            this.callSuper('handleDrag', [dragVector]);
             this.setPosition(
                 this.getPosition().translate(dragVector)
             );
@@ -228,7 +228,7 @@
          * Updates the DOM based on user interactions.
          */
         function updateDOM() {
-            getParentClass(GameBoardController).prototype.updateDOM.apply(this);
+            this.callSuper('updateDOM');
             this.layoutTiles();
             this.translateTileContainer();
             this.getTileOffset();

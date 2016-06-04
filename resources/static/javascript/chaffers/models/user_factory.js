@@ -15,7 +15,7 @@
     ) {
 
         function User() {
-            ChaffersModel.apply(this);
+            this.callSuper('constructor');
 
             createDjangoField(this, 'username');
         }

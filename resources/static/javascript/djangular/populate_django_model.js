@@ -31,7 +31,7 @@
             }
 
             return djangoHTTP.post(
-                instance.getDataQueryURL() + '/get_data_by_id',
+                instance.getClass().getDataQueryURL() + '/get_data_by_id',
                 {
                     model: instance.constructor.name,
                     id: instance.id,

@@ -9,7 +9,7 @@
     function flawFactory(CharacterTrait, extend) {
 
         function Flaw() {
-            CharacterTrait.apply(this, arguments);
+            this.callSuper('constructor');
         }
         extend(Flaw, CharacterTrait);
 

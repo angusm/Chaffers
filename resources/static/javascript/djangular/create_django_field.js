@@ -28,14 +28,14 @@
                 instance,
                 fieldName, {
                     get: function() {
-                        if (!isDef(instance.djangoValues[fieldName]) && !this.loadingDjangoValue[fieldName]) {
-                            this.loadingDjangoValue[fieldName] = true;
+                        if (!isDef(instance.djangoValues[fieldName]) && !instance.loadingDjangoValue[fieldName]) {
+                            instance.loadingDjangoValue[fieldName] = true;
                             populateDjangoModel(instance);
                         }
                         return instance.djangoValues[fieldName];
                     },
                     set: function(value) {
-                        this.djangoValues[fieldName] = value;
+                        instance.djangoValues[fieldName] = value;
                     }
                 }
             );
