@@ -104,7 +104,7 @@
          * Run the query dom function on the current instance.
          */
         function queryDOM() {
-            this.callSuper('queryDom');
+            this.callSuper('queryDOM');
         }
 
         /**

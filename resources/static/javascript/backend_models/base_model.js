@@ -25,6 +25,7 @@
         classMethod(BaseModel, 'getProto', getClassProto);
         classMethod(BaseModel, 'getParentClassFunction', getClassParentClassFunction);
         classMethod(BaseModel, 'getTopLevelConstructor', getClassToplevelConstructor);
+        classMethod(BaseModel, 'getClass', getClassClass);
 
         // Instance methods
         BaseModel.prototype.getParentClass = getParentClass;
@@ -34,12 +35,16 @@
         BaseModel.prototype.getProto = getInstanceProto;
         BaseModel.prototype.getParentClassFunction = getInstanceParentClassFunction;
         BaseModel.prototype.getTopLevelConstructor = getInstanceToplevelConstructor;
-        BaseModel.prototype.getClass = getClass;
+        BaseModel.prototype.getClass = getInstanceClass;
 
         return BaseModel;
         // STOP! Functions only past this point
 
-        function getClass() {
+        function getClassClass() {
+            return this;
+        }
+
+        function getInstanceClass() {
             return this.constructor;
         }
 
@@ -102,7 +107,19 @@
          * @returns {function}
          */
         function getInstanceParentClassFunction(functionName) {
-            return this.getParentClass().prototype[functionName];
+            var parentClass = this.getParentClass();
+            while (
+                parentClass != this.getTopLevelConstructor() &&
+                typeof parentClass.prototype[functionName] !== 'function'
+            ) {
+                parentClass = parentClass.getParentClass();
+            }
+
+            if (!parentClass.prototype[functionName]) {
+                throw new Error('Unable to find parent class function "' + functionName + '" from "' + this.getParentClass().name + '"');
+            } else {
+                return parentClass.prototype[functionName];
+            }
         }
 
         /**

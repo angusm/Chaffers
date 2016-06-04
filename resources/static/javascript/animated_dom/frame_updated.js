@@ -2,16 +2,21 @@
     angular.module('animatedDom').factory('FrameUpdated', FrameUpdatedFactory);
 
     FrameUpdatedFactory.$inject = [
-        'AnimatedDomService'
+        'AnimatedDomService',
+        'BaseModel',
+        'extend'
     ];
     function FrameUpdatedFactory(
-        AnimatedDomService
+        AnimatedDomService,
+        BaseModel,
+        extend
     ) {
         FrameUpdated.$inject = [];
 
         function FrameUpdated() {
             AnimatedDomService.registerInstance(this);
         }
+        extend(FrameUpdated, BaseModel);
 
         // Functions
         FrameUpdated.prototype.queryDOM = queryDOM;

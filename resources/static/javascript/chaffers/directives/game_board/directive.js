@@ -7,8 +7,7 @@
     gameBoardDirective.$inject = [
         'extend',
         'MouseUpdated',
-        'Position2D',
-        'getParentClass'
+        'Position2D'
     ];
 
     // STOP! Nothing but functions past this point ya hear?
@@ -21,8 +20,7 @@
     function gameBoardDirective(
         extend,
         MouseUpdated,
-        Position2D,
-        getParentClass
+        Position2D
     ) {
 
         var directive = {
