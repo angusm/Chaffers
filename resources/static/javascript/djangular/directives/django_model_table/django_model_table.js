@@ -4,6 +4,7 @@
 
     angular.module('djangular').directive('djangoModelTable',[
         'isDef',
+        '$injector',
         djangoModelTableDirective
     ]);
 
@@ -16,7 +17,10 @@
      * Also takes in a set of fields that should be displayed.
      * @returns {Object} the directive object for ...
      */
-    function djangoModelTableDirective(isDef) {
+    function djangoModelTableDirective(
+        isDef,
+        $injector
+    ) {
         var directive = {
             restrict: 'E',
             scope: {
@@ -29,12 +33,16 @@
             templateUrl: '/static/javascript/djangular/directives/django_model_table/django_model_table.html'
         };
 
-        return directive;
-
+        // Controller methods
         DjangoModelTableController.prototype.getInstances = getInstances;
         DjangoModelTableController.prototype.getFields = getFields;
         DjangoModelTableController.prototype.setInstances = setInstances;
         DjangoModelTableController.prototype.getModelClass = getModelClass;
+
+        return directive;
+        // STOP! Hammer Time!
+        // Just kidding, actually function time, just functions past this point please.
+
         function DjangoModelTableController() {
             this.instances = undefined;
             this.modelClass = undefined;

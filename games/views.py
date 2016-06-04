@@ -42,7 +42,14 @@ def get_data_by_id(request):
 
 
 def view_all(request):
-    pass
+    """
+    Show the game with the given ID
+    """
+    return render_chaffers(
+        request,
+        'django_model_table.html',
+        {'model_name': 'Game'}
+    )
 
 
 def get_all_games_data(request):

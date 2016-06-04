@@ -11,8 +11,6 @@
             ChildClass.prototype = Object.create(ParentClass.prototype);
             ChildClass.prototype.constructor = ChildClass;
 
-            window[ChildClass.name] = ChildClass;
-
             // Handle class methods
             if (isDef(ParentClass.__class_properties__)) {
                 ParentClass.__class_properties__.forEach(function(classPropertyPropertyName) {
