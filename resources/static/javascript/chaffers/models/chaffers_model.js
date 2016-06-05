@@ -25,12 +25,17 @@
         classMethod(ChaffersModel, 'getDataQueryURL', getDataQueryURL);
 
         // Instance Methods
+        ChaffersModel.prototype.getViewURL = getViewURL;
 
         return ChaffersModel;
         // STOP! Functions only past this point alright.
 
         function getDataQueryURL() {
             return '/resources';
+        }
+
+        function getViewURL() {
+            return '/resources/view/' + this.getClass().name + '/' + this.id;
         }
 
     }

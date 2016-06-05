@@ -7,7 +7,7 @@
     gameBoardDirective.$inject = [
         'extend',
         'MouseUpdated',
-        'Position2D'
+        'Position2d'
     ];
 
     // STOP! Nothing but functions past this point ya hear?
@@ -20,7 +20,7 @@
     function gameBoardDirective(
         extend,
         MouseUpdated,
-        Position2D
+        Position2d
     ) {
 
         var directive = {
@@ -44,7 +44,7 @@
 
             this.ngElement = $element;
             this.djangoHTTP = djangoHTTP;
-            this.position = new Position2D(0, 0);
+            this.position = new Position2d(0, 0);
             this.scale = 1.0;
             this.tiles = [];
             this.tileSize = 75;
@@ -167,7 +167,7 @@
                 for (var y = -1; y <= this.getTilesHigh(); y++) {
                     this.updateTile(
                         this.getTiles()[tileIndex],
-                        new Position2D(x, y)
+                        new Position2d(x, y)
                     );
                     tileIndex++;
                 }
@@ -234,10 +234,10 @@
 
         /**
          * Returns the visible tiles area.
-         * @returns {Position2D} The visible tiles area.
+         * @returns {Position2d} The visible tiles area.
          */
         function getVisibleTilesArea() {
-            return new Position2D(
+            return new Position2d(
                 this.getTilesWide(),
                 this.getTilesHigh()
             );
@@ -251,7 +251,7 @@
             var position = this.getPosition();
             var xOffset = -Math.floor(position.getX() / this.getTileSize());
             var yOffset = -Math.floor(position.getY() / this.getTileSize());
-            return new Position2D(xOffset, yOffset);
+            return new Position2d(xOffset, yOffset);
         }
 
         function translateTileContainer() {

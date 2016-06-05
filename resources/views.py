@@ -1,17 +1,64 @@
-from django.shortcuts import render
-from resources.models import Player
+from render_chaffers import render_chaffers
 from django.http import JsonResponse
 import json
+import model_views
 
 
 # Create your views here.
 def get_class_by_name(class_name):
+    """
+    Returns the class with the given name
+    :param class_name:
+    :return:
+    """
     class_module = __import__('resources.models', fromlist=[str(class_name)])
     return getattr(class_module, class_name)
 
 
-def get_all_ids(request):
+def view_all(request, model_name):
+    """
+    Create a view listing out all of the models
+    :param request:
+    :param model_name:
+    :return:
+    """
+    if model_name in model_views.view_methods:
+        return model_views.view_all_methods[model_name](request)
+    else:
+        return render_chaffers(
+            request,
+            'django_model_table.html',
+            {'model_name': model_name}
+        )
 
+
+def view(request, model_name, model_id):
+    """
+    Create a view showing information about the given model
+    :param request:
+    :param model_name:
+    :param model_id:
+    :return:
+    """
+    if model_name in model_views.view_methods:
+        return model_views.view_methods[model_name](request, model_id)
+    else:
+        return render_chaffers(
+            request,
+            'django_model_view.html',
+            {
+                'model_name': model_name,
+                'model_id': model_id
+            }
+        )
+
+
+def get_all_ids(request):
+    """
+    Return all of the IDs for the given model
+    :param request:
+    :return:
+    """
     request_data = json.loads(request.body)
     class_name = request_data['model']
 
@@ -40,30 +87,3 @@ def get_data_by_id(request):
         'data': data
     })
 
-
-def render_chaffers(request, template_name, context=None):
-    """
-    Renders a chaffers template providing player context
-    :param request:
-    :param template_name:
-    :param context:
-    :return:
-    """
-
-    is_authenticated = request.user.is_authenticated()
-
-    player_data = {}
-    if is_authenticated:
-        player = Player.get_by_user(request.user)
-        player_properties = [
-            'username',
-        ]
-        player_data = player.to_dict(*player_properties)
-
-    context['player_data'] = json.dumps(player_data)
-    context['is_authenticated'] = is_authenticated
-    return render(
-        request,
-        template_name,
-        context
-    )

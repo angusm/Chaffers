@@ -1,8 +1,10 @@
 <table>
     <tr>
+        <th>ID</th>
         <th ng-repeat="field in djangoModelTableVM.getFields()" ng-bind="field"></th>
     </tr>
     <tr ng-repeat="instance in djangoModelTableVM.getInstances()">
+        <td><a ng-bind="instance.id" ng-href="{{ instance.getViewURL() }}"></a></td>
         <td ng-repeat="field in djangoModelTableVM.getFields()" ng-bind="instance[field]"></td>
     </tr>
 </table>

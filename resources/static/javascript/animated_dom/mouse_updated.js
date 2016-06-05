@@ -4,21 +4,19 @@
     MouseUpdatedFactory.$inject = [
         'FrameUpdated',
         'extend',
-        'Position2D',
-        'getParentClass'
+        'Position2d'
     ];
     function MouseUpdatedFactory(
         FrameUpdated,
         extend,
-        Position2D,
-        getParentClass
+        Position2d
     ) {
         MouseUpdated.$inject = [];
 
         function MouseUpdated(element) {
             FrameUpdated.apply(this);
 
-            this.mousePosition = new Position2D();
+            this.mousePosition = new Position2d();
             this.dragging = false;
 
             jQuery(element).bind('mousedown', this.handleMouseDown.bind(this));
@@ -45,7 +43,7 @@
 
         /**
          * Returns the current mouse position.
-         * @returns {Position2D}
+         * @returns {Position2d}
          */
         function getMousePosition() {
             return this.mousePosition;
@@ -60,7 +58,7 @@
          * @param event
          */
         function handleMouseMove(event) {
-            var newMousePosition = new Position2D(
+            var newMousePosition = new Position2d(
                 event.pageX,
                 event.pageY
             );
@@ -96,7 +94,7 @@
 
         /**
          * Handle a drag event
-         * @param {Position2D} dragVector The X and Y distance dragged
+         * @param {Position2d} dragVector The X and Y distance dragged
          */
         function handleDrag(dragVector) {}
 

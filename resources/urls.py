@@ -19,4 +19,6 @@ from . import views
 urlpatterns = [
     url(r'^get_data_by_id', views.get_data_by_id),
     url(r'^get_all_ids', views.get_all_ids),
+    url(r'^view_all/(?P<model_name>[A-Za-z]+)', views.view_all),
+    url(r'^view/(?P<model_name>[A-Za-z]+)/(?P<model_id>[0-9]+)', views.view),
 ]

@@ -1,0 +1,10 @@
+<table>
+    <tr>
+        <th>Field</th>
+        <th>Value</th>
+    </tr>
+    <tr ng-repeat="field in djangoModelViewVM.getFields()">
+        <td ng-bind="field"></td>
+        <td ng-bind="djangoModelViewVM.getInstance()[field]"></td>
+    </tr>
+</table>

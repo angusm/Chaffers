@@ -2,10 +2,10 @@
 
     "use strict";
 
-    angular.module('djangular').directive('djangoModelTable',[
+    angular.module('djangular').directive('djangoModelView',[
         'isDef',
         '$injector',
-        djangoModelTableDirective
+        djangoModelViewDirective
     ]);
 
     // STOP! Nothing but functions past this point ya hear?
@@ -17,7 +17,7 @@
      * Also takes in a set of fields that should be displayed.
      * @returns {Object} the directive object for ...
      */
-    function djangoModelTableDirective(
+    function djangoModelViewDirective(
         isDef,
         $injector
     ) {
@@ -25,26 +25,26 @@
             restrict: 'E',
             scope: {
                 modelName: '=',
-                fields: '='
+                fields: '=',
+                modelId: '='
             },
-            controller: DjangoModelTableController,
-            controllerAs: 'djangoModelTableVM',
+            controller: DjangoModelViewController,
+            controllerAs: 'djangoModelViewVM',
             bindToController: true,
-            templateUrl: '/static/javascript/djangular/directives/django_model_table/django_model_table.html'
+            templateUrl: '/static/javascript/djangular/directives/django_model_view/django_model_view.html'
         };
 
         // Controller methods
-        DjangoModelTableController.prototype.getInstances = getInstances;
-        DjangoModelTableController.prototype.getFields = getFields;
-        DjangoModelTableController.prototype.setInstances = setInstances;
-        DjangoModelTableController.prototype.getModelClass = getModelClass;
+        DjangoModelViewController.prototype.getInstance = getInstance;
+        DjangoModelViewController.prototype.getFields = getFields;
+        DjangoModelViewController.prototype.getModelClass = getModelClass;
 
         return directive;
         // STOP! Hammer Time!
         // Just kidding, actually function time, just functions past this point please.
 
-        function DjangoModelTableController() {
-            this.instances = undefined;
+        function DjangoModelViewController() {
+            this.instance = undefined;
             this.modelClass = undefined;
         }
 
@@ -58,19 +58,13 @@
                 if (this.fields == 'all') {
                     this.fields = this.getModelClass().getDjangoFields();
                 }
+                if (this.fields.indexOf('id') == -1) {
+                    this.fields = ['id'].concat(this.fields);
+                }
                 return this.fields;
             } else {
-                return [];
+                return ['id'];
             }
-        }
-
-        /**
-         * Sets the instances to the given array. Used as a callback for
-         * after data retrieval has been successfully completed.
-         * @param newInstances
-         */
-        function setInstances(newInstances) {
-            this.instances = newInstances;
         }
 
         /**
@@ -78,12 +72,13 @@
          * are available. Returning an empty array until they've been returned.
          * @returns {Array}
          */
-        function getInstances() {
-            if (!isDef(this.instances)) {
-                this.getModelClass().getAll().then(this.setInstances.bind(this));
-                this.setInstances([]);
+        function getInstance() {
+            if (!isDef(this.instance)) {
+                var ModelClass = this.getModelClass();
+                this.instance = new ModelClass();
+                this.instance.id = this.modelId;
             }
-            return this.instances;
+            return this.instance;
         }
 
         /**
@@ -96,7 +91,6 @@
             }
             return this.modelClass;
         }
-
     }
 
 })();

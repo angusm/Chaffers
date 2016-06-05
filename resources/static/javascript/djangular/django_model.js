@@ -47,6 +47,7 @@
         DjangoModel.prototype.initDjangoField = initDjangoField;
         DjangoModel.prototype.getDjangoFieldValue = getDjangoFieldValue;
         DjangoModel.prototype.setDjangoFieldValue = setDjangoFieldValue;
+        DjangoModel.prototype.getViewURL = getViewURL;
 
         return DjangoModel;
         // STOP! Functions only past this point
@@ -161,6 +162,10 @@
          */
         function getDataQueryURL() {
             throw new Error('getDataQueryURL must be overridden in child Class');
+        }
+
+        function getViewURL() {
+            throw new Error('getViewURL must be overridden in child class.');
         }
 
     }

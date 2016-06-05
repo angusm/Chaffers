@@ -22,3 +22,4 @@ from text_block import TextBlock
 from text_substitution import TextSubstitution
 from self_referencing_text_substitution import SelfReferencingTextSubstitution
 from check_context import CheckContext
+from position_2d import Position2d

@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <django-model-view
+            fields="{% if fields %}{{ fields }}{% else %}'all'{% endif %}"
+            model-id="{{ model_id }}"
+            model-name="'{{ model_name }}'">
+    </django-model-view>
+{% endblock %}
