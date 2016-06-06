@@ -3,5 +3,5 @@ from django.db.models import ForeignKey
 
 
 class GameCharacter(Character):
-    game = ForeignKey('Game', related_name='game_characters')
-    position = ForeignKey('Position2d')
+    game = ForeignKey('Game')
+    position = ForeignKey('GameBoardPosition')

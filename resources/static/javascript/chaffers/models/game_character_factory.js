@@ -26,6 +26,7 @@
 
         // Register Relations
         relationManager.registerHasManyRelation(GameCharacter, 'game', Game);
+        relationManager.registerHasManyRelation(GameCharacter, 'position', Game);
 
         return GameCharacter;
 
