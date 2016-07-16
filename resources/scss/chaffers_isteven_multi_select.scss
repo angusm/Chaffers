@@ -1,22 +1,54 @@
+@import "__chaffers";
 
 // Float selected items to the top
 .multiSelect {
+
+  .line {
+    display: flex;
+  }
+
+  .inputFilter,
+  .clearButton {
+    font-size: 1em;
+    height: 1.5em;
+    margin: 0;
+  }
+
+  & > button {
+    @include multi-select-font();
+    height: 2em;
+    min-height: 0 !important;
+  }
 
   .checkBoxContainer {
     display: flex;
     flex-direction: column;
   }
 
+  .inputFilter {
+    flex: 1;
+  }
+
   .clearButton {
-    width: 41px;
-    height: 41px;
+    box-shadow: none;
+    flex: 0;
+    padding: 0 5px;
+    position: static;
+    width: 1.5em;
   }
 
   .multiSelectItem {
+    min-height: 0;
+    min-width: 0;
     order: 1;
 
     &:not(.multiSelectGroup).selected {
       order: 0;
     }
+  }
+
+  .tickMark {
+    font-size: 1em;
+    top: 0;
   }
 }

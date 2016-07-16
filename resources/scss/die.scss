@@ -3,12 +3,12 @@
 @import "__handies";
 
 die {
-  border-radius: 6px;
+  border-radius: .5em;
   display: block;
-  height: 50px;
+  height: 2.5em;
   overflow: hidden;
   position: relative;
-  width: 50px;
+  width: 2.5em;
 
   .die-display {
     @include absolute-fill();

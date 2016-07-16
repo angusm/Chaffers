@@ -52,13 +52,13 @@ module.exports = function(grunt) {
         watch: {
             css: {
                 files: [
-                    'resources/scss/*.scss'
+                    'resources/scss/**.scss'
                 ],
                 tasks: ['sass']
             },
             scripts: {
                 files: [
-                    '*/static/javascript/**/*.js',
+                    '*/static/javascript/***.js',
                     '!resources/static/javascript/main.min.js'
                 ],
                 tasks: ['uglify'],
@@ -81,4 +81,4 @@ module.exports = function(grunt) {
     // Default task(s).
     grunt.registerTask('default', ['uglify']);
     grunt.registerTask('default', ['sass']);
-}
+};

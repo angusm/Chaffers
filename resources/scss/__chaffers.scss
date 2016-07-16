@@ -1,6 +1,6 @@
-@import "_chaffers_colours";
+@import "__chaffers_colours";
 
-$base-font-size: 30px;
+$base-font-size: 1em;
 $base-padding: 1%;
 
 @mixin base-font() {
@@ -20,13 +20,21 @@ $base-padding: 1%;
 @mixin flavour-text-font() {
   color: $flavour-text-colour;
   font-family: 'Open Sans', sans-serif;
-  font-size: $base-font-size * 0.75;
+  font-size: $base-font-size;
   font-style: italic;
   font-weight: 300;
 }
 
 @mixin header-at-level($header-level) {
-  font-size: $base-font-size * (5 - $header-level)/3;
+  font-size: $base-font-size * (5 - $header-level) / 2;
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
+}
+
+@mixin disclaimer-font() {
+  font-size: 0.2 * $base-font-size;
+}
+
+@mixin multi-select-font() {
+  font-size: $base-font-size;
 }
