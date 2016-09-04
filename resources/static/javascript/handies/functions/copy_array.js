@@ -1,4 +1,4 @@
-(function() {
+(() => {
     angular.module('handies').factory('copyArray', copyArrayFactory);
 
     copyArrayFactory.$inject = ['emptyArray'];

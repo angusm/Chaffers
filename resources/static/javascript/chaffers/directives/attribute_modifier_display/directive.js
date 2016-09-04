@@ -1,4 +1,4 @@
-(function () {
+(() => {
     angular.module('chaffers').directive('attributeModifier', attributeModifier);
 
     // STOP! Nothing but functions past this point ya hear?

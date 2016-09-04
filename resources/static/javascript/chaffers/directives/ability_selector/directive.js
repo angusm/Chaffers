@@ -1,4 +1,4 @@
-(function () {
+(() => {
 
     "use strict";
 
@@ -20,8 +20,7 @@
      * @returns {Object} the directive object for ...
      */
     function AbilitySelector() {
-
-        var directive = {
+        return {
             restrict: 'E',
             scope: {
                 selectedAbilities: '='
@@ -31,9 +30,6 @@
             bindToController: true,
             templateUrl: '/static/javascript/chaffers/directives/ability_selector/ability_selector.html'
         };
-
-        return directive;
-
     }
 
     /**

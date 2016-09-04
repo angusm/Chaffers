@@ -1,26 +1,52 @@
-(function() {
+(() => {
 
-    angular.module('backendModels').factory('implement', implementFactory);
+    angular.module('backendModels').factory('implement', [
+        'isDef',
+        'isFunction',
+        implementFactory
+    ]);
 
-    implementFactory.$inject = ['classProperty', 'isDef'];
-    function implementFactory(classProperty, isDef) {
+    function implementFactory(
+        isDef,
+        isFunction,
+    ) {
 
         return implement;
 
         function implement(TargetClass, InterfaceClass) {
-            var interfacePrototype = Object.create(InterfaceClass.prototype);
-            Object.keys(interfacePrototype).forEach(function(prototypeFunctionName) {
-               TargetClass.prototype[prototypeFunctionName] = interfacePrototype[prototypeFunctionName];
+
+            // Implement functions from InterfaceClass itself
+            getAllProperties(InterfaceClass).filter((interfaceFnName) => {
+                if (
+                    isFunction(InterfaceClass[interfaceFnName]) &&
+                    !isDef(TargetClass[interfaceFnName])
+                ) {
+                    TargetClass[interfaceFnName] =
+                        InterfaceClass[interfaceFnName];
+                }
             });
 
-            // Handle class methods
-            if (isDef(InterfaceClass.__class_properties__)) {
-                InterfaceClass.__class_properties__.forEach(function(classPropertyPropertyName) {
-                    classProperty(TargetClass, classPropertyPropertyName, InterfaceClass[classPropertyPropertyName], false);
-                });
+            // Recursively implement functions from InterfaceClass' parent
+            // classes
+            if (isDef(InterfaceClass.prototype)) {
+                implement(TargetClass, InterfaceClass.prototype);
             }
         }
 
+        function getAllProperties(SomeClass) {
+            return [
+                ...getStaticProperties(SomeClass),
+                ...getDynamicProperties(SomeClass)
+            ];
+        }
+
+        function getStaticProperties(SomeClass) {
+            return Object.getOwnPropertyNames(SomeClass);
+        }
+
+        function getDynamicProperties(SomeClass) {
+            return Object.getOwnPropertyNames(Object.getPrototypeOf(SomeClass));
+        }
     }
 
 })();

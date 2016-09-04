@@ -1,4 +1,4 @@
-(function () {
+(() => {
     angular.module('chaffers').directive('abilityModifier', abilityModifier);
 
     // STOP! Nothing but functions past this point ya hear?
@@ -9,20 +9,15 @@
      * @returns {Object} the directive object for an ability modifier
      */
     function abilityModifier() {
-
-        var directive = {
+        return {
             restrict: 'E',
             scope: {
                 abilityModifier: '='
             },
-            controller: function () {
-            },
+            controller: () => {},
             controllerAs: 'abilityModifierVM',
             bindToController: true,
             templateUrl: '/static/javascript/chaffers/directives/ability_modifier_display/ability_modifier.html'
         };
-
-        return directive;
-
     }
 })();

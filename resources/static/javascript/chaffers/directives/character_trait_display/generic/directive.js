@@ -1,4 +1,4 @@
-(function() {
+(() => {
     angular.module('chaffers').directive('characterTrait', characterTrait);
 
     /**
@@ -6,21 +6,21 @@
      * @returns {Object} The directive object for displaying a character trait
      */
     function characterTrait() {
-
         var directive = {
             restrict: 'E',
             scope: {
                 characterTrait: '='
             },
             templateUrl: '/static/javascript/chaffers/directives/character_trait_display/generic/character_trait.html',
-            controller: function() {
-                this.popoverTemplateUrl = '/static/javascript/chaffers/directives/character_trait_display/generic/character_trait_popover.html';
-            },
+            controller: CharacterTraitController,
             controllerAs: 'characterTraitVM',
             bindToController: true
         };
 
-        return directive;
+        function CharacterTraitController() {}
 
+        return directive;
+        // STOP! Functions only past this point.
     }
+
 })();

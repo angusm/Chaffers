@@ -1,4 +1,4 @@
-(function() {
+(() => {
 
     angular.module('djangular').factory('createPopulatedDjangoModel', [
         'populateDjangoModel',
@@ -17,9 +17,7 @@
          * @returns {*}
          */
         function createPopulatedDjangoModel(ModelClass, id) {
-            var instance = new ModelClass();
-            instance.id = id;
-            return populateDjangoModel(instance);
+            return populateDjangoModel(ModelClass.createInstanceWithID(id));
         }
 
         return createPopulatedDjangoModel;

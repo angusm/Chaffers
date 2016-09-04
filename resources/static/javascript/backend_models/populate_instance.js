@@ -1,12 +1,19 @@
-(function() {
+(() => {
 
     angular.module('chaffers').factory('populateInstance', [
-        'relationManager',
+        'BackendModel',
         'caseTransform',
-        populateInstanceFactory
+        'isArray',
+        'isNonNullObject',
+        populateInstanceFactory,
     ]);
 
-    function populateInstanceFactory(relationManager, caseTransform) {
+    function populateInstanceFactory(
+        BackendModel,
+        caseTransform,
+        isArray,
+        isNonNullObject,
+    ) {
 
         return populateInstance;
         // STOP! Nothing but functions past here please
@@ -15,103 +22,105 @@
          * Returns a function that will populate a given class instance with the given
          * data using information from the relation manager to create instances of
          * related classes as appropriate
-         * @param instanceToPopulate
-         * @param dataForPopulation
+         * @param instance
+         * @param data
+         * @returns Populated instance
          */
-        function populateInstance(instanceToPopulate, dataForPopulation) {
+        function populateInstance(instance, data) {
+
+            // If the instance is not a a BackendModel throw an error
+            if (!(instance instanceof BackendModel)) {
+                throw new Error('Can only populate BackendModel instances');
+            }
 
             // If the data for population is not valid jump out
-            if (typeof dataForPopulation !== 'object') {
-                throw new Error('Data for population must be an object');
+            if (!isNonNullObject(data)) {
+                throw new Error(
+                    'Data for population must be a non-null object');
             }
 
-            // If the data is null, then we just return the instance as is
-            if (dataForPopulation === null) {
-                return instanceToPopulate;
-            }
+            let InstanceClass = instance.constructor;
 
-            var dataKeys = Object.keys(dataForPopulation);
-            dataKeys.forEach(function (dataKey) {
+            Object.keys(data).forEach((dataKey) => {
 
                 // Convert the key to a camel cased key
-                var camelCasedKey = caseTransform.snakeCaseToCamelCase(dataKey);
-                var data = dataForPopulation[dataKey];
+                let camelCasedKey = caseTransform.snakeCaseToCamelCase(dataKey);
+                let value = data[dataKey];
 
                 // If the instance doesn't have the given property then
                 // on to the next one
-                if (
-                    !instanceToPopulate.constructor.prototype.hasOwnProperty(camelCasedKey) &&
-                    !instanceToPopulate.hasOwnProperty(camelCasedKey)
-                ) {
+                if (!instance.hasOwnProperty(camelCasedKey)) {
                     return;
                 }
 
                 // Check for a has one relation on the instance
-                if (relationManager.isHasOneRelation(instanceToPopulate, camelCasedKey)) {
-                    populateHasOneRelation(instanceToPopulate, camelCasedKey, data);
+                if (InstanceClass.isHasOneRelation(camelCasedKey)) {
+                    populateHasOneRelation(instance, camelCasedKey, value);
                 }
 
                 // Check for a has many relation on the instance
-                else if (relationManager.isHasManyRelation(instanceToPopulate, camelCasedKey)) {
-                    populateHasManyRelation(instanceToPopulate, camelCasedKey, data);
+                else if (InstanceClass.isHasManyRelation(camelCasedKey)) {
+                    populateHasManyRelation(instance, camelCasedKey, value);
                 }
 
                 // If there are no relations on the instance then we can simply do straight assignment
                 else {
-                    instanceToPopulate[camelCasedKey] = data;
+                    instance[camelCasedKey] = value;
                 }
 
             });
+
+            return instance;
         }
 
         /**
          * Populates a has many relation property on an instance
-         * @param instanceToPopulate
-         * @param propertyString
-         * @param dataValues
+         * @param instance
+         * @param property
+         * @param values
          */
-        function populateHasManyRelation(instanceToPopulate, propertyString, dataValues) {
+        function populateHasManyRelation(instance, property, values) {
 
             // Jump out if the given data is not valid
-            if (typeof dataValues !== 'object') {
+            if (!isArray(values)) {
                 return;
             }
 
-            instanceToPopulate[propertyString] = [];
-            dataValues.forEach(function(dataValue) {
-                var relationInstance = getRelationInstance(instanceToPopulate, propertyString, dataValue);
-                instanceToPopulate[propertyString].push(relationInstance);
+            instance[property] = values.filter((value) => {
+                return isNonNullObject(value);
+            }).map((value) => {
+                return getRelationInstance(
+                    instance,
+                    property,
+                    value);
             });
         }
 
         /**
          * Populates a has one relation property on an instance
-         * @param instanceToPopulate
-         * @param propertyString
+         * @param instance
+         * @param property
          * @param data
          */
-        function populateHasOneRelation(instanceToPopulate, propertyString, data) {
-
+        function populateHasOneRelation(instance, property, data) {
             // Jump out if the given data is not valid
-            if (typeof data !== 'object') {
+            if (!isNonNullObject(data)) {
                 return;
             }
 
-            var relationInstance = getRelationInstance(instanceToPopulate, propertyString, data);
-            instanceToPopulate[propertyString] = relationInstance;
+            instance[property] = getRelationInstance(instance, property, data);
         }
 
         /**
          * Creates an instance of the related class
-         * @param instanceToPopulate
-         * @param propertyString
+         * @param instance
+         * @param property
          * @param data
          */
-        function getRelationInstance(instanceToPopulate, propertyString, data) {
-            var RelationClass = relationManager.getRelationClass(instanceToPopulate, propertyString);
-            var relationInstance = new RelationClass();
-            populateInstance(relationInstance, data);
-            return relationInstance;
+        function getRelationInstance(instance, property, data) {
+            let InstanceClass = instance.constructor;
+            let RelationClass = InstanceClass.getRelatedClass(property);
+            return populateInstance(new RelationClass(), data);
         }
 
     }

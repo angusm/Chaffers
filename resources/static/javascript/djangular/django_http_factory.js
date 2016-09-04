@@ -1,4 +1,4 @@
-(function() {
+(() => {
 
     angular.module('djangular').factory('djangoHTTP', [
         'csrfService',

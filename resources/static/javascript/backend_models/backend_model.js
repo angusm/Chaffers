@@ -1,28 +1,40 @@
-(function() {
+(() => {
 
     angular.module('backendModels').factory(
         'BackendModel',
         [
             'BaseModel',
-            'extend',
-            backendModelFactory
+            () => BackendModel,
         ]
     );
 
-    function backendModelFactory(
-        BaseModel,
-        extend
-    ) {
+    class BackendModel extends BaseModel {
 
-        function BackendModel() {
-            BaseModel.apply(this);
+        static getHasManyRelations() {
+            return new Map();
         }
-        extend(BackendModel, BaseModel);
 
-        return BackendModel;
-        // STOP! Functions only past this point
+        static getHasOneRelations() {
+            return new Map();
+        }
 
+        static getRelatedClass(property) {
+            if (this.isHasOneRelation(property)) {
+                return this.getHasOneRelations().get(property);
+            } else if (this.isHasManyRelation(property)) {
+                return this.getHasManyRelations().get(property);
+            } else {
+                return undefined;
+            }
+        }
+
+        static isHasManyRelation(property) {
+            return this.getHasManyRelations().has(property);
+        }
+
+        static isHasOneRelation(property) {
+            return this.getHasOneRelations().has(property);
+        }
     }
-
 
 })();

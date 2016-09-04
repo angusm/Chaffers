@@ -1,4 +1,4 @@
-(function () {
+(() => {
     angular.module('chaffers').directive('characterSheetFromId', characterSheetFromId);
 
     // STOP! Nothing but functions past this point ya hear?
@@ -22,13 +22,11 @@
         };
 
         CharacterSheetFromIdController.$inject = [
-            'Character',
-            'createPopulatedDjangoModel'
+            'Character'
         ];
 
         function CharacterSheetFromIdController(
-            Character,
-            createPopulatedDjangoModel
+            Character
         ) {
             createPopulatedDjangoModel(Character, this.characterId).then(setCharacter.bind(this));
         }

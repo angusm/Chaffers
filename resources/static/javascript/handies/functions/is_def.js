@@ -1,4 +1,4 @@
-(function() {
+(() => {
     angular.module('handies').factory('isDef', isDefFactory);
 
     function isDefFactory() {

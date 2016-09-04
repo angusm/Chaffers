@@ -1,4 +1,4 @@
-(function() {
+(() => {
     angular.module('handies').factory('emptyArray', emptyArrayFactory);
 
     function emptyArrayFactory() {

@@ -1,6 +1,3 @@
 <span class="character-trait"
-      uib-popover-template="characterTraitVM.popoverTemplateUrl"
-      ng-bind="characterTraitVM.characterTrait.getDisplayName()"
-      popover-is-open="popoverIsOpen"
-      ng-mouseenter="popoverIsOpen = true"
-      ng-mouseout="popoverIsOpen = false"></span>
+      ng-bind="characterTraitVM.characterTrait.getDisplayName()"></span>
+<open-modal-button template=/static/javascript/chaffers/directives/character_trait_display/generic/character_trait_modal.html">?</open-modal-button>

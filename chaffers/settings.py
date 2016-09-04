@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'characters',
     'check_contexts',
     'resources',
+    'channels',
 )
 
 MIDDLEWARE_CLASSES = (

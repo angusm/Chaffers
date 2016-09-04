@@ -1,31 +1,21 @@
-(function() {
+(() => {
 
-    angular.module('backendModels').factory('caseTransform', caseTransformFactory);
+    angular.module('backendModels').factory('caseTransform', () => CaseTransformer);
 
-    function caseTransformFactory() {
+    class CaseTransformer {
 
-        return {
-            snakeCaseToCamelCase: snakeCaseToCamelCase,
-            camelCaseToSnakeCase: camelCaseToSnakeCase
-        };
-
-
-        // STOP! Nothing but functions past this point alright?
-        function snakeCaseToCamelCase(snakeCaseString) {
-            return snakeCaseString.replace(/(_\w)/g, transformSnakeCaseMatchToCamelCase);
-
-            /**
-             * Replaces a matched snake case section with a camel cased version
-             * @param snakeCaseMatch
-             */
-            function transformSnakeCaseMatchToCamelCase(snakeCaseMatch) {
-
+        /**
+         * Converts a string to a snake_case to a camelCase string
+         * @param snakeCaseString
+         * @returns {string} The snake_case string converted to camelCase
+         */
+        static snakeCaseToCamelCase(snakeCaseString) {
+            return snakeCaseString.replace(/(_\w)/g, (snakeCaseMatch) => {
                 // We don't care about the underscore part of the match so,
                 // we just want the word part of the match
                 var matchedString = snakeCaseMatch[1];
                 return matchedString.toUpperCase();
-
-            }
+            });
         }
 
         /**
@@ -33,15 +23,11 @@
          * @param camelCaseString
          * @returns {string} The camelCase string converted to snake_case
          */
-        function camelCaseToSnakeCase(camelCaseString) {
-
-            return camelCaseString.replace(/([A-Z])/g, transformCamelCaseMatchToSnakeCase);
-
-            function transformCamelCaseMatchToSnakeCase(camelCaseMatch) {
+        static camelCaseToSnakeCase(camelCaseString) {
+            return camelCaseString.replace(/([A-Z])/g, (camelCaseMatch) => {
                 return '_' + camelCaseMatch.toLowerCase();
-            }
+            });
         }
-
     }
 
 })();

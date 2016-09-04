@@ -4,8 +4,6 @@ module.exports = function(grunt) {
             modules: {
                 options: {
                     mangle: false,
-                    beautify: true,
-                    sourceMap: true,
                     screwIE8: true
                 },
                 files: {

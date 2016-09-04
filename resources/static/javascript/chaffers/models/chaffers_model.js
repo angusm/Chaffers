@@ -1,41 +1,23 @@
-(function() {
+(() => {
 
-    angular.module('chaffers').factory('ChaffersModel', ChaffersModelFactory);
-
-    ChaffersModelFactory.$inject = [
+    angular.module('chaffers').factory('ChaffersModel', [
         'DjangoModel',
-        'extend',
-        'classMethod'
-    ];
+        ChaffersModelFactory,
+    ]);
 
     function ChaffersModelFactory(
         DjangoModel,
-        extend,
-        classMethod
     ) {
 
-        function ChaffersModel() {
-            this.callSuper('constructor');
-        }
-        extend(ChaffersModel, DjangoModel);
+        class ChaffersModel extends DjangoModel {
+            static getDataQueryURL() {
+                return '/resources';
+            }
 
-        // Relations
-
-        // Class Methods
-        classMethod(ChaffersModel, 'getDataQueryURL', getDataQueryURL);
-
-        // Instance Methods
-        ChaffersModel.prototype.getViewURL = getViewURL;
-
-        return ChaffersModel;
-        // STOP! Functions only past this point alright.
-
-        function getDataQueryURL() {
-            return '/resources';
-        }
-
-        function getViewURL() {
-            return '/resources/view/' + this.getClass().name + '/' + this.id;
+            getViewURL() {
+                return '/resources/view/' + this.constructor.name + '/' +
+                    this.id;
+            }
         }
 
     }

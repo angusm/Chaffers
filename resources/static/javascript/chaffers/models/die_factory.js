@@ -1,4 +1,4 @@
-(function () {
+(() => {
 
     angular.module('chaffers').factory('Die', DieFactory);
 

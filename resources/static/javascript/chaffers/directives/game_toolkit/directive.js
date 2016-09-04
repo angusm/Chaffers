@@ -1,4 +1,4 @@
-(function () {
+(() => {
 
     "use strict";
 
@@ -6,7 +6,7 @@
 
     gameToolkitDirective.$inject = [
         'extend',
-        'MouseUpdated',
+        'ThrashKilledMouse',
         'Position2d'
     ];
 
