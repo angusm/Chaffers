@@ -6,6 +6,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0; maximum-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+        <!-- Google Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Stalemate' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,800,800italic,700italic' rel='stylesheet' type='text/css'>
         <title>
             {% block title %}Chaffers{% endblock %}
         </title>
@@ -27,16 +32,23 @@
         <!-- Block Content -->
         {% block content %}{% endblock %}
 
-        <!-- Scripts -->
-        <script type="text/javascript" src="{% static 'javascript/main.min.js' %}"></script>
-
-        <!-- Google Fonts -->
-        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Stalemate' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,800,800italic,700italic' rel='stylesheet' type='text/css'>
-
         <div class="disclaimers">
             Icons made by Lorc, Delapouite, John Colburn, Felbrigg, John Redman, Carl Olsen, sbed, PriorBlue, Willdabeast, Viscious Speed, Lord Berandas, Irongamer, HeavenlyDog, Lucas, Faithtoken, Skoll and Various artists from game-icons.net. Available on <a href="http://game-icons.net">"http://game-icons.net"</a>.
         </div>
+
+        <!-- Scripts -->
+
+        {# JQuery #}
+        <script type="text/javascript" src="{% static 'javascript/bin/externs/jquery-2.2.1.js' %}"></script>
+
+        {# Angular #}
+        <script type="text/javascript" src="{% static 'javascript/bin/externs/angular.js' %}"></script>
+
+        {# 3rd Party Angular modules #}
+        <script type="text/javascript" src="{% static 'javascript/bin/externs/angular-cookies.js' %}"></script>
+        <script type="text/javascript" src="{% static 'javascript/bin/externs/angular_ui/ui-bootstrap-tpls-1.2.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'javascript/bin/externs/isteven_multi_select/isteven-multi-select.js' %}"></script>
+
+        <script type="text/javascript" src="{% static 'javascript/bin/main.min.js' %}"></script>
     </body>
 </html>

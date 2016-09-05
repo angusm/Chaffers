@@ -4,3 +4,6 @@ Alphabetize methods
  - uppercase first
  - static first
 Use ES6
+Two spaces after imports
+Imports up top
+Exports as last line
