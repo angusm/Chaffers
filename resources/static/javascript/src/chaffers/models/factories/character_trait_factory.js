@@ -18,25 +18,15 @@ function CharacterTraitFactory(
      * @constructor
      */
     return class CharacterTrait extends ChaffersModel {
-        static getDjangoModelName() {return 'CharacterTrait';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'displayName',
-                'description',
-                'attributeModifiers',
-                'abilityModifiers',
-            ]
+        constructor(id) {
+            super(id);
+            this.createCharField('displayName');
+            this.createHasOneField('description', 'chaffers', 'TextBlock');
+            this.createHasManyField('attributeModifiers', 'chaffers', 'AttributeModifier');
+            this.createHasManyField('abilityModifiers', 'chaffers', 'AbilityModifier');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().set('description', TextBlock);
-        }
-
-        static getHasManyRelations() {
-            return super.getHasManyRelations().set('attributeModifiers', AttributeModifier).set('abilityModifiers', AbilityModifier);
-        }
+        static getModelName() {return 'CharacterTrait';}
 
         /**
          * Returns the display name for the character trait
@@ -52,7 +42,7 @@ function CharacterTraitFactory(
         getDescription() {
 
             // If the description is not an instance of text block return nothing
-            if (typeof this.description === 'undefined') {
+            if (typeof this.description === null) {
                 return '';
             }
 

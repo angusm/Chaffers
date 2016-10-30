@@ -11,20 +11,12 @@ function GameCharacterFactory(
     GameBoardPosition,
 ) {
     return class GameCharacter extends Character{
-        static getDjangoModelName() {return 'GameCharacter';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'game',
-                'position'
-            ];
+        constructor(id) {
+            super(id);
+            this.createHasOneField('game', 'chaffers', 'Game');
+            this.createHasOneField('position', 'chaffers', 'GameBoardPosition');
         }
 
-        static getHasManyRelations() {
-            return super.getHasManyRelations().
-                set('game', Game).
-                set('position', GameBoardPosition)
-        }
+        static getModelName() {return 'GameCharacter';}
     };
 }

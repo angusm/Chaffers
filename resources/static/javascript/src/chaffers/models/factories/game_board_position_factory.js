@@ -1,5 +1,5 @@
 import Position2d from '../../../handies/structs/geometry/position_2d';
-import implement from '../../../backend_models/implement';
+import implement from '../../../djangular/implement';
 
 GameBoardPositionFactory.$inject = ['ChaffersModel'];
 export default GameBoardPositionFactory;
@@ -12,15 +12,13 @@ function GameBoardPositionFactory(
      * @constructor
      */
     class GameBoardPosition extends ChaffersModel {
-        static getDjangoModelName() {return 'GameBoardPosition';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'x',
-                'y',
-            ]
+        constructor(id) {
+            super(id);
+            this.createNumberField('x');
+            this.createNumberField('y');
         }
+
+        static getModelName() {return 'GameBoardPosition';}
     }
     implement(GameBoardPosition, Position2d);
 

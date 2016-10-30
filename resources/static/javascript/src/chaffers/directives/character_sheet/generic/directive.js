@@ -44,6 +44,7 @@
             Attribute.getAll().then(
                 this.setAttributes.bind(this)
             );
+            window['character'] = this.character;
         }
 
         /**

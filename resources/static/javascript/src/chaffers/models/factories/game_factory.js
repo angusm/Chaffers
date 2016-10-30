@@ -1,34 +1,20 @@
 GameFactory.$inject = [
     'ChaffersModel',
-    'Player',
-    'TextBlock',
 ];
 export default GameFactory;
 
 function GameFactory(
     ChaffersModel,
-    Player,
-    TextBlock,
 ) {
     return class Game extends ChaffersModel {
-        static getDjangoModelName() {return 'Game';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'displayName',
-                'description',
-                'gameMasters'
-            ];
+        constructor(id) {
+            super(id);
+            this.createHasOneField('description', 'chaffers', 'TextBlock');
+            this.createCharField('displayName');
+            this.createHasManyField('gameMasters', 'chaffers', 'Player');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().set('description', TextBlock);
-        }
-
-        static getHasManyRelations() {
-            return super.getHasManyRelations().set('gameMasters', Player);
-        }
+        static getModelName() {return 'Game';}
 
         /**
          * Returns the description of the game.
@@ -36,7 +22,7 @@ function GameFactory(
          */
         getDescription() {
             // If the description is not an instance of text block return nothing
-            if (typeof this.description === 'undefined') {
+            if (typeof this.description === null) {
                 return '';
             }
             return this.description.getText();

@@ -10,7 +10,7 @@ function ChaffersModelFactory(
         }
 
         getViewURL() {
-            return '/resources/view/' + this.constructor.getDjangoModelName() + '/' +
+            return '/resources/view/' + this.constructor.getModelName() + '/' +
                 this.id;
         }
     };

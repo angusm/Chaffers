@@ -1,4 +1,4 @@
-import createPopulatedInstance from '../../../backend_models/create_populated_instance';
+import createPopulatedInstance from '../../../djangular/create_populated_instance';
 
 playerPanelDirective.$inject = [
     'Player'

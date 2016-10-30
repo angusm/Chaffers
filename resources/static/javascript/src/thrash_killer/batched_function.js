@@ -1,10 +1,7 @@
 import ThrashKillerRunCount from './thrash_killer_run_count';
-import BaseModel from '../backend_models/base_model';
 
-
-export default class BatchedFunction extends BaseModel {
+export default class BatchedFunction {
     constructor(fn, runCount = ThrashKillerRunCount.INDEFINITE) {
-        super();
         this.fn = fn;
         this.runCount = runCount;
     }

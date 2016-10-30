@@ -1,27 +1,24 @@
 PlayerFactory.$inject = [
     'ChaffersModel',
     'User',
+    'Game',
 ];
 export default PlayerFactory;
 
 function PlayerFactory(
     ChaffersModel,
     User,
+    Game,
 ) {
     return class Player extends ChaffersModel {
-        static getDjangoModelName() {return 'Player';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'masteredGames',
-                'user',
-            ];
+        constructor(id) {
+            super(id);
+            this.createCharField('username');
+            this.createHasManyField('masteredGames', 'chaffers', 'Game');
+            this.createHasOneField('user', 'chaffers', 'User');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().set('user', User);
-        }
+        static getModelName() {return 'Player';}
 
         /**
          * Return the player's username

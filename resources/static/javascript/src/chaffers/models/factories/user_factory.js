@@ -7,14 +7,12 @@ function UserFactory(
     ChaffersModel,
 ) {
     return class User extends ChaffersModel {
-        static getDjangoModelName() {return 'User';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'username'
-            ];
+        constructor(id) {
+            super(id);
+            this.createCharField('username');
         }
+
+        static getModelName() {return 'User';}
 
         /**
          * Return the user's username

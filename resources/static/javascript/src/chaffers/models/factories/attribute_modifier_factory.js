@@ -9,21 +9,15 @@ function AttributeModifierFactory(
     Attribute,
 ) {
     return class AttributeModifier extends ChaffersModel {
-        static getDjangoModelName() {return 'AttributeModifier';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'displayName',
-                'modifier',
-                'attributeId',
-                'attribute',
-            ];
+        constructor(id) {
+            super(id);
+            this.createCharField('displayName');
+            this.createNumberField('modifier');
+            this.createNumberField('attributeId');
+            this.createHasOneField('attribute', 'chaffers', 'Attribute');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().set('attribute', Attribute);
-        }
+        static getModelName() {return 'AttributeModifier';}
 
         /**
          * Return the modifier for this instance

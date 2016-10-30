@@ -1,5 +1,4 @@
 gameDirective.$inject = [
-    'createPopulatedDjangoModel',
     'djangoHTTP',
     'Game'
 ];
@@ -10,7 +9,6 @@ export default gameDirective;
  * @returns {Object} the directive object for ...
  */
 function gameDirective(
-    createPopulatedDjangoModel,
     djangoHTTP,
     Game
 ) {
@@ -33,7 +31,7 @@ function gameDirective(
      */
     function GameController(djangoHTTP) {
         this.djangoHTTP = djangoHTTP;
-        createPopulatedDjangoModel(Game, this.gameId).then(setGame.bind(this));
+        this.setGame(new Game(this.gameId));
     }
 
     // Functions

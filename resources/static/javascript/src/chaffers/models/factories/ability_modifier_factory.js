@@ -11,28 +11,16 @@ function AbilityModifierFactory(
     CheckContext,
 ) {
     return class AbilityModifier extends ChaffersModel {
-        static getDjangoModelName() {return 'AbilityModifier';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'ability',
-                'abilityId',
-                'checkContexts',
-                'displayName',
-                'modifier',
-            ];
+        constructor(id) {
+            super(id);
+            this.createHasOneField('ability', 'chaffers', 'Ability');
+            this.createNumberField('abilityId');
+            this.createHasManyField('checkContexts', 'chaffers', 'CheckContext');
+            this.createCharField('displayName');
+            this.createNumberField('modifier');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().
-                set('ability', Ability);
-        }
-
-        static getHasManyRelations() {
-            return super.getHasManyRelations().
-                set('checkContexts', CheckContext);
-        }
+        static getModelName() {return 'AbilityModifier';}
 
         /**
          * Returns true if the modifier applies to the given ability

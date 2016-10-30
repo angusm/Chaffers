@@ -5,14 +5,11 @@ function TextBlockFactory(
     ChaffersModel,
 ) {
     return class TextBlock extends ChaffersModel {
-        static getDjangoModelName() {return 'TextBlock';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'formattedText'
-            ];
+        constructor(id) {
+            super(id);
+            this.createCharField('formattedText');
         }
+        static getModelName() {return 'TextBlock';}
 
         /**
          * Returns the formatted version of the text for the block

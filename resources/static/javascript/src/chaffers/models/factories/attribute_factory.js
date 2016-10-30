@@ -9,20 +9,14 @@ function AttributeFactory(
     TextBlock,
 ) {
     return class Attribute extends ChaffersModel {
-        static getDjangoModelName() {return 'Attribute';}
-        
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'baseValue',
-                'displayName',
-                'description',
-            ]
+        constructor(id) {
+            super(id);
+            this.createNumberField('baseValue');
+            this.createHasOneField('description', 'chaffers', 'TextBlock');
+            this.createCharField('displayName');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().set('description', TextBlock);
-        }
+        static getModelName() {return 'Attribute';}
 
         /**
          * Return the base value for this attribute
@@ -37,7 +31,11 @@ function AttributeFactory(
          * @returns {string}
          */
         getDescription() {
-            return this.description.formattedText;
+            if (this.description) {
+                return this.description.formattedText;
+            } else {
+                return '';
+            }
         }
 
         /**

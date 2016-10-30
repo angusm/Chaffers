@@ -9,18 +9,11 @@ function GameMapFactory(
     Game
 ) {
     return class GameMap extends ChaffersModel {
-        static getDjangoModelName() {return 'GameMap';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'game',
-            ];
+        constructor(id) {
+            super(id);
+            this.createHasOneField('game', 'chaffers', 'Game');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().
-                set('game', Game);
-        }
+        static getModelName() {return 'GameMap';}
     }
 }

@@ -13,25 +13,15 @@ function CharacterFactory(
     TextBlock
 ) {
     return class Character extends ChaffersModel {
-        static getDjangoModelName() {return 'Character';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'specialties',
-                'flaws',
-                'description',
-                'displayName',
-            ]
+        constructor(id) {
+            super(id);
+            this.createHasManyField('flaws', 'chaffers', 'Flaw');
+            this.createHasManyField('specialties', 'chaffers', 'Specialty');
+            this.createHasOneField('description', 'chaffers', 'TextBlock');
+            this.createCharField('displayName');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().set('description', TextBlock);
-        }
-
-        static getHasManyRelations() {
-            return super.getHasManyRelations().set('flaws', Flaw).set('specialties', Specialty);
-        }
+        static getModelName() {return 'Character';}
 
         /**
          * Return the display name for this character
@@ -56,7 +46,7 @@ function CharacterFactory(
         getDescription() {
 
             // If the description is not an instance of text block return nothing
-            if (typeof this.description === 'undefined') {
+            if (typeof this.description === null) {
                 return '';
             }
 

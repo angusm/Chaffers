@@ -9,19 +9,14 @@ function AbilityFactory(
     TextBlock
 ) {
     return class Ability extends ChaffersModel {
-        static getDjangoModelName() {return 'Ability';}
-
-        static getDjangoFields() {
-            return [
-                ...super.getDjangoFields(),
-                'description',
-                'displayName'
-            ];
+        constructor(id) {
+            super(id);
+            this.createHasOneField('description', 'chaffers', 'TextBlock');
+            this.createCharField('displayName');
         }
 
-        static getHasOneRelations() {
-            return super.getHasOneRelations().
-                set('description', TextBlock);
+        static getModelName() {
+            return 'Ability';
         }
 
         /**
@@ -29,7 +24,11 @@ function AbilityFactory(
          * @returns {string}
          */
         getDescription() {
-            return this.description.formattedText;
+            if (this.description) {
+                return this.description.formattedText;
+            } else {
+                return '';
+            }
         }
 
         /**

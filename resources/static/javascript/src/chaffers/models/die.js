@@ -1,8 +1,5 @@
-import BaseModel from '../../backend_models/base_model';
-
-export default class Die extends BaseModel {
+export default class Die {
     constructor() {
-        super();
         this.value = undefined;
         this.sides = 6;
         this.roll();
