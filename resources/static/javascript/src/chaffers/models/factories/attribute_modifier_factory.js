@@ -2,13 +2,14 @@ AttributeModifierFactory.$inject = [
     'ChaffersModel',
     'Attribute',
 ];
+let AttributeModifier;
 export default AttributeModifierFactory;
 
 function AttributeModifierFactory(
     ChaffersModel,
     Attribute,
 ) {
-    return class AttributeModifier extends ChaffersModel {
+    AttributeModifier = AttributeModifier || class AttributeModifier extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createCharField('displayName');
@@ -58,4 +59,5 @@ function AttributeModifierFactory(
             return false;
         }
     }
+    return AttributeModifier;
 }

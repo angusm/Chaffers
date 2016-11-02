@@ -1,10 +1,11 @@
 ChaffersModelFactory.$inject = ['DjangoModel'];
+let ChaffersModel;
 export default ChaffersModelFactory;
 
 function ChaffersModelFactory(
     DjangoModel,
 ) {
-    return class ChaffersModel extends DjangoModel {
+    ChaffersModel = ChaffersModel || class ChaffersModel extends DjangoModel {
         static getDataQueryURL() {
             return '/resources';
         }
@@ -14,4 +15,5 @@ function ChaffersModelFactory(
                 this.id;
         }
     };
+    return ChaffersModel;
 }

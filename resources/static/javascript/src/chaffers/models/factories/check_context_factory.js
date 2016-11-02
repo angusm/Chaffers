@@ -2,13 +2,14 @@ CheckContextFactory.$inject = [
     'ChaffersModel',
     'TextBlock',
 ];
+let CheckContext;
 export default CheckContextFactory;
 
 function CheckContextFactory(
     ChaffersModel,
     TextBlock
 ) {
-    return class CheckContext extends ChaffersModel {
+    CheckContext = CheckContext || class CheckContext extends ChaffersModel {
 
         constructor(id) {
             super(id);
@@ -26,5 +27,6 @@ function CheckContextFactory(
         getID() {
             return this.id;
         }
-    }
+    };
+    return CheckContext;
 }

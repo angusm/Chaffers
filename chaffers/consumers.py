@@ -27,15 +27,20 @@ def ws_message(message):
     group_name = '__'.join([
         str(message_data['model_name']),
         str(message_data['id']),
-        str(message_data['name']),
+        str(message_data['field_name']),
     ])
     Group(group_name).add(message.reply_channel)
 
     target_class = get_class_by_name(message_data['model_name'])
     raw_value = target_class.objects.get(pk=message_data['id']).to_dict(
-        message_data['name'])
-    value = raw_value[message_data['name']]
+        message_data['field_name'])
+    value = raw_value[message_data['field_name']]
 
     message.reply_channel.send({
-        'text': json.dumps(value)
+        'text': json.dumps({
+            'data': value,
+            'field_name': message_data['field_name'],
+            'id': message_data['id'],
+            'model_name': message_data['model_name'],
+        })
     })

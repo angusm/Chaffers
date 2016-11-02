@@ -2,13 +2,14 @@ AttributeFactory.$inject = [
     'ChaffersModel',
     'TextBlock',
 ];
+let Attribute;
 export default AttributeFactory;
 
 function AttributeFactory(
     ChaffersModel,
     TextBlock,
 ) {
-    return class Attribute extends ChaffersModel {
+    Attribute = Attribute || class Attribute extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createNumberField('baseValue');
@@ -45,6 +46,6 @@ function AttributeFactory(
         getDisplayName() {
             return this.displayName;
         }
-    }
-
+    };
+    return Attribute;
 }

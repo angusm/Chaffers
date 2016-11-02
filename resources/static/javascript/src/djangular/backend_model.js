@@ -7,6 +7,10 @@ export default class BackendModel {
         this.fields_ = new Map();
     }
 
+    getField(fieldName) {
+        return this.fields_.get(fieldName);
+    }
+
     createField_(fieldName, type, relationModuleName, relationFactoryName) {
         const field = new Field(
             fieldName,

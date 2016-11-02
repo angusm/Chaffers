@@ -3,6 +3,7 @@ GameCharacterFactory.$inject =[
     'Game',
     'GameBoardPosition',
 ];
+let GameCharacter;
 export default GameCharacterFactory;
 
 function GameCharacterFactory(
@@ -10,7 +11,7 @@ function GameCharacterFactory(
     Game,
     GameBoardPosition,
 ) {
-    return class GameCharacter extends Character{
+    GameCharacter = GameCharacter || class GameCharacter extends Character{
         constructor(id) {
             super(id);
             this.createHasOneField('game', 'chaffers', 'Game');
@@ -19,4 +20,5 @@ function GameCharacterFactory(
 
         static getModelName() {return 'GameCharacter';}
     };
+    return GameCharacter;
 }

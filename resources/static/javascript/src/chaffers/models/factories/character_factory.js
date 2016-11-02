@@ -4,6 +4,7 @@ CharacterFactory.$inject = [
     'ChaffersModel',
     'TextBlock',
 ];
+let Character;
 export default CharacterFactory;
 
 function CharacterFactory(
@@ -12,7 +13,7 @@ function CharacterFactory(
     ChaffersModel,
     TextBlock
 ) {
-    return class Character extends ChaffersModel {
+    Character = Character || class Character extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createHasManyField('flaws', 'chaffers', 'Flaw');
@@ -185,6 +186,7 @@ function CharacterFactory(
             });
             return finalValue
         }
-    }
+    };
+    return Character;
 }
 

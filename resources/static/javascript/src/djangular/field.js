@@ -1,22 +1,21 @@
 import isDef from '../handies/functions/is_def';
 import FieldType from './field_type';
 import FieldTypeDefaultValue from './field_type_default_value';
-import CaseTransform from './case_transform'
+import Socket from './socket';
 
 const RETRY_TIME = 10000;
 
 export default class Field {
     constructor(name, type, instance, relationClassModule = undefined, relationClassName = undefined) {
-        this.instance_ = undefined;
+        this.instance_ = instance;
         this.relationClassModule_ = relationClassModule;
         this.relationClassName_ = relationClassName;
-        this.instance = instance;
         this.name = name;
         this.type = type;
         this.value_ = undefined;
         this.loaded_ = false;
-        this.lastRequestTime_ = 0;
-        this.socket_ = undefined;
+        this.requested_ = false;
+        this.socket_ = Socket.getByClass(this.instance_.constructor);
         this.defaultValue_ = undefined;
 
         Object.defineProperty(
@@ -26,17 +25,6 @@ export default class Field {
                 set: this.setValue.bind(this),
             },
         );
-    }
-
-    get instance() {
-        return this.instance_;
-    }
-
-    set instance(newInstance) {
-        if (this.instance_ != newInstance) {
-            this.instance_ = newInstance;
-            this.makeLimitedGetRequest_();
-        }
     }
 
     getValue() {
@@ -66,33 +54,39 @@ export default class Field {
     }
 
     setValue(newValue) {
+        console.log('set', this.instance_.constructor.getModelName(), this.instance_.id, this.name, newValue);
         this.value_ = newValue;
         this.loaded_ = true;
-        this.makeLimitedSetRequest_();
     }
 
     makeLimitedGetRequest_() {
-        const currentTime = new Date().getTime();
-        if (currentTime - this.lastRequestTime_ > RETRY_TIME &&
-            isDef(this.instance.id)
-        ) {
-            this.lastRequestTime_ = currentTime;
-            this.makeRequest_();
+        if (!this.requested_ && this.instance_.id) {
+            this.requested_ = true;
+            this.socket_.requestField(this.name, this.instance_);
         }
     }
 
-    makeLimitedSetRequest_() {
-
+    populateFromBackendData(backendData) {
+        console.log('setting', this.instance_.constructor.getModelName(), this.instance_.id, this.name, backendData);
+        this.instance_[this.name] = this.getValueFromBackendData(backendData);
     }
 
-    makeRequest_() {
-        this.closeExistingSocket_();
-        this.socket_ = new WebSocket('ws://' + window.location.host);
-        this.socket_.onmessage = this.handleSocketMessage_.bind(this);
-        this.socket_.onopen = this.sendSocketRequest_.bind(this);
-        if (this.socket_.readyState == WebSocket.OPEN) {
-            this.socket_.onopen();
+    getValueFromBackendData(backendData) {
+        let value;
+        if (this.isHasOneRelation()) {
+            const RelationClass = this.getRelationClass();
+            if (backendData && backendData.id) {
+                value = RelationClass.getInstanceWithId(backendData.id);
+            } else {
+                value = null;
+            }
+        } else if (this.isHasManyRelation()) {
+            value = this.getRelationClass().getInstancesByIds(
+                backendData.map((data) => data.id));
+        } else {
+            value = backendData;
         }
+        return value;
     }
 
     isHasOneRelation() {
@@ -101,39 +95,5 @@ export default class Field {
 
     isHasManyRelation() {
         return this.type === FieldType.HAS_MANY;
-    }
-
-    handleSocketMessage_(message) {
-        const messageData = JSON.parse(message.data);
-        let value;
-        if (this.isHasOneRelation()) {
-            const RelationClass = this.getRelationClass();
-            if (messageData && messageData.id) {
-                value = new RelationClass(messageData.id);
-            } else {
-                value = null;
-            }
-        } else if (this.isHasManyRelation()) {
-            value = this.getRelationClass().createInstancesWithIDs(
-                messageData.map((data) => data.id));
-        } else {
-            value = messageData;
-        }
-        this.instance[this.name] = value;
-    }
-
-    sendSocketRequest_() {
-        this.socket_.send(JSON.stringify({
-            request: 'GET',
-            model_name: this.instance.constructor.getModelName(),
-            id: this.instance.id,
-            name: CaseTransform.camelCaseToSnakeCase(this.name),
-        }));
-    }
-
-    closeExistingSocket_() {
-        if (isDef(this.socket_)) {
-            this.socket_.close();
-        }
     }
 }

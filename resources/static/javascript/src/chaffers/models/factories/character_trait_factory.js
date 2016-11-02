@@ -4,6 +4,7 @@ CharacterTraitFactory.$inject = [
     'AttributeModifier',
     'AbilityModifier',
 ];
+let CharacterTrait;
 export default CharacterTraitFactory;
 
 function CharacterTraitFactory(
@@ -17,7 +18,7 @@ function CharacterTraitFactory(
      * Class to contain Character Trait data and functionality
      * @constructor
      */
-    return class CharacterTrait extends ChaffersModel {
+    CharacterTrait = CharacterTrait || class CharacterTrait extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createCharField('displayName');
@@ -70,5 +71,6 @@ function CharacterTraitFactory(
                 return this.attributeModifiers;
             }
         }
-    }
+    };
+    return CharacterTrait;
 }

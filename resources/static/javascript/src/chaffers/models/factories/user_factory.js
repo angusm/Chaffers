@@ -1,12 +1,13 @@
 UserFactory.$inject = [
     'ChaffersModel',
 ];
+let User;
 export default UserFactory;
 
 function UserFactory(
     ChaffersModel,
 ) {
-    return class User extends ChaffersModel {
+    User = User || class User extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createCharField('username');
@@ -21,5 +22,6 @@ function UserFactory(
         getUsername() {
             return this.username;
         }
-    }
+    };
+    return User;
 }

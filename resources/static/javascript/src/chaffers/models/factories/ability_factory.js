@@ -2,13 +2,14 @@ AbilityFactory.$inject = [
     'ChaffersModel',
     'TextBlock'
 ];
+let Ability;
 export default AbilityFactory;
 
 function AbilityFactory(
     ChaffersModel,
     TextBlock
 ) {
-    return class Ability extends ChaffersModel {
+    Ability = Ability || class Ability extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createHasOneField('description', 'chaffers', 'TextBlock');
@@ -38,5 +39,7 @@ function AbilityFactory(
         getDisplayName() {
             return this.displayName;
         }
-    }
+    };
+
+    return Ability;
 }

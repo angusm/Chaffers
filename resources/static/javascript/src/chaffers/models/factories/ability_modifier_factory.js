@@ -3,6 +3,7 @@ AbilityModifierFactory.$inject = [
     'Ability',
     'CheckContext',
 ];
+let AbilityModifier;
 export default AbilityModifierFactory;
 
 function AbilityModifierFactory(
@@ -10,7 +11,7 @@ function AbilityModifierFactory(
     Ability,
     CheckContext,
 ) {
-    return class AbilityModifier extends ChaffersModel {
+    AbilityModifier = AbilityModifier || class AbilityModifier extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createHasOneField('ability', 'chaffers', 'Ability');
@@ -103,6 +104,6 @@ function AbilityModifierFactory(
             return true;
 
         }
-    }
-
+    };
+    return AbilityModifier;
 }

@@ -3,6 +3,7 @@ PlayerFactory.$inject = [
     'User',
     'Game',
 ];
+let Player;
 export default PlayerFactory;
 
 function PlayerFactory(
@@ -10,7 +11,7 @@ function PlayerFactory(
     User,
     Game,
 ) {
-    return class Player extends ChaffersModel {
+    Player = Player || class Player extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createCharField('username');
@@ -35,5 +36,6 @@ function PlayerFactory(
         getUser() {
             return this.user;
         }
-    }
+    };
+    return Player;
 }

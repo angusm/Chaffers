@@ -1,12 +1,13 @@
 GameFactory.$inject = [
     'ChaffersModel',
 ];
+let Game;
 export default GameFactory;
 
 function GameFactory(
     ChaffersModel,
 ) {
-    return class Game extends ChaffersModel {
+    Game = Game || class Game extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createHasOneField('description', 'chaffers', 'TextBlock');
@@ -36,4 +37,5 @@ function GameFactory(
             return this.displayName;
         }
     };
+    return Game;
 }

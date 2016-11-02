@@ -1,5 +1,6 @@
 import BackendModel from './backend_model';
-
+import getFirstDefined from '../handies/functions/get_first_defined';
+import DynamicDefaultMap from '../handies/structs/maps/dynamic_default';
 
 DjangoModelFactory.$inject = ['djangoHTTP'];
 export default DjangoModelFactory;
@@ -13,8 +14,17 @@ function DjangoModelFactory(
             super(id);
         }
 
-        static createInstancesWithIDs(ids) {
-            return ids.map((id) => new this(id));
+        static getInstanceWithId(id) {
+            this.instanceMap = getFirstDefined(
+                this.instanceMap,
+                new DynamicDefaultMap((id) => {
+                    return new this(id);
+                }));
+            return this.instanceMap.get(id);
+        }
+
+        static getInstancesByIds(ids) {
+            return ids.map((id) => this.getInstanceWithId(id));
         }
 
         static getModelName() {
@@ -26,7 +36,7 @@ function DjangoModelFactory(
          * @returns {Array<DjangoModel>}
          */
         static getAll() {
-            return this.getAllIDs().then(this.createInstancesWithIDs.bind(this));
+            return this.getAllIDs().then(this.getInstancesByIds.bind(this));
         }
 
         /**

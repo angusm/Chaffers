@@ -19,17 +19,17 @@ class MapWrapper {
     forEach() {
         return this.map_.forEach.apply(this, arguments);
     }
-    get() {
-        return this.map_.get.apply(this, arguments);
+    get(key) {
+        return this.map_.get(key);
     }
-    has() {
-        return this.map_.has.apply(this, arguments);
+    has(key) {
+        return this.map_.has(key);
     }
     keys() {
         return this.map_.keys.apply(this, arguments);
     }
-    set() {
-        return this.map_.set.apply(this, arguments);
+    set(key, value) {
+        return this.map_.set(key, value);
     }
     values() {
         return this.map_.values.apply(this, arguments);

@@ -1,4 +1,3 @@
-import isDef from '../../functions/is_def';
 import MapWrapper from './map_wrapper';
 
 export default class DynamicDefaultMap extends MapWrapper {
@@ -8,9 +7,8 @@ export default class DynamicDefaultMap extends MapWrapper {
     }
 
     get(key) {
-        let originalValue = super.get(key);
-        if (isDef(originalValue)) {
-            return originalValue;
+        if (super.has(key)) {
+            return super.get(key);
         } else {
             let generatedDefault = this.defaultGenerator_(key);
             this.set(key, generatedDefault);

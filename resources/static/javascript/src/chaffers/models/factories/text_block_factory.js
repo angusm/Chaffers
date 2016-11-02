@@ -1,10 +1,11 @@
 TextBlockFactory.$inject = ['ChaffersModel'];
+let TextBlock;
 export default TextBlockFactory;
 
 function TextBlockFactory(
     ChaffersModel,
 ) {
-    return class TextBlock extends ChaffersModel {
+    TextBlock = TextBlock || class TextBlock extends ChaffersModel {
         constructor(id) {
             super(id);
             this.createCharField('formattedText');
@@ -18,5 +19,6 @@ function TextBlockFactory(
         getText() {
             return this.formattedText;
         }
-    }
+    };
+    return TextBlock;
 }

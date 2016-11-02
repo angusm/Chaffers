@@ -23,7 +23,7 @@
         function CharacterSheetFromIdController(
             Character
         ) {
-            this.setCharacter(new Character(this.characterId));
+            this.setCharacter(Character.getInstanceWithId(this.characterId));
         }
 
         CharacterSheetFromIdController.prototype.setCharacter = setCharacter;

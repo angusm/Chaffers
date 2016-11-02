@@ -1,6 +1,7 @@
 import Position2d from '../../../handies/structs/geometry/position_2d';
 import implement from '../../../djangular/implement';
 
+let GameBoardPosition;
 GameBoardPositionFactory.$inject = ['ChaffersModel'];
 export default GameBoardPositionFactory;
 
@@ -11,16 +12,18 @@ function GameBoardPositionFactory(
      * Class to contain Character Trait data and functionality
      * @constructor
      */
-    class GameBoardPosition extends ChaffersModel {
-        constructor(id) {
-            super(id);
-            this.createNumberField('x');
-            this.createNumberField('y');
-        }
+    if (!GameBoardPosition) {
+        GameBoardPosition = class GameBoardPosition extends ChaffersModel {
+            constructor(id) {
+                super(id);
+                this.createNumberField('x');
+                this.createNumberField('y');
+            }
 
-        static getModelName() {return 'GameBoardPosition';}
+            static getModelName() {return 'GameBoardPosition';}
+        };
+        implement(GameBoardPosition, Position2d);
     }
-    implement(GameBoardPosition, Position2d);
 
     return GameBoardPosition;
 }
