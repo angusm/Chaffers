@@ -1,11 +1,18 @@
 import CaseTransform from './case_transform';
 import DynamicDefaultMap from '../handies/structs/maps/dynamic_default';
+import ArrayMap from '../handies/structs/maps/array';
+import populateInstance from './populate_instance';
 
 const REQUEST_LIMIT = 7;
 let socket;
 const socketMap = new DynamicDefaultMap((ModelClass) => {
     return Socket.getSingleton();
 });
+
+let timeout;
+const modelNames = [];
+const fieldsByClass = new ArrayMap();
+const idsByClass = new ArrayMap();
 
 class Socket {
     constructor() {
@@ -37,15 +44,15 @@ class Socket {
 
     handleSocketMessage_(message) {
         const parsedMessage = JSON.parse(message.data);
-        const messageData = parsedMessage.data;
+        const messageData = parsedMessage.values;
         const modelName = parsedMessage.model_name;
-        const fieldName =
-            CaseTransform.snakeCaseToCamelCase(parsedMessage.field_name);
-        const id = parsedMessage.id;
         const ModelClass = angular.injector(['chaffers']).get(modelName);
-        const instance = ModelClass.getInstanceWithId(id);
-        const field = instance.getField(fieldName);
-        field.populateFromBackendData(messageData);
+
+        messageData.forEach((instanceData) => {
+            const id = instanceData.id;
+            const instance = ModelClass.getInstanceWithId(id);
+            populateInstance(instance, instanceData);
+        });
         angular.element('body').scope().$digest();
         this.outstanding_--;
         this.processSendQueue_();
@@ -65,22 +72,46 @@ class Socket {
         if (!this.isReady_()) {
             this.openSocket_();
         } else {
-            while (this.sendQueue_.length > 0 && this.outstanding_ < REQUEST_LIMIT) {
-                const request = this.sendQueue_.pop();
-                this.socket_.send(request);
+            modelNames.filter((modelName, i) => {
+                return modelNames.indexOf(modelName) === i;
+            }).forEach((modelName) => {
+                if (this.outstanding_ >= REQUEST_LIMIT) {
+                    return;
+                }
+
+                const ids = idsByClass.get(modelName).filter((val, i, a) => {
+                    return a.indexOf(val) === i;
+                });
+                const fields = fieldsByClass.get(modelName).filter((val, i, a) => {
+                    return a.indexOf(val) === i;
+                });
+
+                this.socket_.send(JSON.stringify({
+                    request: 'GET',
+                    model_name: modelName,
+                    ids: ids,
+                    field_names: ['id', ...fields.map((fieldName) => {
+                        return CaseTransform.camelCaseToSnakeCase(fieldName)
+                    })],
+                }));
+                fieldsByClass.delete(modelName);
+                idsByClass.delete(modelName);
                 this.outstanding_++;
-            }
+                modelNames.splice(modelName.indexOf(modelName), 1);
+            });
         }
     }
 
     requestField(fieldName, instance) {
-        console.log(instance.constructor.getModelName(), fieldName, instance.id);
-        this.sendQueue_.push(JSON.stringify({
-            request: 'GET',
-            model_name: instance.constructor.getModelName(),
-            id: instance.id,
-            field_name: CaseTransform.camelCaseToSnakeCase(fieldName),
-        }));
+        const modelName = instance.constructor.getModelName();
+        modelNames.push(modelName);
+        fieldsByClass.pushOnArray(modelName, fieldName);
+        idsByClass.pushOnArray(modelName, instance.id);
+
+        clearTimeout(timeout);
+        setTimeout(() => {
+            this.processSendQueue_();
+        }, 1);
         this.processSendQueue_();
     }
 }

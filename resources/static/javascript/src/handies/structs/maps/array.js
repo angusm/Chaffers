@@ -8,6 +8,10 @@ export default class ArrayMap extends DynamicDefaultMap {
         });
     }
 
+    clearArray(key) {
+        this.set(key, []);
+    }
+
     pushOnArray(key, value) {
         this.get(key).push(value);
     }

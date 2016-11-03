@@ -33,24 +33,26 @@ export default function populateInstance(instance, data) {
 
         // If the instance doesn't have the given property then
         // on to the next one
-        if (!instance.hasOwnProperty(camelCasedKey)) {
+        if (!instance.hasOwnProperty(camelCasedKey) || camelCasedKey == 'id') {
             return;
         }
 
-        // Check for a has one relation on the instance
-        if (InstanceClass.isHasOneRelation(camelCasedKey)) {
-            populateHasOneRelation(instance, camelCasedKey, value);
-        }
+        instance.getField(camelCasedKey).populateFromBackendData(value);
 
-        // Check for a has many relation on the instance
-        else if (InstanceClass.isHasManyRelation(camelCasedKey)) {
-            populateHasManyRelation(instance, camelCasedKey, value);
-        }
-
-        // If there are no relations on the instance then we can simply do straight assignment
-        else {
-            instance[camelCasedKey] = value;
-        }
+        // // Check for a has one relation on the instance
+        // if (InstanceClass.isHasOneRelation(camelCasedKey)) {
+        //     populateHasOneRelation(instance, camelCasedKey, value);
+        // }
+        //
+        // // Check for a has many relation on the instance
+        // else if (InstanceClass.isHasManyRelation(camelCasedKey)) {
+        //     populateHasManyRelation(instance, camelCasedKey, value);
+        // }
+        //
+        // // If there are no relations on the instance then we can simply do straight assignment
+        // else {
+        //     instance[camelCasedKey] = value;
+        // }
 
     });
 

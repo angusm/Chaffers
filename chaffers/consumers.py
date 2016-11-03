@@ -26,21 +26,20 @@ def ws_message(message):
 
     group_name = '__'.join([
         str(message_data['model_name']),
-        str(message_data['id']),
-        str(message_data['field_name']),
     ])
     Group(group_name).add(message.reply_channel)
 
+    from pprint import pprint
+    pprint(message_data['field_names'])
+
     target_class = get_class_by_name(message_data['model_name'])
-    raw_value = target_class.objects.get(pk=message_data['id']).to_dict(
-        message_data['field_name'])
-    value = raw_value[message_data['field_name']]
+    queryset = target_class.objects.filter(id__in=message_data['ids'])
+    values = target_class.to_dict_queryset(
+        queryset, message_data['field_names'])
 
     message.reply_channel.send({
         'text': json.dumps({
-            'data': value,
-            'field_name': message_data['field_name'],
-            'id': message_data['id'],
+            'values': values,
             'model_name': message_data['model_name'],
         })
     })

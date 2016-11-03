@@ -3,8 +3,6 @@ import FieldType from './field_type';
 import FieldTypeDefaultValue from './field_type_default_value';
 import Socket from './socket';
 
-const RETRY_TIME = 10000;
-
 export default class Field {
     constructor(name, type, instance, relationClassModule = undefined, relationClassName = undefined) {
         this.instance_ = instance;
@@ -54,7 +52,6 @@ export default class Field {
     }
 
     setValue(newValue) {
-        console.log('set', this.instance_.constructor.getModelName(), this.instance_.id, this.name, newValue);
         this.value_ = newValue;
         this.loaded_ = true;
     }
@@ -67,7 +64,6 @@ export default class Field {
     }
 
     populateFromBackendData(backendData) {
-        console.log('setting', this.instance_.constructor.getModelName(), this.instance_.id, this.name, backendData);
         this.instance_[this.name] = this.getValueFromBackendData(backendData);
     }
 
